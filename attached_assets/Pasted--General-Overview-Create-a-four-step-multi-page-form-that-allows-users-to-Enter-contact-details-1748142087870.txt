@@ -1,0 +1,129 @@
+🧱 General Overview:
+Create a four-step multi-page form that allows users to:
+
+Enter contact details.
+
+Select preferred time for a Pilates session (with time-of-day preferences).
+
+Declare medical conditions (and trigger follow-up emails if applicable).
+
+Pay a $20 AUD introductory fee using Stripe, with support for Apple Pay and Google Pay.
+
+🎨 Design & UI:
+Use the uploaded high-fidelity mockups as visual reference:
+
+Clean, modern UI with a light and calming feel.
+
+Centered form card on top of a soft gradient/oceanic background.
+
+Consistent layout across all 4 steps.
+
+Rounded corners, light shadows, modern input fields and toggles/buttons.
+
+📋 Step-by-Step Breakdown:
+Step 1: Contact Info
+Input fields:
+
+First Name
+
+Last Name
+
+Phone Number (AU format)
+
+Email Address
+
+Static class name: “Introduction Pilates Session | 1hr Class”
+
+Static price: $20.00 AUD
+
+Progress indicator: “Step 1 of 4”
+
+Step 2: Time Preferences
+Select up to three time preferences from the following options:
+
+Morning: 7.00 am – 11.00 am
+
+Afternoon: 1.00 pm – 3.00 pm
+
+Evening: 5.00 pm – 7.00 pm
+
+Display in priority order.
+
+Option to select preferred class language: English or Español.
+
+Progress indicator: “Step 2 of 4”
+
+Step 3: Medical Declaration
+Question: “Do you have any existing medical conditions or injuries we should be aware of?”
+
+Toggle or checkbox to show a text area if “Yes” is selected.
+
+If user selects “Yes,” send an automated follow-up email requesting a doctor’s clearance.
+
+Step 4: Payment
+Integrate Stripe Checkout:
+
+Include Apple Pay and Google Pay support.
+
+Total amount: $20 AUD
+
+On success:
+
+Display a success screen with confirmation.
+
+Trigger an automated booking confirmation email with class name, time preferences, and contact details.
+
+📨 Email Integration:
+Use Node.js + Nodemailer (or a modern email API like SendGrid or Resend):
+
+Confirmation email after successful payment.
+
+Medical clearance follow-up email if Step 3 includes a medical condition.
+
+Include class details and support contact in emails.
+
+🧠 Form Logic:
+Store form data using local state or a central store (e.g., Redux or React Context).
+
+Prevent moving to the next step unless current step is validated.
+
+Add step indicator at the bottom (e.g., “Step 2 of 4”).
+
+Allow back and forth navigation between steps.
+
+💳 Stripe Integration:
+Use Stripe’s official libraries.
+
+Apple Pay & Google Pay enabled through Stripe Payment Request Button.
+
+Set currency to AUD and charge $20.
+
+After successful payment:
+
+Save user data.
+
+Trigger emails.
+
+Redirect to a thank-you screen.
+
+🗃 Optional Back-End:
+Use Firebase, Supabase, or simple Express.js server for:
+
+Storing form submissions
+
+Sending emails
+
+Logging payment confirmations
+
+✅ Deliverables:
+Fully functional 4-step form
+
+Responsive layout based on your mockups
+
+Stripe payment page
+
+Email logic
+
+Form validation and error handling
+
+GitHub repo or Replit deployment
