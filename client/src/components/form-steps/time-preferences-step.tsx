@@ -209,49 +209,55 @@ export default function TimePreferencesStep({ data, onUpdate, onNext, onPrevious
           </Form>
         </div>
 
-        {/* Navigation Button */}
-        <div 
-          className="next-button-container" 
-          style={{ 
-            width: '100%', 
-            margin: '24px 0', 
-            cursor: 'pointer',
-            border: isFormValid ? '1px solid #111111' : '1px solid #111',
-            background: isFormValid ? '#111111' : '#fff',
-            color: isFormValid ? '#FFF' : '#111'
-          }}
-          onClick={form.handleSubmit(onSubmit)}
-        >
-          <div style={{ flexShrink: 0 }}>
-            <div className="step-text" style={{ color: 'inherit' }}>Step 2 of 4</div>
+        {/* Navigation Container */}
+        <div style={{ 
+          display: 'flex', 
+          alignItems: 'center', 
+          gap: '16px', 
+          width: '100%', 
+          margin: '24px 0',
+          position: 'relative'
+        }}>
+          {/* Previous Button */}
+          <div 
+            style={{ 
+              width: '40px',
+              height: '40px',
+              border: '1px solid #111',
+              borderRadius: '6px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              background: '#fff',
+              cursor: 'pointer',
+              flexShrink: 0
+            }}
+            onClick={onPrevious}
+          >
+            <ChevronLeft size={16} color="#111" />
           </div>
-          <div style={{ flexShrink: 0 }}>
-            <div className="action-text" style={{ color: 'inherit' }}>
-              Next step
+
+          {/* Next Button */}
+          <div 
+            className="next-button-container" 
+            style={{ 
+              flex: 1,
+              cursor: 'pointer',
+              border: isFormValid ? '1px solid #111111' : '1px solid #111',
+              background: isFormValid ? '#111111' : '#fff',
+              color: isFormValid ? '#FFF' : '#111'
+            }}
+            onClick={form.handleSubmit(onSubmit)}
+          >
+            <div style={{ flexShrink: 0 }}>
+              <div className="step-text" style={{ color: 'inherit' }}>Step 2 of 4</div>
+            </div>
+            <div style={{ flexShrink: 0 }}>
+              <div className="action-text" style={{ color: 'inherit' }}>
+                Next step
+              </div>
             </div>
           </div>
-        </div>
-
-        {/* Previous Button */}
-        <div 
-          style={{ 
-            position: 'absolute', 
-            left: '0', 
-            top: '50%', 
-            transform: 'translateY(-50%)',
-            width: '40px',
-            height: '40px',
-            border: '1px solid #111',
-            borderRadius: '6px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            background: '#fff',
-            cursor: 'pointer'
-          }}
-          onClick={onPrevious}
-        >
-          <ChevronLeft size={16} color="#111" />
         </div>
       </>
     );
