@@ -64,7 +64,16 @@ export default function ContactStep({ data, onUpdate, onNext }: ContactStepProps
         </div>
         <div style={{ width: '100%' }}>
           <p style={{ fontSize: '14px', color: '#666', margin: '0', lineHeight: '1.4' }}>
-            Book your 1-hour introduction class in South Yarra, Melbourne for just $20 — a special discounted rate to experience clinical pilates. One-time payment, no subscription.
+            Book your 1-hour introduction class at{' '}
+            <a 
+              href="https://maps.google.com/?q=316-320+Toorak+Road+South+Yarra+VIC+Australia" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              style={{ color: '#0ea5e9', textDecoration: 'underline' }}
+            >
+              316-320 Toorak Road, South Yarra
+            </a>{' '}
+            for just $20 — a special discounted rate to experience clinical pilates. One-time payment, no subscription.
           </p>
         </div>
       </div>
