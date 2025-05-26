@@ -87,7 +87,7 @@ export default function TimePreferencesStep({ data, onUpdate, onNext, onPrevious
   };
 
   return (
-    <div>
+    <div className="form-inner">
       <div className="text-center mb-8">
         <h1 className="text-2xl font-bold text-slate-800 mb-2">Book a Class Time</h1>
         <p className="text-slate-600 text-sm">
@@ -104,8 +104,8 @@ export default function TimePreferencesStep({ data, onUpdate, onNext, onPrevious
                 const Icon = slot.icon;
                 
                 return (
-                  <AccordionItem key={slot.id} value={slot.id} className="border border-slate-200 rounded-lg">
-                    <AccordionTrigger className="px-4 py-3 hover:no-underline">
+                  <AccordionItem key={slot.id} value={slot.id} className="accordion-item">
+                    <AccordionTrigger className="accordion-trigger">
                       <div className="flex items-center space-x-3">
                         <Icon className={`${slot.iconColor} text-lg`} />
                         <div className="text-left">
@@ -122,21 +122,19 @@ export default function TimePreferencesStep({ data, onUpdate, onNext, onPrevious
                           
                           return (
                             <div key={timeSlot} className="relative">
-                              <Button
+                              <button
                                 type="button"
-                                variant={isSelected ? "default" : "outline"}
-                                size="sm"
-                                className="w-full text-xs relative"
+                                className={`time-slot-button w-full ${isSelected ? 'selected' : ''}`}
                                 onClick={() => handleTimeSelection(timeSlot)}
                                 disabled={!isSelected && selectedTimes.length >= 3}
                               >
                                 {timeSlot}
                                 {isSelected && (
-                                  <div className="absolute -top-1 -right-1 w-4 h-4 bg-primary text-primary-foreground text-xs rounded-full flex items-center justify-center font-bold">
+                                  <div className="priority-badge">
                                     {priorityIndex + 1}
                                   </div>
                                 )}
-                              </Button>
+                              </button>
                             </div>
                           );
                         })}

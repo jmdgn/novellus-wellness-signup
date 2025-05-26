@@ -23,15 +23,14 @@ export default function FormNavigation({
   return (
     <div className="flex justify-between items-center mt-8 pt-6 border-t border-slate-100">
       {currentStep > 1 ? (
-        <Button
+        <button
           type="button"
-          variant="ghost"
           onClick={onPrevious}
           disabled={isSubmitting}
-          className="flex items-center space-x-2 text-slate-600 hover:text-slate-800"
+          className="form-button-outline flex items-center space-x-2"
         >
           <ChevronLeft size={16} />
-        </Button>
+        </button>
       ) : (
         <div />
       )}
@@ -41,14 +40,14 @@ export default function FormNavigation({
       </div>
       
       {onNext && (
-        <Button 
+        <button 
           type="button"
           onClick={onNext}
           disabled={nextDisabled || isSubmitting}
-          className="bg-primary hover:bg-primary/90 px-6 py-3"
+          className="form-button"
         >
           {isSubmitting ? "Processing..." : nextLabel}
-        </Button>
+        </button>
       )}
     </div>
   );
