@@ -98,17 +98,26 @@ const CheckoutForm = ({ formData, onPrevious, submitBooking, isSubmitting }: Pay
     }
   };
 
+  // Check if form is valid (Stripe elements loaded and ready)
+  const isFormValid = stripe && elements;
+
   return (
-    <div>
-      <div className="text-center mb-8">
-        <h1 className="text-2xl font-bold text-slate-800 mb-2">Payment & Confirmation</h1>
-        <div className="text-right">
-          <div className="text-lg font-bold text-slate-800">$20.00 AUD</div>
+    <>
+      {/* Title Group */}
+      <div style={{ flexDirection: 'column', alignItems: 'flex-start', gap: '10px', width: '100%', display: 'flex' }}>
+        <div style={{ width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <h1 style={{ fontSize: '28px', fontWeight: '700', color: '#111', margin: '0', lineHeight: '1.6' }}>
+            Payment & Confirmation
+          </h1>
+          <div style={{ fontSize: '28px', fontWeight: '700', color: '#999' }}>
+            $20.00 AUD
+          </div>
         </div>
       </div>
 
-      {/* Payment Form */}
-      <form onSubmit={handleSubmit} className="space-y-6">
+      {/* Form Inner Container */}
+      <div className="form-inner" style={{ width: '100%', margin: '24px 0 0 0' }}>
+        <form onSubmit={handleSubmit} style={{ width: '100%', padding: '16px 20px' }} className="space-y-6">
         <div className="bg-slate-50 rounded-lg p-4">
           <PaymentElement />
         </div>
@@ -120,30 +129,76 @@ const CheckoutForm = ({ formData, onPrevious, submitBooking, isSubmitting }: Pay
           </div>
         </div>
 
-        {/* Payment Button */}
-        <Button 
-          type="submit"
-          disabled={!stripe || isProcessing || isSubmitting}
-          className="w-full bg-slate-800 hover:bg-slate-900 py-4 px-6"
-        >
-          {isProcessing ? "Processing..." : "Confirm reservation"}
-        </Button>
+        </form>
+      </div>
 
-        {/* Navigation */}
-        <div className="flex justify-between items-center pt-6 border-t border-slate-100">
-          <Button
-            type="button"
-            variant="ghost"
-            onClick={onPrevious}
-            disabled={isProcessing}
-            className="flex items-center space-x-2 text-slate-600 hover:text-slate-800"
-          >
-            <ChevronLeft size={16} />
-          </Button>
-          <div className="step-indicator">Step 4 of 4</div>
+      {/* Navigation Container */}
+      <div style={{ 
+        display: 'flex', 
+        alignItems: 'center', 
+        gap: '16px', 
+        width: '100%', 
+        margin: '24px 0',
+        position: 'relative'
+      }}>
+        {/* Previous Button */}
+        <div 
+          style={{ 
+            width: '55px',
+            height: '55px',
+            border: '1px solid #CCC',
+            borderRadius: '6px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            background: '#fff',
+            cursor: isProcessing ? 'not-allowed' : 'pointer',
+            flexShrink: 0,
+            transition: 'background-color 0.2s ease',
+            opacity: isProcessing ? 0.5 : 1
+          }}
+          onClick={isProcessing ? undefined : onPrevious}
+          onMouseEnter={(e) => {
+            if (!isProcessing) e.currentTarget.style.background = '#F9F9F9';
+          }}
+          onMouseLeave={(e) => {
+            if (!isProcessing) e.currentTarget.style.background = '#fff';
+          }}
+        >
+          <ChevronLeft size={16} color="#111" />
         </div>
-      </form>
-    </div>
+
+        {/* Confirm Button */}
+        <div 
+          className="next-button-container" 
+          style={{ 
+            flex: 1,
+            cursor: (!stripe || isProcessing || isSubmitting) ? 'not-allowed' : 'pointer',
+            border: (stripe && !isProcessing && !isSubmitting) ? '1px solid #111111' : '1px solid #111',
+            background: (stripe && !isProcessing && !isSubmitting) ? '#111111' : '#fff',
+            color: (stripe && !isProcessing && !isSubmitting) ? '#FFF' : '#111',
+            opacity: (!stripe || isProcessing || isSubmitting) ? 0.5 : 1
+          }}
+          onClick={(!stripe || isProcessing || isSubmitting) ? undefined : (e) => {
+            e.preventDefault();
+            const form = document.querySelector('form');
+            if (form) {
+              const submitEvent = new Event('submit', { bubbles: true, cancelable: true });
+              form.dispatchEvent(submitEvent);
+            }
+          }}
+        >
+          <div style={{ flexShrink: 0 }}>
+            <div className="step-text" style={{ color: 'inherit' }}>Step 4 of 4</div>
+          </div>
+          <div style={{ flexShrink: 0 }}>
+            <div className="action-text" style={{ color: 'inherit' }}>
+              {isProcessing ? "Processing..." : "Confirm reservation"}
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
   );
 };
 
