@@ -69,6 +69,7 @@ const healthQuestions = [
 
 export default function MedicalDeclarationStep({ data, onUpdate, onNext, onPrevious }: MedicalDeclarationStepProps) {
   const [selectedPainAreas, setSelectedPainAreas] = useState<string[]>(data?.painAreas || []);
+  const [pregnancyWeeks, setPregnancyWeeks] = useState<number | undefined>(data?.pregnancyWeeks);
   const [responses, setResponses] = useState<{
     isPregnant: boolean | null;
     heartCondition: boolean | null;
@@ -91,13 +92,14 @@ export default function MedicalDeclarationStep({ data, onUpdate, onNext, onPrevi
     resolver: zodResolver(medicalDeclarationSchema),
     defaultValues: {
       painAreas: data?.painAreas || [],
-      isPregnant: data?.isPregnant || false,
-      heartCondition: data?.heartCondition || false,
-      chestPain: data?.chestPain || false,
-      dizziness: data?.dizziness || false,
-      asthmaAttack: data?.asthmaAttack || false,
-      diabetesControl: data?.diabetesControl || false,
-      otherConditions: data?.otherConditions || false,
+      isPregnant: data?.isPregnant ?? false,
+      pregnancyWeeks: data?.pregnancyWeeks,
+      heartCondition: data?.heartCondition ?? false,
+      chestPain: data?.chestPain ?? false,
+      dizziness: data?.dizziness ?? false,
+      asthmaAttack: data?.asthmaAttack ?? false,
+      diabetesControl: data?.diabetesControl ?? false,
+      otherConditions: data?.otherConditions ?? false,
       medicalConditions: data?.medicalConditions || "",
       hasMedicalConditions: data?.hasMedicalConditions || false,
     },
@@ -133,14 +135,45 @@ export default function MedicalDeclarationStep({ data, onUpdate, onNext, onPrevi
     const newResponses = { ...responses, [questionKey]: value };
     setResponses(newResponses);
     form.setValue(questionKey, value);
+    
+    // If pregnancy is set to false, clear pregnancy weeks
+    if (questionKey === "isPregnant" && !value) {
+      setPregnancyWeeks(undefined);
+      form.setValue("pregnancyWeeks", undefined);
+    }
+  };
+
+  const handlePregnancyWeeksChange = (weeks: number) => {
+    setPregnancyWeeks(weeks);
+    form.setValue("pregnancyWeeks", weeks);
   };
 
   const onSubmit = (values: MedicalDeclaration) => {
+    // Check if all questions have been answered
+    const allQuestionsAnswered = Object.values(responses).every(response => response !== null);
+    
+    if (!allQuestionsAnswered) {
+      // Find which questions are unanswered and show error
+      healthQuestions.forEach((question) => {
+        if (responses[question.key] === null) {
+          form.setError(question.key, { message: "Please answer this question" });
+        }
+      });
+      return;
+    }
+
+    // If pregnant, require pregnancy weeks
+    if (responses.isPregnant && !pregnancyWeeks) {
+      form.setError("pregnancyWeeks", { message: "Please specify how many weeks pregnant you are" });
+      return;
+    }
+
     onUpdate(values);
     onNext();
   };
 
-  const hasAnyYesAnswers = Object.values(responses).some(Boolean);
+  const hasAnyYesAnswers = Object.values(responses).some(response => response === true);
+  const allQuestionsAnswered = Object.values(responses).every(response => response !== null);
 
   return (
     <div className="form-inner">
@@ -207,6 +240,38 @@ export default function MedicalDeclarationStep({ data, onUpdate, onNext, onPrevi
                   No
                 </button>
               </div>
+
+              {/* Pregnancy weeks field - show only for pregnancy question when Yes is selected */}
+              {question.key === "isPregnant" && responses.isPregnant === true && (
+                <div className="ml-9 mt-4">
+                  <label className="text-sm font-medium text-slate-700 block mb-2">
+                    How long have you been pregnant (in weeks)?
+                  </label>
+                  <input
+                    type="number"
+                    min="1"
+                    max="42"
+                    value={pregnancyWeeks || ''}
+                    onChange={(e) => handlePregnancyWeeksChange(parseInt(e.target.value) || 0)}
+                    className="form-field w-32"
+                    placeholder="0"
+                  />
+                  {form.formState.errors.pregnancyWeeks && (
+                    <p className="text-red-500 text-xs mt-1">
+                      {form.formState.errors.pregnancyWeeks.message}
+                    </p>
+                  )}
+                </div>
+              )}
+
+              {/* Show validation errors for unanswered questions */}
+              {form.formState.errors[question.key] && (
+                <div className="ml-9 mt-2">
+                  <p className="text-red-500 text-xs">
+                    {form.formState.errors[question.key]?.message}
+                  </p>
+                </div>
+              )}
             </div>
           ))}
 
@@ -254,7 +319,8 @@ export default function MedicalDeclarationStep({ data, onUpdate, onNext, onPrevi
             <div className="step-indicator">Step 3 of 4</div>
             <button 
               type="submit"
-              className="form-button"
+              disabled={!allQuestionsAnswered}
+              className={`form-button ${!allQuestionsAnswered ? 'opacity-50 cursor-not-allowed' : ''}`}
             >
               Next step
             </button>
