@@ -59,8 +59,23 @@ export default function ContactStep({ data, onUpdate, onNext }: ContactStepProps
       <div style={{ flexDirection: 'column', alignItems: 'flex-start', gap: '10px', width: '100%', display: 'flex' }}>
         <div style={{ width: '100%' }}>
           <h1 style={{ fontSize: '28px', fontWeight: '700', color: '#111', margin: '0', lineHeight: '1.6' }}>
-            Try Clinical Pilates
+            Try Novellus Clinical Pilates
           </h1>
+        </div>
+        <div style={{ width: '100%', display: 'flex', alignItems: 'center', gap: '8px', margin: '8px 0' }}>
+          <img 
+            src="/attached_assets/Profile Image.png" 
+            alt="Beatriz Durango" 
+            style={{ 
+              width: '32px', 
+              height: '32px', 
+              borderRadius: '50%', 
+              objectFit: 'cover' 
+            }} 
+          />
+          <h2 style={{ fontSize: '18px', fontWeight: '700', color: '#111', margin: '0', lineHeight: '1.4' }}>
+            with Beatriz Durango
+          </h2>
         </div>
         <div style={{ width: '100%' }}>
           <p style={{ fontSize: '14px', color: '#666', margin: '0', lineHeight: '1.4' }}>
