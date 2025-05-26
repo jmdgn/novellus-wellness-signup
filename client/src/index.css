@@ -13,7 +13,7 @@
   --card-foreground: 215 25% 27%;
   --border: 214 32% 91%; /* #e2e8f0 */
   --input: 214 32% 91%;
-  --primary: 199 89% 48%; /* #0ea5e9 */
+  --primary: 199 89% 48%; /* #0095F6 */
   --primary-foreground: 210 40% 98%;
   --secondary: 210 40% 96%;
   --secondary-foreground: 222 84% 5%;
@@ -30,7 +30,7 @@
   --ocean-200: 208 100% 86%; /* #bae6fd */
   --ocean-300: 208 96% 72%; /* #7dd3fc */
   --ocean-400: 199 91% 60%; /* #38bdf8 */
-  --ocean-500: 199 89% 48%; /* #0ea5e9 */
+  --ocean-500: 199 89% 48%; /* #0095F6 */
   --ocean-600: 200 98% 39%; /* #0284c7 */
   --ocean-700: 201 96% 32%; /* #0369a1 */
   --ocean-800: 201 90% 27%; /* #075985 */
@@ -176,14 +176,14 @@
   }
   
   .time-slot-button.selected {
-    background: #0ea5e9;
+    background: #0095F6;
     color: white;
-    border-color: #0ea5e9;
+    border-color: #0095F6;
   }
   
   .time-slot-button:hover:not(.selected) {
     background: #f1f5f9;
-    border-color: #0ea5e9;
+    border-color: #0095F6;
   }
   
   .priority-badge {
@@ -192,7 +192,7 @@
     right: -4px;
     width: 16px;
     height: 16px;
-    background: #111;
+    background: #0095F6;
     color: white;
     border-radius: 50%;
     font-size: 10px;

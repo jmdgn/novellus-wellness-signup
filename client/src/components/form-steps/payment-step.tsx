@@ -277,7 +277,7 @@ export default function PaymentStep(props: PaymentStepProps) {
         appearance: {
           theme: 'stripe',
           variables: {
-            colorPrimary: '#0ea5e9',
+            colorPrimary: '#0095F6',
             borderRadius: '8px',
           }
         }

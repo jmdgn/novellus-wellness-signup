@@ -85,7 +85,7 @@ export default function ContactStep({ data, onUpdate, onNext }: ContactStepProps
               href="https://maps.google.com/?q=316-320+Toorak+Road+South+Yarra+VIC+Australia" 
               target="_blank" 
               rel="noopener noreferrer"
-              style={{ color: '#0ea5e9', textDecoration: 'underline' }}
+              style={{ color: '#0095F6', textDecoration: 'underline' }}
             >
               316-320 Toorak Road, South Yarra
             </a>{' '}
