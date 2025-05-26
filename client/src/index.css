@@ -221,6 +221,9 @@
 }
 
 /* Exact Figma Design Specifications */
+.max-w-lg {
+  max-width: 558px !important;
+}
 
 .form-frame {
   background: #fff;
