@@ -23,57 +23,68 @@ const painAreas = [
   { id: "hips", label: "Hips" },
   { id: "knees", label: "Knees" },
   { id: "ankles", label: "Ankles" },
-  { id: "other", label: "Other" }
+  { id: "other", label: "Other" },
+  { id: "none", label: "None" }
 ];
+
+type ResponseKey = "isPregnant" | "heartCondition" | "chestPain" | "dizziness" | "asthmaAttack" | "diabetesControl" | "otherConditions";
 
 const healthQuestions = [
   {
     id: "isPregnant",
     question: "Are you pregnant?",
-    key: "isPregnant" as keyof typeof responses
+    key: "isPregnant" as ResponseKey
   },
   {
     id: "heartCondition", 
     question: "Has your medical practitioner ever told you that you have a heart condition, or have you ever suffered a stroke?",
-    key: "heartCondition" as keyof typeof responses
+    key: "heartCondition" as ResponseKey
   },
   {
     id: "chestPain",
     question: "Do you ever experience unexplained pains or discomfort in your chest at rest or during physical exercise / Activity?",
-    key: "chestPain" as keyof typeof responses
+    key: "chestPain" as ResponseKey
   },
   {
     id: "dizziness",
     question: "Do you ever feel faint, dizzy, or lose balance during physical activity / exercise?",
-    key: "dizziness" as keyof typeof responses
+    key: "dizziness" as ResponseKey
   },
   {
     id: "asthmaAttack",
     question: "Have you had an asthma attack requiring immediate medical attention at any time over the last 12 months?",
-    key: "asthmaAttack" as keyof typeof responses
+    key: "asthmaAttack" as ResponseKey
   },
   {
     id: "diabetesControl",
     question: "If you have diabetes (type 1 or 2), have you had trouble controlling your blood sugar (glucose) in the last 3 months?",
-    key: "diabetesControl" as keyof typeof responses
+    key: "diabetesControl" as ResponseKey
   },
   {
     id: "otherConditions",
     question: "Do you have any other conditions that may require special consideration for you to exercise?",
-    key: "otherConditions" as keyof typeof responses
+    key: "otherConditions" as ResponseKey
   }
 ];
 
 export default function MedicalDeclarationStep({ data, onUpdate, onNext, onPrevious }: MedicalDeclarationStepProps) {
   const [selectedPainAreas, setSelectedPainAreas] = useState<string[]>(data?.painAreas || []);
-  const [responses, setResponses] = useState({
-    isPregnant: data?.isPregnant || false,
-    heartCondition: data?.heartCondition || false,
-    chestPain: data?.chestPain || false,
-    dizziness: data?.dizziness || false,
-    asthmaAttack: data?.asthmaAttack || false,
-    diabetesControl: data?.diabetesControl || false,
-    otherConditions: data?.otherConditions || false,
+  const [responses, setResponses] = useState<{
+    isPregnant: boolean | null;
+    heartCondition: boolean | null;
+    chestPain: boolean | null;
+    dizziness: boolean | null;
+    asthmaAttack: boolean | null;
+    diabetesControl: boolean | null;
+    otherConditions: boolean | null;
+  }>({
+    isPregnant: data?.isPregnant ?? null,
+    heartCondition: data?.heartCondition ?? null,
+    chestPain: data?.chestPain ?? null,
+    dizziness: data?.dizziness ?? null,
+    asthmaAttack: data?.asthmaAttack ?? null,
+    diabetesControl: data?.diabetesControl ?? null,
+    otherConditions: data?.otherConditions ?? null,
   });
 
   const form = useForm<MedicalDeclaration>({
@@ -101,17 +112,24 @@ export default function MedicalDeclarationStep({ data, onUpdate, onNext, onPrevi
   const handlePainAreaChange = (areaId: string, checked: boolean) => {
     let newPainAreas: string[];
     
-    if (checked) {
-      newPainAreas = [...selectedPainAreas, areaId];
+    if (areaId === "none") {
+      // If "None" is selected, clear all other selections
+      newPainAreas = checked ? ["none"] : [];
     } else {
-      newPainAreas = selectedPainAreas.filter(area => area !== areaId);
+      // If any other area is selected, remove "none" first
+      const areasWithoutNone = selectedPainAreas.filter(area => area !== "none");
+      if (checked) {
+        newPainAreas = [...areasWithoutNone, areaId];
+      } else {
+        newPainAreas = areasWithoutNone.filter(area => area !== areaId);
+      }
     }
     
     setSelectedPainAreas(newPainAreas);
     form.setValue("painAreas", newPainAreas as any);
   };
 
-  const handleResponseChange = (questionKey: keyof typeof responses, value: boolean) => {
+  const handleResponseChange = (questionKey: ResponseKey, value: boolean) => {
     const newResponses = { ...responses, [questionKey]: value };
     setResponses(newResponses);
     form.setValue(questionKey, value);
