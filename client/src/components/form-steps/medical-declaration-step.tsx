@@ -202,7 +202,7 @@ export default function MedicalDeclarationStep({ data, onUpdate, onNext, onPrevi
           {/* Question 1: Pain History */}
           <div className="bg-white border border-slate-200 rounded-lg p-4">
             <div className="flex items-start space-x-3 mb-4">
-              <div className="bg-slate-800 text-white rounded-full flex items-center justify-center font-bold mt-0.5" style={{ width: '24px', height: '24px', fontSize: '12px' }}>
+              <div className="bg-slate-800 text-white rounded-full flex items-center justify-center font-bold mt-0.5" style={{ width: '-webkit-fill-available', maxWidth: '24px', height: '24px', fontSize: '12px' }}>
                 1
               </div>
               <div className="text-sm font-medium text-slate-800" style={{ width: 'fit-content' }}>
@@ -228,7 +228,7 @@ export default function MedicalDeclarationStep({ data, onUpdate, onNext, onPrevi
           {healthQuestions.map((question, index) => (
             <div key={question.id} className="bg-white border border-slate-200 rounded-lg p-4">
               <div className="flex items-start space-x-3 mb-4">
-                <div className="bg-slate-800 text-white rounded-full flex items-center justify-center font-bold mt-0.5" style={{ width: '24px', height: '24px', fontSize: '12px' }}>
+                <div className="bg-slate-800 text-white rounded-full flex items-center justify-center font-bold mt-0.5" style={{ width: '-webkit-fill-available', maxWidth: '24px', height: '24px', fontSize: '12px' }}>
                   {index + 2}
                 </div>
                 <div className="text-sm font-medium text-slate-800" style={{ width: 'fit-content' }}>
