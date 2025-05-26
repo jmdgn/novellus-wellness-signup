@@ -239,24 +239,22 @@
   justify-content: flex-start;
   align-items: center;
   gap: 24px;
-  width: 510px;
-  height: 404px;
-  padding-bottom: 32px;
+  width: 100%;
+  min-height: 404px;
+  padding: 24px;
   display: flex;
   overflow: hidden;
-  margin: 24px auto 0 auto;
 }
 
 .form-title-container {
   box-sizing: border-box;
   border-bottom: 0.5px solid #ccc;
   flex-flow: row;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 110px;
-  width: 510px;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
   height: 60px;
-  padding: 20px;
+  padding: 20px 0;
   display: flex;
   overflow: hidden;
 }
@@ -274,8 +272,7 @@
 }
 
 .field-row {
-  width: 470px;
-  height: 80px;
+  width: 100%;
   margin-bottom: 24px;
 }
 
@@ -312,10 +309,9 @@
   border-radius: 6px;
   justify-content: space-between;
   align-items: center;
-  width: 510px;
+  width: 100%;
   padding: 16px 32px;
   display: flex;
-  margin: 24px auto;
 }
 
 .step-text {
