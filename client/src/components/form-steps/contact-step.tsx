@@ -75,7 +75,7 @@ export default function ContactStep({ data, onUpdate, onNext }: ContactStepProps
 
         {/* Contact Form */}
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} style={{ width: '100%', padding: '0 20px' }}>
+          <form onSubmit={form.handleSubmit(onSubmit)} style={{ width: '100%', padding: '16px 20px' }}>
             {/* First Name & Last Name Row */}
             <div className="field-row" style={{ display: 'flex', gap: '12px', width: '100%' }}>
               <FormField
