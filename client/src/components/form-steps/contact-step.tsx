@@ -30,6 +30,13 @@ export default function ContactStep({ data, onUpdate, onNext }: ContactStepProps
     onNext();
   };
 
+  // Check if all required fields are filled
+  const isFormValid = form.formState.isValid && 
+    form.watch("firstName") && 
+    form.watch("lastName") && 
+    form.watch("phoneNumber") && 
+    form.watch("email");
+
   const handlePhoneChange = (value: string) => {
     // Format Australian phone number as user types
     const cleaned = value.replace(/\D/g, '');
@@ -166,14 +173,20 @@ export default function ContactStep({ data, onUpdate, onNext }: ContactStepProps
       {/* Navigation Button */}
       <div 
         className="next-button-container" 
-        style={{ width: '100%', margin: '24px 0', cursor: 'pointer' }}
+        style={{ 
+          width: '100%', 
+          margin: '24px 0', 
+          cursor: 'pointer',
+          border: isFormValid ? '1px solid #0095F6' : '1px solid #111',
+          color: isFormValid ? '#0095F6' : '#111'
+        }}
         onClick={form.handleSubmit(onSubmit)}
       >
         <div style={{ flexShrink: 0 }}>
-          <div className="step-text">Step 1 of 4</div>
+          <div className="step-text" style={{ color: 'inherit' }}>Step 1 of 4</div>
         </div>
         <div style={{ flexShrink: 0 }}>
-          <div className="action-text">
+          <div className="action-text" style={{ color: 'inherit' }}>
             Next step
           </div>
         </div>
