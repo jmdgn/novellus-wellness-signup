@@ -46,7 +46,7 @@ export const contactInfoSchema = z.object({
 });
 
 export const timePreferencesSchema = z.object({
-  timePreferences: z.array(z.enum(["morning", "afternoon", "evening"])).min(1, "Please select at least one time preference").max(3, "You can select up to 3 time preferences"),
+  timePreferences: z.array(z.string()).min(1, "Please select at least one time preference").max(3, "You can select up to 3 time preferences"),
   language: z.enum(["english", "spanish"]).default("english"),
 });
 

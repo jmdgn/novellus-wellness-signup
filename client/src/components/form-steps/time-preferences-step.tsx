@@ -3,6 +3,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { timePreferencesSchema, type TimePreferences } from "@shared/schema";
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { useState } from "react";
 import { ChevronLeft, Sun, Sunset, Moon } from "lucide-react";
 
@@ -19,26 +20,29 @@ const timeSlots = [
     name: "Morning",
     time: "7.00 am to 11.00 am",
     icon: Sun,
-    iconColor: "text-yellow-500"
+    iconColor: "text-yellow-500",
+    times: ["7.00 am", "8.00 am", "9.00 am", "10.00 am"]
   },
   {
     id: "afternoon", 
     name: "Afternoon",
     time: "1.00 pm to 3.00 pm",
     icon: Sun,
-    iconColor: "text-orange-500"
+    iconColor: "text-orange-500",
+    times: ["1.00 pm", "2.00 pm", "3.00 pm"]
   },
   {
     id: "evening",
     name: "Evening", 
     time: "5.00 pm to 7.00 pm",
     icon: Moon,
-    iconColor: "text-indigo-500"
+    iconColor: "text-indigo-500",
+    times: ["5.00 pm", "6.00 pm", "7.00 pm"]
   }
 ];
 
 export default function TimePreferencesStep({ data, onUpdate, onNext, onPrevious }: TimePreferencesStepProps) {
-  const [selectedSlots, setSelectedSlots] = useState<string[]>(data?.timePreferences || []);
+  const [selectedTimes, setSelectedTimes] = useState<string[]>(data?.timePreferences || []);
   const [selectedLanguage, setSelectedLanguage] = useState<"english" | "spanish">(data?.language || "english");
 
   const form = useForm<TimePreferences>({
@@ -49,23 +53,23 @@ export default function TimePreferencesStep({ data, onUpdate, onNext, onPrevious
     },
   });
 
-  const handleTimeSlotToggle = (slotId: string) => {
-    const currentIndex = selectedSlots.indexOf(slotId);
-    let newSelectedSlots: string[];
+  const handleTimeSelection = (timeSlot: string) => {
+    const currentIndex = selectedTimes.indexOf(timeSlot);
+    let newSelectedTimes: string[];
 
     if (currentIndex > -1) {
       // Remove if already selected
-      newSelectedSlots = selectedSlots.filter(slot => slot !== slotId);
-    } else if (selectedSlots.length < 3) {
+      newSelectedTimes = selectedTimes.filter(time => time !== timeSlot);
+    } else if (selectedTimes.length < 3) {
       // Add if under limit
-      newSelectedSlots = [...selectedSlots, slotId];
+      newSelectedTimes = [...selectedTimes, timeSlot];
     } else {
       // Already at limit
       return;
     }
 
-    setSelectedSlots(newSelectedSlots);
-    form.setValue("timePreferences", newSelectedSlots as ("morning" | "afternoon" | "evening")[]);
+    setSelectedTimes(newSelectedTimes);
+    form.setValue("timePreferences", newSelectedTimes);
   };
 
   const handleLanguageSelect = (language: "english" | "spanish") => {
@@ -93,38 +97,55 @@ export default function TimePreferencesStep({ data, onUpdate, onNext, onPrevious
 
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
-          {/* Time Preference Options */}
+          {/* Accordion Time Slots */}
           <div className="space-y-4 mb-6">
-            {timeSlots.map((slot, index) => {
-              const Icon = slot.icon;
-              const isSelected = selectedSlots.includes(slot.id);
-              const priorityIndex = selectedSlots.indexOf(slot.id);
-              
-              return (
-                <div
-                  key={slot.id}
-                  className={`time-slot-card relative ${isSelected ? 'selected' : ''}`}
-                  onClick={() => handleTimeSlotToggle(slot.id)}
-                >
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center space-x-3">
-                      <Icon className={`${slot.iconColor} text-lg`} />
-                      <div>
-                        <div className="font-medium text-slate-800">{slot.name}</div>
-                        <div className="text-sm text-slate-600">{slot.time}</div>
+            <Accordion type="multiple" className="space-y-3">
+              {timeSlots.map((slot) => {
+                const Icon = slot.icon;
+                
+                return (
+                  <AccordionItem key={slot.id} value={slot.id} className="border border-slate-200 rounded-lg">
+                    <AccordionTrigger className="px-4 py-3 hover:no-underline">
+                      <div className="flex items-center space-x-3">
+                        <Icon className={`${slot.iconColor} text-lg`} />
+                        <div className="text-left">
+                          <div className="font-medium text-slate-800">{slot.name}</div>
+                          <div className="text-sm text-slate-600">{slot.time}</div>
+                        </div>
                       </div>
-                    </div>
-                    <ChevronLeft className="text-slate-400 rotate-180" size={16} />
-                  </div>
-                  
-                  {isSelected && (
-                    <div className="priority-badge">
-                      {priorityIndex + 1}
-                    </div>
-                  )}
-                </div>
-              );
-            })}
+                    </AccordionTrigger>
+                    <AccordionContent className="px-4 pb-4">
+                      <div className="grid grid-cols-4 gap-2 mt-2">
+                        {slot.times.map((timeSlot) => {
+                          const isSelected = selectedTimes.includes(timeSlot);
+                          const priorityIndex = selectedTimes.indexOf(timeSlot);
+                          
+                          return (
+                            <div key={timeSlot} className="relative">
+                              <Button
+                                type="button"
+                                variant={isSelected ? "default" : "outline"}
+                                size="sm"
+                                className="w-full text-xs relative"
+                                onClick={() => handleTimeSelection(timeSlot)}
+                                disabled={!isSelected && selectedTimes.length >= 3}
+                              >
+                                {timeSlot}
+                                {isSelected && (
+                                  <div className="absolute -top-1 -right-1 w-4 h-4 bg-primary text-primary-foreground text-xs rounded-full flex items-center justify-center font-bold">
+                                    {priorityIndex + 1}
+                                  </div>
+                                )}
+                              </Button>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </AccordionContent>
+                  </AccordionItem>
+                );
+              })}
+            </Accordion>
             
             <FormField
               control={form.control}
@@ -136,6 +157,20 @@ export default function TimePreferencesStep({ data, onUpdate, onNext, onPrevious
               )}
             />
           </div>
+
+          {/* Selected Times Summary */}
+          {selectedTimes.length > 0 && (
+            <div className="mb-6 p-4 bg-slate-50 rounded-lg">
+              <div className="text-sm font-medium text-slate-700 mb-2">Your class time choices:</div>
+              <div className="space-y-1">
+                {selectedTimes.map((time, index) => (
+                  <div key={time} className="text-sm text-slate-600">
+                    <span className="font-medium">{index + 1}.</span> {time}
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
 
           {/* Language Preference */}
           <div className="mb-6">
