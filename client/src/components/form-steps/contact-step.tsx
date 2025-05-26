@@ -66,16 +66,16 @@ export default function ContactStep({ data, onUpdate, onNext }: ContactStepProps
         {/* Class Info Header */}
         <div className="form-title-container" style={{ width: '100%' }}>
           <div style={{ flexShrink: 0 }}>
-            <div className="form-title">Introduction Pilates Session | 1hr Class</div>
+            <div className="form-title pl-[20px] pr-[20px]">Introduction Pilates Session | 1hr Class</div>
           </div>
           <div style={{ flexShrink: 0 }}>
-            <div className="form-price">$20.00 AUD</div>
+            <div className="form-price pl-[20px] pr-[20px]">$20.00 AUD</div>
           </div>
         </div>
 
         {/* Contact Form */}
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} style={{ width: '100%' }}>
+          <form onSubmit={form.handleSubmit(onSubmit)} style={{ width: '100%', padding: '0 20px' }}>
             {/* First Name & Last Name Row */}
             <div className="field-row" style={{ display: 'flex', gap: '12px', width: '100%' }}>
               <FormField
