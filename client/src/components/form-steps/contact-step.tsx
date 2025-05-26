@@ -70,7 +70,8 @@ export default function ContactStep({ data, onUpdate, onNext }: ContactStepProps
               width: '32px', 
               height: '32px', 
               borderRadius: '50%', 
-              objectFit: 'cover' 
+              objectFit: 'cover',
+              backgroundColor: '#F9F9F9'
             }} 
           />
           <h2 style={{ fontSize: '18px', fontWeight: '700', color: '#111', margin: '0', lineHeight: '1.4' }}>
