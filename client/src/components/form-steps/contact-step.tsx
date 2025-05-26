@@ -47,7 +47,7 @@ export default function ContactStep({ data, onUpdate, onNext }: ContactStepProps
   };
 
   return (
-    <div>
+    <div className="form-inner">
       <div className="text-center mb-8">
         <h1 className="text-2xl font-bold text-slate-800 mb-2">Reserve your spot</h1>
         <p className="text-slate-600 text-sm leading-relaxed">
@@ -56,7 +56,7 @@ export default function ContactStep({ data, onUpdate, onNext }: ContactStepProps
       </div>
 
       {/* Class Info */}
-      <div className="bg-slate-50 rounded-lg p-4 mb-6 flex justify-between items-center">
+      <div className="bg-white border border-slate-200 rounded-lg p-4 mb-6 flex justify-between items-center">
         <div>
           <div className="font-semibold text-slate-800">Introduction Pilates Session | 1hr Class</div>
         </div>
@@ -78,7 +78,7 @@ export default function ContactStep({ data, onUpdate, onNext }: ContactStepProps
                   <FormControl>
                     <Input 
                       placeholder="Jane" 
-                      className="focus-ring"
+                      className="form-field"
                       {...field}
                     />
                   </FormControl>
@@ -95,7 +95,7 @@ export default function ContactStep({ data, onUpdate, onNext }: ContactStepProps
                   <FormControl>
                     <Input 
                       placeholder="Cooper" 
-                      className="focus-ring"
+                      className="form-field"
                       {...field}
                     />
                   </FormControl>
@@ -114,7 +114,7 @@ export default function ContactStep({ data, onUpdate, onNext }: ContactStepProps
                 <FormControl>
                   <Input 
                     placeholder="0400 000 000" 
-                    className="focus-ring"
+                    className="form-field"
                     {...field}
                     onChange={(e) => {
                       const formatted = handlePhoneChange(e.target.value);
@@ -137,7 +137,7 @@ export default function ContactStep({ data, onUpdate, onNext }: ContactStepProps
                   <Input 
                     type="email"
                     placeholder="jane.cooper@email.com" 
-                    className="focus-ring"
+                    className="form-field"
                     {...field}
                   />
                 </FormControl>
