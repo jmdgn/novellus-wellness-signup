@@ -47,8 +47,7 @@ export default function ContactStep({ data, onUpdate, onNext }: ContactStepProps
   };
 
   return (
-    <div className="form-card">
-      <div className="form-frame">
+    <div className="form-frame">
         {/* Title Group - Outside form-inner, positioned at top */}
         <div style={{ flexDirection: 'column', alignItems: 'flex-start', gap: '10px', width: '510px', display: 'flex', padding: '24px 24px 0 24px' }}>
           <div style={{ width: '223px', height: '32px' }}>
@@ -181,7 +180,6 @@ export default function ContactStep({ data, onUpdate, onNext }: ContactStepProps
             </button>
           </div>
         </div>
-      </div>
     </div>
   );
 }

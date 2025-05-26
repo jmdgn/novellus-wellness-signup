@@ -79,7 +79,7 @@
     background: #fff;
     border-radius: 16px;
     box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-    padding: 32px 24px;
+    padding: 24px;
     width: 100%;
     max-width: 558px;
     margin: 0 auto;
@@ -221,10 +221,6 @@
 }
 
 /* Exact Figma Design Specifications */
-.form-card {
-  margin: 0 auto;
-  padding: 2rem;
-}
 
 .form-frame {
   background: #fff;
