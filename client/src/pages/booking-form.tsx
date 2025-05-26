@@ -76,11 +76,9 @@ export default function BookingForm() {
 
       {/* Main Form Container */}
       <div className="w-full max-w-lg">
-        <Card className="form-card p-8 relative">
-          <CardContent className="p-0">
-            {renderCurrentStep()}
-          </CardContent>
-        </Card>
+        <div className="form-card">
+          {renderCurrentStep()}
+        </div>
 
         {/* Progress Bar */}
         <div className="mt-6">
