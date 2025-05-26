@@ -51,8 +51,8 @@ const CheckoutForm = ({ formData, onPrevious, submitBooking, isSubmitting }: Pay
       });
       const { paymentIntentId } = await paymentResponse.json();
 
-      // Confirm payment
-      const { error } = await stripe.confirmPayment({
+      // Confirm payment with the payment method from the form
+      const { error, paymentIntent } = await stripe.confirmPayment({
         elements,
         confirmParams: {
           return_url: `${window.location.origin}/success/${booking.id}`,
@@ -66,11 +66,11 @@ const CheckoutForm = ({ formData, onPrevious, submitBooking, isSubmitting }: Pay
           description: error.message,
           variant: "destructive",
         });
-      } else {
+      } else if (paymentIntent && paymentIntent.status === 'succeeded') {
         // Confirm payment on the backend
         await apiRequest("POST", "/api/confirm-payment", {
           bookingId: booking.id,
-          paymentIntentId,
+          paymentIntentId: paymentIntent.id,
         });
 
         toast({
@@ -80,6 +80,12 @@ const CheckoutForm = ({ formData, onPrevious, submitBooking, isSubmitting }: Pay
 
         // Redirect to success page
         setLocation(`/success/${booking.id}`);
+      } else {
+        toast({
+          title: "Payment Processing",
+          description: "Payment is being processed...",
+          variant: "default",
+        });
       }
     } catch (error: any) {
       toast({
