@@ -143,6 +143,7 @@ const CheckoutForm = ({ formData, onPrevious, submitBooking, isSubmitting }: Pay
               checked={termsAccepted}
               onCheckedChange={(checked) => setTermsAccepted(checked === true)}
               className="mt-1"
+              style={{ width: '24px', height: '24px', borderRadius: '6px' }}
             />
             <label htmlFor="terms" className="text-xs text-slate-600 leading-relaxed cursor-pointer">
               I agree that the information I have given on this document is true and correct. I have read and understood all wording written in this document. I take full responsibility for my actions at any and all times on site, off site and on-line. This includes during any workouts, classes, practices and use of equipment whilst engaged in activities.
