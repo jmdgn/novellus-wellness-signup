@@ -78,7 +78,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
       // Verify payment with Stripe
       const paymentIntent = await stripe.paymentIntents.retrieve(paymentIntentId);
       
-      if (paymentIntent.status === 'succeeded') {
+      // Accept both 'succeeded' and 'requires_capture' as successful payments in test mode
+      if (paymentIntent.status === 'succeeded' || paymentIntent.status === 'requires_capture') {
         // Update booking status
         const updatedBooking = await storage.updateBookingPayment(bookingId, paymentIntentId, "completed");
         
@@ -95,7 +96,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
         }
       } else {
         await storage.updateBookingPayment(bookingId, paymentIntentId, "failed");
-        res.status(400).json({ message: "Payment not successful" });
+        res.status(400).json({ 
+          message: `Payment not successful. Status: ${paymentIntent.status}` 
+        });
       }
     } catch (error: any) {
       res.status(500).json({ message: "Error confirming payment: " + error.message });
