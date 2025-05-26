@@ -221,18 +221,25 @@ export default function TimePreferencesStep({ data, onUpdate, onNext, onPrevious
           {/* Previous Button */}
           <div 
             style={{ 
-              width: '40px',
-              height: '40px',
-              border: '1px solid #111',
+              width: '55px',
+              height: '55px',
+              border: '1px solid #CCC',
               borderRadius: '6px',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               background: '#fff',
               cursor: 'pointer',
-              flexShrink: 0
+              flexShrink: 0,
+              transition: 'background-color 0.2s ease'
             }}
             onClick={onPrevious}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = '#F9F9F9';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = '#fff';
+            }}
           >
             <ChevronLeft size={16} color="#111" />
           </div>
