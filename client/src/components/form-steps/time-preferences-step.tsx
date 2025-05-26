@@ -86,17 +86,29 @@ export default function TimePreferencesStep({ data, onUpdate, onNext, onPrevious
     onNext();
   };
 
+  // Check if form is valid (at least one time selected)
+  const isFormValid = selectedTimes.length > 0;
+
   return (
-    <div className="form-inner">
-      <div className="text-center mb-8">
-        <h1 className="text-2xl font-bold text-slate-800 mb-2">Book a Class Time</h1>
-        <p className="text-slate-600 text-sm">
-          Select 3x time preferences | Select in order of priority
-        </p>
+    <>
+      {/* Title Group */}
+      <div style={{ flexDirection: 'column', alignItems: 'flex-start', gap: '10px', width: '100%', display: 'flex' }}>
+        <div style={{ width: '100%' }}>
+          <h1 style={{ fontSize: '28px', fontWeight: '700', color: '#111', margin: '0', lineHeight: '1.6' }}>
+            Book a Class Time
+          </h1>
+        </div>
+        <div style={{ width: '100%' }}>
+          <p style={{ fontSize: '14px', color: '#666', margin: '0', lineHeight: '1.4' }}>
+            Select 3x time preferences | Select in order of priority
+          </p>
+        </div>
       </div>
 
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)}>
+      {/* Form Inner Container */}
+      <div className="form-inner" style={{ width: '100%', margin: '24px 0 0 0' }}>
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} style={{ width: '100%', padding: '16px 20px' }}>
           {/* Accordion Time Slots */}
           <div className="space-y-4 mb-6">
             <Accordion type="multiple" className="space-y-3">
@@ -193,26 +205,54 @@ export default function TimePreferencesStep({ data, onUpdate, onNext, onPrevious
             </div>
           </div>
 
-          {/* Navigation */}
-          <div className="flex justify-between items-center mt-8 pt-6 border-t border-slate-100">
-            <Button
-              type="button"
-              variant="ghost"
-              onClick={onPrevious}
-              className="flex items-center space-x-2 text-slate-600 hover:text-slate-800"
-            >
-              <ChevronLeft size={16} />
-            </Button>
-            <div className="step-indicator">Step 2 of 4</div>
-            <Button 
-              type="submit"
-              className="bg-primary hover:bg-primary/90 px-6 py-3"
-            >
-              Next step
-            </Button>
+            </form>
+          </Form>
+        </div>
+
+        {/* Navigation Button */}
+        <div 
+          className="next-button-container" 
+          style={{ 
+            width: '100%', 
+            margin: '24px 0', 
+            cursor: 'pointer',
+            border: isFormValid ? '1px solid #111111' : '1px solid #111',
+            background: isFormValid ? '#111111' : '#fff',
+            color: isFormValid ? '#FFF' : '#111'
+          }}
+          onClick={form.handleSubmit(onSubmit)}
+        >
+          <div style={{ flexShrink: 0 }}>
+            <div className="step-text" style={{ color: 'inherit' }}>Step 2 of 4</div>
           </div>
-        </form>
-      </Form>
-    </div>
-  );
+          <div style={{ flexShrink: 0 }}>
+            <div className="action-text" style={{ color: 'inherit' }}>
+              Next step
+            </div>
+          </div>
+        </div>
+
+        {/* Previous Button */}
+        <div 
+          style={{ 
+            position: 'absolute', 
+            left: '0', 
+            top: '50%', 
+            transform: 'translateY(-50%)',
+            width: '40px',
+            height: '40px',
+            border: '1px solid #111',
+            borderRadius: '6px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            background: '#fff',
+            cursor: 'pointer'
+          }}
+          onClick={onPrevious}
+        >
+          <ChevronLeft size={16} color="#111" />
+        </div>
+      </>
+    );
 }
