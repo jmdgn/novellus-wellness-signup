@@ -190,6 +190,7 @@ export default function TimePreferencesStep({ data, onUpdate, onNext, onPrevious
                 type="button"
                 variant={selectedLanguage === "english" ? "default" : "outline"}
                 className="flex-1"
+                style={{ height: '52px', borderRadius: '8px' }}
                 onClick={() => handleLanguageSelect("english")}
               >
                 English
@@ -198,6 +199,7 @@ export default function TimePreferencesStep({ data, onUpdate, onNext, onPrevious
                 type="button"
                 variant={selectedLanguage === "spanish" ? "default" : "outline"}
                 className="flex-1"
+                style={{ height: '52px', borderRadius: '8px' }}
                 onClick={() => handleLanguageSelect("spanish")}
               >
                 Español
