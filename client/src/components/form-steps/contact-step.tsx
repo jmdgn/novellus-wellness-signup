@@ -51,7 +51,7 @@ export default function ContactStep({ data, onUpdate, onNext }: ContactStepProps
       {/* Title Group */}
       <div style={{ flexDirection: 'column', alignItems: 'flex-start', gap: '10px', width: '100%', display: 'flex' }}>
         <div style={{ width: '100%' }}>
-          <h1 style={{ fontSize: '20px', fontWeight: '700', color: '#111', margin: '0', lineHeight: '1.6' }}>
+          <h1 style={{ fontSize: '28px', fontWeight: '700', color: '#111', margin: '0', lineHeight: '1.6' }}>
             Reserve your spot
           </h1>
         </div>
@@ -61,9 +61,8 @@ export default function ContactStep({ data, onUpdate, onNext }: ContactStepProps
           </p>
         </div>
       </div>
-
       {/* Form Inner Container */}
-      <div className="form-inner" style={{ width: '100%', margin: '24px 0 0 0' }}>
+      <div className="form-inner pl-[0px] pr-[0px] pt-[8px] pb-[8px]" style={{ width: '100%', margin: '24px 0 0 0' }}>
         {/* Class Info Header */}
         <div className="form-title-container" style={{ width: '100%' }}>
           <div style={{ flexShrink: 0 }}>
@@ -164,20 +163,19 @@ export default function ContactStep({ data, onUpdate, onNext }: ContactStepProps
           </form>
         </Form>
       </div>
-
       {/* Navigation Button */}
-      <div className="next-button-container" style={{ width: '100%', margin: '24px 0' }}>
+      <div 
+        className="next-button-container" 
+        style={{ width: '100%', margin: '24px 0', cursor: 'pointer' }}
+        onClick={form.handleSubmit(onSubmit)}
+      >
         <div style={{ flexShrink: 0 }}>
           <div className="step-text">Step 1 of 4</div>
         </div>
         <div style={{ flexShrink: 0 }}>
-          <button 
-            onClick={form.handleSubmit(onSubmit)} 
-            className="action-text" 
-            style={{ background: 'none', border: 'none', cursor: 'pointer' }}
-          >
+          <div className="action-text">
             Next step
-          </button>
+          </div>
         </div>
       </div>
     </>

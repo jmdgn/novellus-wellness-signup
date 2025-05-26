@@ -97,10 +97,9 @@ export default function BookingForm() {
           </defs>
         </svg>
       </div>
-
       {/* Main Form Container */}
       <div className="w-full max-w-lg">
-        <div className="form-card">
+        <div className="form-card pt-[32px] pb-[32px] text-[#555555]">
           {renderCurrentStep()}
         </div>
 
