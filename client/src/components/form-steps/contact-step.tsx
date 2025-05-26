@@ -178,7 +178,8 @@ export default function ContactStep({ data, onUpdate, onNext }: ContactStepProps
           margin: '24px 0', 
           cursor: 'pointer',
           border: isFormValid ? '1px solid #0095F6' : '1px solid #111',
-          color: isFormValid ? '#0095F6' : '#111'
+          background: isFormValid ? '#0095F6' : '#fff',
+          color: isFormValid ? '#FFF' : '#111'
         }}
         onClick={form.handleSubmit(onSubmit)}
       >
