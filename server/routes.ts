@@ -29,7 +29,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         booking.asthmaAttack || 
         booking.diabetesControl || 
         booking.otherConditions ||
-        (booking.painAreas && booking.painAreas.length > 0 && !booking.painAreas.includes("none"));
+        (booking.painAreas && Array.isArray(booking.painAreas) && booking.painAreas.length > 0 && !booking.painAreas.includes("none"));
         
       if (needsMedicalClearance) {
         await sendMedicalClearanceEmail(booking);
@@ -104,7 +104,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
             updatedBooking.asthmaAttack || 
             updatedBooking.diabetesControl || 
             updatedBooking.otherConditions ||
-            (updatedBooking.painAreas && updatedBooking.painAreas.length > 0 && !updatedBooking.painAreas.includes("none"));
+            (updatedBooking.painAreas && Array.isArray(updatedBooking.painAreas) && updatedBooking.painAreas.length > 0 && !updatedBooking.painAreas.includes("none"));
           
           res.json({ 
             success: true, 
