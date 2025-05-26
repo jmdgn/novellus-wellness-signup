@@ -94,11 +94,11 @@ export default function Success() {
                 <span className="text-slate-600">Language:</span>
                 <span className="font-medium">{booking.language === 'english' ? 'English' : 'Español'}</span>
               </div>
-              {booking.timePreferences && booking.timePreferences.length > 0 && (
+              {booking.timePreferences && Array.isArray(booking.timePreferences) && booking.timePreferences.length > 0 && (
                 <div className="pt-2 border-t border-slate-200">
                   <span className="text-slate-600 text-sm">Time Preferences:</span>
                   <div className="mt-1 space-y-1">
-                    {(booking.timePreferences as string[]).map((slot, index) => (
+                    {booking.timePreferences.map((slot: string, index: number) => (
                       <div key={slot} className="text-sm">
                         <span className="font-medium">{index + 1}.</span> {timeSlotNames[slot as keyof typeof timeSlotNames]}
                       </div>
@@ -108,7 +108,7 @@ export default function Success() {
               )}
             </div>
 
-            {booking.hasMedicalConditions && (
+            {booking.needsMedicalClearance && (
               <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
                 <p className="text-sm text-blue-800">
                   <strong>Medical Clearance Required:</strong> We've sent you a separate email with instructions for obtaining medical clearance from your doctor.

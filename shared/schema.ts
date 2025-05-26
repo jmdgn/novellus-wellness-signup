@@ -18,6 +18,13 @@ export const bookings = pgTable("bookings", {
   language: text("language").notNull().default("english"),
   painAreas: jsonb("pain_areas"), // Array of selected pain areas
   isPregnant: boolean("is_pregnant").default(false),
+  pregnancyWeeks: integer("pregnancy_weeks"),
+  heartCondition: boolean("heart_condition").default(false),
+  chestPain: boolean("chest_pain").default(false),
+  dizziness: boolean("dizziness").default(false),
+  asthmaAttack: boolean("asthma_attack").default(false),
+  diabetesControl: boolean("diabetes_control").default(false),
+  otherConditions: boolean("other_conditions").default(false),
   medicalConditions: text("medical_conditions"),
   hasMedicalConditions: boolean("has_medical_conditions").default(false),
   stripePaymentIntentId: text("stripe_payment_intent_id"),

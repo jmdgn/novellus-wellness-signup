@@ -22,7 +22,16 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const booking = await storage.createBooking(validatedData);
       
       // Send medical clearance email if needed
-      if (booking.hasMedicalConditions) {
+      const needsMedicalClearance = booking.isPregnant || 
+        booking.heartCondition || 
+        booking.chestPain || 
+        booking.dizziness || 
+        booking.asthmaAttack || 
+        booking.diabetesControl || 
+        booking.otherConditions ||
+        (booking.painAreas && booking.painAreas.length > 0 && !booking.painAreas.includes("none"));
+        
+      if (needsMedicalClearance) {
         await sendMedicalClearanceEmail(booking);
       }
       
@@ -87,9 +96,19 @@ export async function registerRoutes(app: Express): Promise<Server> {
           // Send confirmation email
           await sendConfirmationEmail(updatedBooking);
           
+          // Add medical clearance flag for frontend display
+          const needsMedicalClearance = updatedBooking.isPregnant || 
+            updatedBooking.heartCondition || 
+            updatedBooking.chestPain || 
+            updatedBooking.dizziness || 
+            updatedBooking.asthmaAttack || 
+            updatedBooking.diabetesControl || 
+            updatedBooking.otherConditions ||
+            (updatedBooking.painAreas && updatedBooking.painAreas.length > 0 && !updatedBooking.painAreas.includes("none"));
+          
           res.json({ 
             success: true, 
-            booking: updatedBooking 
+            booking: { ...updatedBooking, needsMedicalClearance }
           });
         } else {
           res.status(404).json({ message: "Booking not found" });
