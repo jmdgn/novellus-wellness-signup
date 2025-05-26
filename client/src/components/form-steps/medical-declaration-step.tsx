@@ -26,27 +26,77 @@ const painAreas = [
   { id: "other", label: "Other" }
 ];
 
+const healthQuestions = [
+  {
+    id: "isPregnant",
+    question: "Are you pregnant?",
+    key: "isPregnant" as keyof typeof responses
+  },
+  {
+    id: "heartCondition", 
+    question: "Has your medical practitioner ever told you that you have a heart condition, or have you ever suffered a stroke?",
+    key: "heartCondition" as keyof typeof responses
+  },
+  {
+    id: "chestPain",
+    question: "Do you ever experience unexplained pains or discomfort in your chest at rest or during physical exercise / Activity?",
+    key: "chestPain" as keyof typeof responses
+  },
+  {
+    id: "dizziness",
+    question: "Do you ever feel faint, dizzy, or lose balance during physical activity / exercise?",
+    key: "dizziness" as keyof typeof responses
+  },
+  {
+    id: "asthmaAttack",
+    question: "Have you had an asthma attack requiring immediate medical attention at any time over the last 12 months?",
+    key: "asthmaAttack" as keyof typeof responses
+  },
+  {
+    id: "diabetesControl",
+    question: "If you have diabetes (type 1 or 2), have you had trouble controlling your blood sugar (glucose) in the last 3 months?",
+    key: "diabetesControl" as keyof typeof responses
+  },
+  {
+    id: "otherConditions",
+    question: "Do you have any other conditions that may require special consideration for you to exercise?",
+    key: "otherConditions" as keyof typeof responses
+  }
+];
+
 export default function MedicalDeclarationStep({ data, onUpdate, onNext, onPrevious }: MedicalDeclarationStepProps) {
   const [selectedPainAreas, setSelectedPainAreas] = useState<string[]>(data?.painAreas || []);
-  const [isPregnant, setIsPregnant] = useState<boolean>(data?.isPregnant || false);
-  const [showMedicalConditions, setShowMedicalConditions] = useState<boolean>(false);
+  const [responses, setResponses] = useState({
+    isPregnant: data?.isPregnant || false,
+    heartCondition: data?.heartCondition || false,
+    chestPain: data?.chestPain || false,
+    dizziness: data?.dizziness || false,
+    asthmaAttack: data?.asthmaAttack || false,
+    diabetesControl: data?.diabetesControl || false,
+    otherConditions: data?.otherConditions || false,
+  });
 
   const form = useForm<MedicalDeclaration>({
     resolver: zodResolver(medicalDeclarationSchema),
     defaultValues: {
       painAreas: data?.painAreas || [],
       isPregnant: data?.isPregnant || false,
+      heartCondition: data?.heartCondition || false,
+      chestPain: data?.chestPain || false,
+      dizziness: data?.dizziness || false,
+      asthmaAttack: data?.asthmaAttack || false,
+      diabetesControl: data?.diabetesControl || false,
+      otherConditions: data?.otherConditions || false,
       medicalConditions: data?.medicalConditions || "",
       hasMedicalConditions: data?.hasMedicalConditions || false,
     },
   });
 
-  // Update medical conditions visibility when pain areas or pregnancy status changes
+  // Update medical conditions visibility when any medical issues are present
   useEffect(() => {
-    const hasMedicalIssues = selectedPainAreas.length > 0 || isPregnant;
-    setShowMedicalConditions(hasMedicalIssues);
-    form.setValue("hasMedicalConditions", hasMedicalIssues);
-  }, [selectedPainAreas, isPregnant, form]);
+    const hasAnyMedicalIssues = selectedPainAreas.length > 0 || Object.values(responses).some(Boolean);
+    form.setValue("hasMedicalConditions", hasAnyMedicalIssues);
+  }, [selectedPainAreas, responses, form]);
 
   const handlePainAreaChange = (areaId: string, checked: boolean) => {
     let newPainAreas: string[];
@@ -61,10 +111,10 @@ export default function MedicalDeclarationStep({ data, onUpdate, onNext, onPrevi
     form.setValue("painAreas", newPainAreas as any);
   };
 
-  const handlePregnancyChange = (value: string) => {
-    const pregnant = value === "yes";
-    setIsPregnant(pregnant);
-    form.setValue("isPregnant", pregnant);
+  const handleResponseChange = (questionKey: keyof typeof responses, value: boolean) => {
+    const newResponses = { ...responses, [questionKey]: value };
+    setResponses(newResponses);
+    form.setValue(questionKey, value);
   };
 
   const onSubmit = (values: MedicalDeclaration) => {
@@ -72,8 +122,10 @@ export default function MedicalDeclarationStep({ data, onUpdate, onNext, onPrevi
     onNext();
   };
 
+  const hasAnyYesAnswers = Object.values(responses).some(Boolean);
+
   return (
-    <div>
+    <div className="form-inner">
       <div className="text-center mb-8">
         <h1 className="text-2xl font-bold text-slate-800 mb-2">Medical History & Information</h1>
         <p className="text-slate-600 text-sm">
@@ -85,7 +137,7 @@ export default function MedicalDeclarationStep({ data, onUpdate, onNext, onPrevi
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
           
           {/* Question 1: Pain History */}
-          <div className="bg-slate-50 rounded-lg p-4">
+          <div className="bg-white border border-slate-200 rounded-lg p-4">
             <div className="flex items-start space-x-3 mb-4">
               <div className="w-6 h-6 bg-slate-800 text-white rounded-full flex items-center justify-center text-sm font-bold mt-0.5">
                 1
@@ -97,72 +149,60 @@ export default function MedicalDeclarationStep({ data, onUpdate, onNext, onPrevi
             
             <div className="grid grid-cols-3 gap-3 ml-9">
               {painAreas.map((area) => (
-                <FormField
+                <button
                   key={area.id}
-                  control={form.control}
-                  name="painAreas"
-                  render={() => (
-                    <FormItem className="flex items-center space-x-2">
-                      <FormControl>
-                        <Checkbox
-                          checked={selectedPainAreas.includes(area.id)}
-                          onCheckedChange={(checked) => handlePainAreaChange(area.id, !!checked)}
-                        />
-                      </FormControl>
-                      <FormLabel className="text-sm text-slate-700 cursor-pointer">
-                        {area.label}
-                      </FormLabel>
-                    </FormItem>
-                  )}
-                />
+                  type="button"
+                  className={`time-slot-button ${selectedPainAreas.includes(area.id) ? 'selected' : ''}`}
+                  onClick={() => handlePainAreaChange(area.id, !selectedPainAreas.includes(area.id))}
+                >
+                  {area.label}
+                </button>
               ))}
             </div>
           </div>
 
-          {/* Question 2: Pregnancy */}
-          <div className="bg-slate-50 rounded-lg p-4">
-            <div className="flex items-start space-x-3 mb-4">
-              <div className="w-6 h-6 bg-slate-800 text-white rounded-full flex items-center justify-center text-sm font-bold mt-0.5">
-                2
+          {/* Health Questions 2-8 */}
+          {healthQuestions.map((question, index) => (
+            <div key={question.id} className="bg-white border border-slate-200 rounded-lg p-4">
+              <div className="flex items-start space-x-3 mb-4">
+                <div className="w-6 h-6 bg-slate-800 text-white rounded-full flex items-center justify-center text-sm font-bold mt-0.5">
+                  {index + 2}
+                </div>
+                <div className="text-sm font-medium text-slate-800">
+                  {question.question}
+                </div>
               </div>
-              <div className="text-sm font-medium text-slate-800">
-                Are you pregnant?
+              
+              <div className="ml-9 flex space-x-3">
+                <button
+                  type="button"
+                  className={`time-slot-button ${responses[question.key] === true ? 'selected' : ''}`}
+                  onClick={() => handleResponseChange(question.key, true)}
+                >
+                  Yes
+                </button>
+                <button
+                  type="button"
+                  className={`time-slot-button ${responses[question.key] === false ? 'selected' : ''}`}
+                  onClick={() => handleResponseChange(question.key, false)}
+                >
+                  No
+                </button>
               </div>
             </div>
-            
-            <FormField
-              control={form.control}
-              name="isPregnant"
-              render={() => (
-                <FormItem className="ml-9">
-                  <FormControl>
-                    <RadioGroup
-                      value={isPregnant ? "yes" : "no"}
-                      onValueChange={handlePregnancyChange}
-                      className="flex space-x-4"
-                    >
-                      <div className="flex items-center space-x-2">
-                        <RadioGroupItem value="yes" id="pregnancy-yes" />
-                        <FormLabel htmlFor="pregnancy-yes" className="text-sm text-slate-700 cursor-pointer">
-                          Yes
-                        </FormLabel>
-                      </div>
-                      <div className="flex items-center space-x-2">
-                        <RadioGroupItem value="no" id="pregnancy-no" />
-                        <FormLabel htmlFor="pregnancy-no" className="text-sm text-slate-700 cursor-pointer">
-                          No
-                        </FormLabel>
-                      </div>
-                    </RadioGroup>
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </div>
+          ))}
+
+          {/* Medical Clearance Notice */}
+          {hasAnyYesAnswers && (
+            <div className="bg-amber-50 border border-amber-200 rounded-lg p-4">
+              <div className="text-sm text-amber-800">
+                <strong>IF YOU ANSWERED 'YES' to any of the 7 questions above</strong>, please seek guidance from an appropriate allied health professional or medical practitioner prior to undertaking exercise to gain clearance &amp; / or provide evidence of clearance.
+              </div>
+            </div>
+          )}
 
           {/* Conditional Medical Conditions Text Area */}
-          {showMedicalConditions && (
+          {(selectedPainAreas.length > 0 || hasAnyYesAnswers) && (
             <FormField
               control={form.control}
               name="medicalConditions"
@@ -174,7 +214,7 @@ export default function MedicalDeclarationStep({ data, onUpdate, onNext, onPrevi
                   <FormControl>
                     <Textarea
                       placeholder="Please provide details about your medical conditions..."
-                      className="focus-ring min-h-[100px]"
+                      className="form-field min-h-[100px]"
                       {...field}
                     />
                   </FormControl>
@@ -186,21 +226,20 @@ export default function MedicalDeclarationStep({ data, onUpdate, onNext, onPrevi
 
           {/* Navigation */}
           <div className="flex justify-between items-center mt-8 pt-6 border-t border-slate-100">
-            <Button
+            <button
               type="button"
-              variant="ghost"
               onClick={onPrevious}
-              className="flex items-center space-x-2 text-slate-600 hover:text-slate-800"
+              className="form-button-outline flex items-center space-x-2"
             >
               <ChevronLeft size={16} />
-            </Button>
+            </button>
             <div className="step-indicator">Step 3 of 4</div>
-            <Button 
+            <button 
               type="submit"
-              className="bg-primary hover:bg-primary/90 px-6 py-3"
+              className="form-button"
             >
               Next step
-            </Button>
+            </button>
           </div>
         </form>
       </Form>

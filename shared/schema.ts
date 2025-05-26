@@ -53,6 +53,12 @@ export const timePreferencesSchema = z.object({
 export const medicalDeclarationSchema = z.object({
   painAreas: z.array(z.enum(["neck", "shoulders", "back", "hips", "knees", "ankles", "other"])).optional(),
   isPregnant: z.boolean().default(false),
+  heartCondition: z.boolean().default(false),
+  chestPain: z.boolean().default(false),
+  dizziness: z.boolean().default(false),
+  asthmaAttack: z.boolean().default(false),
+  diabetesControl: z.boolean().default(false),
+  otherConditions: z.boolean().default(false),
   medicalConditions: z.string().optional(),
   hasMedicalConditions: z.boolean().default(false),
 });
