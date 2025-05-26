@@ -82,10 +82,7 @@ export default function ContactStep({ data, onUpdate, onNext }: ContactStepProps
         {/* Class Info Header */}
         <div className="form-title-container" style={{ width: '100%' }}>
           <div style={{ flexShrink: 0 }}>
-            <div className="form-title pl-[20px] pr-[20px]">Introduction Pilates Session | 1hr Class</div>
-          </div>
-          <div style={{ flexShrink: 0 }}>
-            <div className="form-price pl-[20px] pr-[20px]">$20.00 AUD</div>
+            <div className="form-title pl-[20px] pr-[20px]">Your details</div>
           </div>
         </div>
 
