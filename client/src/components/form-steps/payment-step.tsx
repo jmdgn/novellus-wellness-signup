@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements, PaymentElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 import { ChevronLeft } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
@@ -26,11 +27,21 @@ const CheckoutForm = ({ formData, onPrevious, submitBooking, isSubmitting }: Pay
   const { toast } = useToast();
   const [, setLocation] = useLocation();
   const [isProcessing, setIsProcessing] = useState(false);
+  const [termsAccepted, setTermsAccepted] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!stripe || !elements) {
+      return;
+    }
+
+    if (!termsAccepted) {
+      toast({
+        title: "Terms Required",
+        description: "Please accept the terms and conditions to continue.",
+        variant: "destructive",
+      });
       return;
     }
 
@@ -98,20 +109,22 @@ const CheckoutForm = ({ formData, onPrevious, submitBooking, isSubmitting }: Pay
     }
   };
 
-  // Check if form is valid (Stripe elements loaded and ready)
-  const isFormValid = stripe && elements;
+  // Check if form is valid (Stripe elements loaded, ready, and terms accepted)
+  const isFormValid = stripe && elements && termsAccepted;
 
   return (
     <>
       {/* Title Group */}
       <div style={{ flexDirection: 'column', alignItems: 'flex-start', gap: '10px', width: '100%', display: 'flex' }}>
-        <div style={{ width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <div style={{ width: '100%' }}>
           <h1 style={{ fontSize: '28px', fontWeight: '700', color: '#111', margin: '0', lineHeight: '1.6' }}>
             Payment & Confirmation
           </h1>
-          <div style={{ fontSize: '28px', fontWeight: '700', color: '#999' }}>
+        </div>
+        <div style={{ width: '100%' }}>
+          <h2 style={{ fontSize: '18px', fontWeight: '600', color: '#666', margin: '0', lineHeight: '1.4' }}>
             $20.00 AUD
-          </div>
+          </h2>
         </div>
       </div>
 
@@ -124,8 +137,16 @@ const CheckoutForm = ({ formData, onPrevious, submitBooking, isSubmitting }: Pay
 
         {/* Terms and Conditions */}
         <div className="bg-slate-50 rounded-lg p-4">
-          <div className="text-xs text-slate-600 leading-relaxed">
-            I agree that the information I have given on this document is true and correct. I have read and understood all wording written in this document. I take full responsibility for my actions at any and all times on site, off site and on-line. This includes during any workouts, classes, practices and use of equipment whilst engaged in activities.
+          <div className="flex items-start space-x-3">
+            <Checkbox 
+              id="terms"
+              checked={termsAccepted}
+              onCheckedChange={(checked) => setTermsAccepted(checked === true)}
+              className="mt-1"
+            />
+            <label htmlFor="terms" className="text-xs text-slate-600 leading-relaxed cursor-pointer">
+              I agree that the information I have given on this document is true and correct. I have read and understood all wording written in this document. I take full responsibility for my actions at any and all times on site, off site and on-line. This includes during any workouts, classes, practices and use of equipment whilst engaged in activities.
+            </label>
           </div>
         </div>
 
