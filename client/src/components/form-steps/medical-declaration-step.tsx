@@ -205,7 +205,7 @@ export default function MedicalDeclarationStep({ data, onUpdate, onNext, onPrevi
               <div className="bg-slate-800 text-white rounded-full flex items-center justify-center font-bold mt-0.5" style={{ width: '24px', height: '24px', fontSize: '12px' }}>
                 1
               </div>
-              <div className="text-sm font-medium text-slate-800">
+              <div className="text-sm font-medium text-slate-800" style={{ width: 'fit-content' }}>
                 Have you ever had undiagnosed pain in any of the following areas?
               </div>
             </div>
@@ -231,7 +231,7 @@ export default function MedicalDeclarationStep({ data, onUpdate, onNext, onPrevi
                 <div className="bg-slate-800 text-white rounded-full flex items-center justify-center font-bold mt-0.5" style={{ width: '24px', height: '24px', fontSize: '12px' }}>
                   {index + 2}
                 </div>
-                <div className="text-sm font-medium text-slate-800">
+                <div className="text-sm font-medium text-slate-800" style={{ width: 'fit-content' }}>
                   {question.question}
                 </div>
               </div>
