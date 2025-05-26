@@ -131,18 +131,18 @@ const CheckoutForm = ({ formData, onPrevious, submitBooking, isSubmitting }: Pay
       {/* Form Inner Container */}
       <div className="form-inner" style={{ width: '100%', margin: '24px 0 0 0' }}>
         <form onSubmit={handleSubmit} style={{ width: '100%', padding: '16px 20px' }} className="space-y-6">
-        <div className="bg-slate-50 rounded-lg p-4">
+        <div className="rounded-lg p-4">
           <PaymentElement />
         </div>
 
         {/* Terms and Conditions */}
-        <div className="bg-slate-50 rounded-lg p-4">
+        <div className="rounded-lg p-4">
           <div className="flex items-start space-x-3">
             <Checkbox 
               id="terms"
               checked={termsAccepted}
               onCheckedChange={(checked) => setTermsAccepted(checked === true)}
-              className="mt-1"
+              className="mt-1 checkbox-custom"
               style={{ width: '24px', height: '24px', borderRadius: '6px' }}
             />
             <label htmlFor="terms" className="text-xs text-slate-600 leading-relaxed cursor-pointer">

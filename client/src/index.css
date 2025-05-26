@@ -203,6 +203,17 @@
   }
 }
 
+/* Custom checkbox styles */
+.checkbox-custom {
+  border-color: #0095F6;
+}
+
+.checkbox-custom[data-state="checked"] {
+  background-color: #0095F6 !important;
+  border-color: #0095F6 !important;
+  color: white !important;
+}
+
 /* Custom focus styles for better accessibility */
 @layer utilities {
   .focus-ring {

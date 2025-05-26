@@ -73,7 +73,7 @@ export default function Success() {
             </p>
             
             {/* Booking Summary */}
-            <div className="bg-slate-50 rounded-lg p-4 text-left space-y-2 mb-6">
+            <div className="rounded-lg p-4 text-left space-y-2 mb-6">
               <div className="flex justify-between text-sm">
                 <span className="text-slate-600">Class:</span>
                 <span className="font-medium">Introduction Pilates Session</span>
