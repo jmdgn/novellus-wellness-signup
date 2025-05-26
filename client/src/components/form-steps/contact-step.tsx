@@ -59,12 +59,12 @@ export default function ContactStep({ data, onUpdate, onNext }: ContactStepProps
       <div style={{ flexDirection: 'column', alignItems: 'flex-start', gap: '10px', width: '100%', display: 'flex' }}>
         <div style={{ width: '100%' }}>
           <h1 style={{ fontSize: '28px', fontWeight: '700', color: '#111', margin: '0', lineHeight: '1.6' }}>
-            Reserve your spot
+            Try Clinical Pilates
           </h1>
         </div>
         <div style={{ width: '100%' }}>
           <p style={{ fontSize: '14px', color: '#666', margin: '0', lineHeight: '1.4' }}>
-            Reserve your spot today for our introductory Pilates class and start your journey to wellness!
+            Book your 1-hour introduction class in South Yarra, Melbourne for just $20 — a special discounted rate to experience clinical pilates. One-time payment, no subscription.
           </p>
         </div>
       </div>
