@@ -47,124 +47,130 @@ export default function ContactStep({ data, onUpdate, onNext }: ContactStepProps
   };
 
   return (
-    <div className="form-frame">
-      {/* Title Section */}
-      <div style={{ padding: '24px 24px 0 24px' }}>
-        <div style={{ marginBottom: '10px' }}>
-          <h1 style={{ fontSize: '20px', fontWeight: '700', color: '#111', margin: '0 0 10px 0', lineHeight: '1.2' }}>
-            Reserve your spot
-          </h1>
-        </div>
-        <p style={{ fontSize: '14px', color: '#666', margin: '0', lineHeight: '1.4' }}>
-          Reserve your spot today for our introductory Pilates class and start your journey to wellness!
-        </p>
-      </div>
-
-      {/* Form Inner Container */}
-      <div className="form-inner">
-        {/* Class Info Header */}
-        <div className="form-title-container">
-          <div className="form-title">Introduction Pilates Session | 1hr Class</div>
-          <div className="form-price">$20.00 AUD</div>
+    <div className="form-card">
+      <div className="form-frame">
+        {/* Title Section */}
+        <div style={{ padding: '24px 24px 0 24px' }}>
+          <div style={{ marginBottom: '10px' }}>
+            <h1 style={{ fontSize: '20px', fontWeight: '700', color: '#111', margin: '0 0 10px 0', lineHeight: '1.2' }}>
+              Reserve your spot
+            </h1>
+          </div>
+          <p style={{ fontSize: '14px', color: '#666', margin: '0', lineHeight: '1.4' }}>
+            Reserve your spot today for our introductory Pilates class and start your journey to wellness!
+          </p>
         </div>
 
-        {/* Contact Form */}
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)}>
-            {/* First Name & Last Name Row */}
-            <div style={{ display: 'flex', gap: '12px', marginBottom: '24px' }}>
-              <FormField
-                control={form.control}
-                name="firstName"
-                render={({ field }) => (
-                  <FormItem style={{ flex: 1 }}>
-                    <FormLabel style={{ fontSize: '14px', fontWeight: '500', color: '#333', marginBottom: '8px', display: 'block' }}>First Name</FormLabel>
-                    <FormControl>
-                      <Input 
-                        placeholder="Jane" 
-                        className="form-field"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="lastName"
-                render={({ field }) => (
-                  <FormItem style={{ flex: 1 }}>
-                    <FormLabel style={{ fontSize: '14px', fontWeight: '500', color: '#333', marginBottom: '8px', display: 'block' }}>Last Name</FormLabel>
-                    <FormControl>
-                      <Input 
-                        placeholder="Citizen" 
-                        className="form-field"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
+        {/* Form Inner Container */}
+        <div className="form-inner">
+          {/* Class Info Header */}
+          <div className="form-title-container">
+            <div className="form-title">Introduction Pilates Session | 1hr Class</div>
+            <div className="form-price">$20.00 AUD</div>
+          </div>
 
-            {/* Phone Number Row */}
-            <div className="field-row">
-              <FormField
-                control={form.control}
-                name="phoneNumber"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel style={{ fontSize: '14px', fontWeight: '500', color: '#333', marginBottom: '8px', display: 'block' }}>Phone Number</FormLabel>
-                    <FormControl>
-                      <Input 
-                        placeholder="0400 000 000" 
-                        className="form-field"
-                        {...field}
-                        onChange={(e) => {
-                          const formatted = handlePhoneChange(e.target.value);
-                          field.onChange(formatted);
-                        }}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
+          {/* Contact Form */}
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)}>
+              {/* First Name & Last Name Row */}
+              <div style={{ display: 'flex', gap: '12px', marginBottom: '24px' }}>
+                <FormField
+                  control={form.control}
+                  name="firstName"
+                  render={({ field }) => (
+                    <FormItem style={{ flex: 1 }}>
+                      <FormLabel style={{ fontSize: '14px', fontWeight: '500', color: '#333', marginBottom: '8px', display: 'block' }}>First Name</FormLabel>
+                      <FormControl>
+                        <Input 
+                          placeholder="Jane" 
+                          className="form-field"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="lastName"
+                  render={({ field }) => (
+                    <FormItem style={{ flex: 1 }}>
+                      <FormLabel style={{ fontSize: '14px', fontWeight: '500', color: '#333', marginBottom: '8px', display: 'block' }}>Last Name</FormLabel>
+                      <FormControl>
+                        <Input 
+                          placeholder="Citizen" 
+                          className="form-field"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
 
-            {/* Email Address Row */}
-            <div className="field-row">
-              <FormField
-                control={form.control}
-                name="email"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel style={{ fontSize: '14px', fontWeight: '500', color: '#333', marginBottom: '8px', display: 'block' }}>Email Address</FormLabel>
-                    <FormControl>
-                      <Input 
-                        type="email"
-                        placeholder="jane.citizen@email.com" 
-                        className="form-field"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
+              {/* Phone Number Row */}
+              <div className="field-row">
+                <FormField
+                  control={form.control}
+                  name="phoneNumber"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel style={{ fontSize: '14px', fontWeight: '500', color: '#333', marginBottom: '8px', display: 'block' }}>Phone Number</FormLabel>
+                      <FormControl>
+                        <Input 
+                          placeholder="0400 000 000" 
+                          className="form-field"
+                          {...field}
+                          onChange={(e) => {
+                            const formatted = handlePhoneChange(e.target.value);
+                            field.onChange(formatted);
+                          }}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
 
-            {/* Navigation Button */}
-            <div className="next-button-container">
-              <div className="step-text">Step 1 of 4</div>
-              <button type="submit" className="action-text" style={{ background: 'none', border: 'none', cursor: 'pointer' }}>
-                Next step
-              </button>
-            </div>
-          </form>
-        </Form>
+              {/* Email Address Row */}
+              <div className="field-row">
+                <FormField
+                  control={form.control}
+                  name="email"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel style={{ fontSize: '14px', fontWeight: '500', color: '#333', marginBottom: '8px', display: 'block' }}>Email Address</FormLabel>
+                      <FormControl>
+                        <Input 
+                          type="email"
+                          placeholder="jane.citizen@email.com" 
+                          className="form-field"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+            </form>
+          </Form>
+        </div>
+
+        {/* Navigation Button - Outside form-inner */}
+        <div className="next-button-container">
+          <div className="step-text">Step 1 of 4</div>
+          <button 
+            onClick={form.handleSubmit(onSubmit)} 
+            className="action-text" 
+            style={{ background: 'none', border: 'none', cursor: 'pointer' }}
+          >
+            Next step
+          </button>
+        </div>
       </div>
     </div>
   );

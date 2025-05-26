@@ -221,6 +221,11 @@
 }
 
 /* Exact Figma Design Specifications */
+.form-card {
+  margin: 0 auto;
+  padding: 2rem;
+}
+
 .form-frame {
   background: #fff;
   border-radius: 16px;
