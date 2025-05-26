@@ -175,17 +175,29 @@ export default function MedicalDeclarationStep({ data, onUpdate, onNext, onPrevi
   const hasAnyYesAnswers = Object.values(responses).some(response => response === true);
   const allQuestionsAnswered = Object.values(responses).every(response => response !== null);
 
+  // Check if form is valid (all questions answered)
+  const isFormValid = allQuestionsAnswered && (!responses.isPregnant || pregnancyWeeks);
+
   return (
-    <div className="form-inner">
-      <div className="text-center mb-8">
-        <h1 className="text-2xl font-bold text-slate-800 mb-2">Medical History & Information</h1>
-        <p className="text-slate-600 text-sm">
-          <strong>Important:</strong> Please answer these questions as honestly as you can and to the best of your knowledge.
-        </p>
+    <>
+      {/* Title Group */}
+      <div style={{ flexDirection: 'column', alignItems: 'flex-start', gap: '10px', width: '100%', display: 'flex' }}>
+        <div style={{ width: '100%' }}>
+          <h1 style={{ fontSize: '28px', fontWeight: '700', color: '#111', margin: '0', lineHeight: '1.6' }}>
+            Medical History & Information
+          </h1>
+        </div>
+        <div style={{ width: '100%' }}>
+          <p style={{ fontSize: '14px', color: '#666', margin: '0', lineHeight: '1.4' }}>
+            <strong>Important:</strong> Please answer these questions as honestly as you can and to the best of your knowledge.
+          </p>
+        </div>
       </div>
 
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+      {/* Form Inner Container */}
+      <div className="form-inner" style={{ width: '100%', margin: '24px 0 0 0' }}>
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} style={{ width: '100%', padding: '16px 20px' }} className="space-y-6">
           
           {/* Question 1: Pain History */}
           <div className="bg-white border border-slate-200 rounded-lg p-4">
@@ -307,26 +319,67 @@ export default function MedicalDeclarationStep({ data, onUpdate, onNext, onPrevi
             />
           )}
 
-          {/* Navigation */}
-          <div className="flex justify-between items-center mt-8 pt-6 border-t border-slate-100">
-            <button
-              type="button"
-              onClick={onPrevious}
-              className="form-button-outline flex items-center space-x-2"
-            >
-              <ChevronLeft size={16} />
-            </button>
-            <div className="step-indicator">Step 3 of 4</div>
-            <button 
-              type="submit"
-              disabled={!allQuestionsAnswered}
-              className={`form-button ${!allQuestionsAnswered ? 'opacity-50 cursor-not-allowed' : ''}`}
-            >
-              Next step
-            </button>
+          </form>
+        </Form>
+      </div>
+
+      {/* Navigation Container */}
+      <div style={{ 
+        display: 'flex', 
+        alignItems: 'center', 
+        gap: '16px', 
+        width: '100%', 
+        margin: '24px 0',
+        position: 'relative'
+      }}>
+        {/* Previous Button */}
+        <div 
+          style={{ 
+            width: '55px',
+            height: '55px',
+            border: '1px solid #CCC',
+            borderRadius: '6px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            background: '#fff',
+            cursor: 'pointer',
+            flexShrink: 0,
+            transition: 'background-color 0.2s ease'
+          }}
+          onClick={onPrevious}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.background = '#F9F9F9';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.background = '#fff';
+          }}
+        >
+          <ChevronLeft size={16} color="#111" />
+        </div>
+
+        {/* Next Button */}
+        <div 
+          className="next-button-container" 
+          style={{ 
+            flex: 1,
+            cursor: 'pointer',
+            border: isFormValid ? '1px solid #111111' : '1px solid #111',
+            background: isFormValid ? '#111111' : '#fff',
+            color: isFormValid ? '#FFF' : '#111'
+          }}
+          onClick={form.handleSubmit(onSubmit)}
+        >
+          <div style={{ flexShrink: 0 }}>
+            <div className="step-text" style={{ color: 'inherit' }}>Step 3 of 4</div>
           </div>
-        </form>
-      </Form>
-    </div>
+          <div style={{ flexShrink: 0 }}>
+            <div className="action-text" style={{ color: 'inherit' }}>
+              Next step
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
   );
 }
