@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
+import profileImg from "@assets/profile-img.png";
 
 interface ContactStepProps {
   data?: Partial<ContactInfo>;
@@ -64,7 +65,7 @@ export default function ContactStep({ data, onUpdate, onNext }: ContactStepProps
         </div>
         <div style={{ width: '100%', display: 'flex', alignItems: 'center', gap: '8px', margin: '8px 0' }}>
           <img 
-            src="/attached_assets/profile-img.png" 
+            src={profileImg} 
             alt="Beatriz Durango" 
             style={{ 
               width: '32px', 
