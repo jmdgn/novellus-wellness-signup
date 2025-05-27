@@ -3,7 +3,7 @@ import { createServer, type Server } from "http";
 import Stripe from "stripe";
 import { storage } from "./storage";
 import { insertBookingSchema, contactInfoSchema, timePreferencesSchema, medicalDeclarationSchema } from "@shared/schema";
-// import { sendEmail } from "./sendgrid";
+import { sendEmail } from "./sendgrid";
 
 if (!process.env.STRIPE_SECRET_KEY) {
   throw new Error('Missing required Stripe secret: STRIPE_SECRET_KEY');
@@ -226,8 +226,13 @@ async function sendConfirmationEmail(booking: any) {
   `;
 
   try {
-    console.log("Email would be sent to:", booking.email);
-    console.log("Confirmation email content:", emailContent);
+    await sendEmail(process.env.SENDGRID_API_KEY!, {
+      to: booking.email,
+      from: 'noreply@novelluspilates.com', // You'll need to verify this domain in SendGrid
+      subject: 'Booking Confirmation - Your Introduction Pilates Session',
+      html: emailContent
+    });
+    console.log("Confirmation email sent successfully to:", booking.email);
   } catch (error) {
     console.error("Failed to send confirmation email:", error);
   }
@@ -272,8 +277,13 @@ async function sendMedicalClearanceEmail(booking: any) {
   `;
 
   try {
-    console.log("Medical clearance email would be sent to:", booking.email);
-    console.log("Medical clearance email content:", emailContent);
+    await sendEmail(process.env.SENDGRID_API_KEY, {
+      to: booking.email,
+      from: 'noreply@novelluspilates.com', // You'll need to verify this domain in SendGrid
+      subject: 'Medical Clearance Required - Novellus Pilates',
+      html: emailContent
+    });
+    console.log("Medical clearance email sent successfully to:", booking.email);
   } catch (error) {
     console.error("Failed to send medical clearance email:", error);
   }
