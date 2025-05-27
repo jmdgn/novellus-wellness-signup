@@ -59,7 +59,7 @@ export default function ContactStep({ data, onUpdate, onNext }: ContactStepProps
       <div style={{ flexDirection: 'column', alignItems: 'flex-start', gap: '10px', width: '100%', display: 'flex' }}>
         <div style={{ width: '100%' }}>
           <h1 style={{ fontSize: '28px', fontWeight: '700', color: '#111', margin: '0', lineHeight: '1.6' }}>
-            Try Novellus Clinical Pilates
+            Try Novellus Pilates
           </h1>
         </div>
         <div style={{ width: '100%', display: 'flex', alignItems: 'center', gap: '8px', margin: '8px 0' }}>
@@ -89,7 +89,7 @@ export default function ContactStep({ data, onUpdate, onNext }: ContactStepProps
             >
               316-320 Toorak Road, South Yarra
             </a>{' '}
-            for just $20 — a special discounted rate to experience clinical pilates. One-time payment, no subscription.
+            for just $20 — a special discounted rate to experience pilates. One-time payment, no subscription.
           </p>
         </div>
       </div>

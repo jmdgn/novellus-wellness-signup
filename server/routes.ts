@@ -249,7 +249,7 @@ async function sendMedicalClearanceEmail(booking: any) {
     <h3>What you need to do:</h3>
     <ol>
       <li>Please consult with your doctor or healthcare provider</li>
-      <li>Obtain written clearance for participating in Pilates exercises</li>
+      <li>Obtain written clearance for participating in pilates exercises</li>
       <li>Email us the clearance document or have your doctor contact us directly</li>
     </ol>
     
@@ -263,7 +263,7 @@ async function sendMedicalClearanceEmail(booking: any) {
     ${booking.medicalConditions}</p>
     ` : ''}
     
-    <p>Once we receive your medical clearance, we will confirm your class time and you'll be all set to start your Pilates journey!</p>
+    <p>Once we receive your medical clearance, we will confirm your class time and you'll be all set to start your pilates journey!</p>
     
     <p>If you have any questions about this process, please contact us at your convenience.</p>
     
