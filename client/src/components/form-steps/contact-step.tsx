@@ -194,21 +194,21 @@ export default function ContactStep({ data, onUpdate, onNext }: ContactStepProps
             </div>
 
             {/* Emergency Contact Section */}
-            <div style={{ width: '100%', margin: '24px 0 16px 0' }}>
+            <div style={{ width: '100%', margin: '32px 0 16px 0' }}>
               <h3 style={{ fontSize: '16px', fontWeight: '600', color: '#333', marginBottom: '16px' }}>Emergency Contact</h3>
             </div>
 
-            {/* Emergency Contact Name Row */}
-            <div className="field-row" style={{ width: '100%' }}>
+            {/* Emergency Contact Fields Row */}
+            <div className="field-row" style={{ width: '100%', display: 'flex', gap: '16px' }}>
               <FormField
                 control={form.control}
                 name="emergencyContactName"
                 render={({ field }) => (
-                  <FormItem>
-                    <FormLabel style={{ fontSize: '14px', fontWeight: '500', color: '#333', marginBottom: '8px', display: 'block' }}>Full Name</FormLabel>
+                  <FormItem style={{ flex: 1 }}>
+                    <FormLabel style={{ fontSize: '14px', fontWeight: '500', color: '#333', marginBottom: '8px', display: 'block' }}>Contact Name</FormLabel>
                     <FormControl>
                       <Input 
-                        placeholder="Emergency contact full name" 
+                        placeholder="Emergency Contact Name" 
                         className="form-field"
                         {...field}
                       />
@@ -217,15 +217,11 @@ export default function ContactStep({ data, onUpdate, onNext }: ContactStepProps
                   </FormItem>
                 )}
               />
-            </div>
-
-            {/* Emergency Contact Phone Row */}
-            <div className="field-row" style={{ width: '100%' }}>
               <FormField
                 control={form.control}
                 name="emergencyContactPhone"
                 render={({ field }) => (
-                  <FormItem>
+                  <FormItem style={{ flex: 1 }}>
                     <FormLabel style={{ fontSize: '14px', fontWeight: '500', color: '#333', marginBottom: '8px', display: 'block' }}>Contact Phone Number</FormLabel>
                     <FormControl>
                       <Input 
