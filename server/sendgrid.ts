@@ -16,16 +16,23 @@ export async function sendEmail(
 ): Promise<boolean> {
   try {
     mailService.setApiKey(apiKey);
-    await mailService.send({
+    console.log('Attempting to send email to:', params.to, 'from:', params.from);
+    
+    const result = await mailService.send({
       to: params.to,
       from: params.from,
       subject: params.subject,
       text: params.text,
       html: params.html,
     });
+    
+    console.log('SendGrid response:', result[0].statusCode);
     return true;
-  } catch (error) {
+  } catch (error: any) {
     console.error('SendGrid email error:', error);
+    if (error.response) {
+      console.error('SendGrid error response:', error.response.body);
+    }
     return false;
   }
 }
