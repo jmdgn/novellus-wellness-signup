@@ -302,6 +302,9 @@ async function sendMedicalClearanceEmail(booking: any) {
 }
 
 async function sendConfirmationSMS(booking: any) {
+  console.log("Starting SMS confirmation for booking:", booking.id);
+  console.log("Phone number from booking:", booking.phoneNumber);
+  
   if (!process.env.TWILIO_ACCOUNT_SID || !process.env.TWILIO_AUTH_TOKEN || !process.env.TWILIO_PHONE_NUMBER) {
     console.warn("Twilio credentials not configured, skipping SMS confirmation");
     return;
