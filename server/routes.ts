@@ -185,7 +185,7 @@ async function sendConfirmationEmail(booking: any) {
   };
 
   const preferredTimes = (booking.timePreferences as string[])
-    .map((slot, index) => `${index + 1}. ${timeSlotNames[slot as keyof typeof timeSlotNames]}`)
+    .map((slot, index) => `${index + 1}. ${timeSlotNames[slot as keyof typeof timeSlotNames] || slot}`)
     .join('\n');
 
   const emailContent = `
