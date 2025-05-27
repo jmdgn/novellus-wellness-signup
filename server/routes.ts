@@ -228,7 +228,7 @@ async function sendConfirmationEmail(booking: any) {
   try {
     await sendEmail(process.env.SENDGRID_API_KEY!, {
       to: booking.email,
-      from: 'noreply@novelluspilates.com', // You'll need to verify this domain in SendGrid
+      from: 'noreply@novellus.net.au',
       subject: 'Booking Confirmation - Your Introduction Pilates Session',
       html: emailContent
     });
@@ -279,7 +279,7 @@ async function sendMedicalClearanceEmail(booking: any) {
   try {
     await sendEmail(process.env.SENDGRID_API_KEY!, {
       to: booking.email,
-      from: 'noreply@novelluspilates.com', // You'll need to verify this domain in SendGrid
+      from: 'noreply@novellus.net.au',
       subject: 'Medical Clearance Required - Novellus Pilates',
       html: emailContent
     });
