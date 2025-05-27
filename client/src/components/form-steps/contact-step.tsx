@@ -62,22 +62,22 @@ export default function ContactStep({ data, onUpdate, onNext }: ContactStepProps
           <h1 style={{ fontSize: '28px', fontWeight: '700', color: '#111', margin: '0', lineHeight: '1.6' }}>
             Try Novellus Pilates
           </h1>
-        </div>
-        <div style={{ width: '100%', display: 'flex', alignItems: 'center', gap: '8px', margin: '8px 0' }}>
-          <img 
-            src={profileImg} 
-            alt="Beatriz Durango" 
-            style={{ 
-              width: '32px', 
-              height: '32px', 
-              borderRadius: '50%', 
-              objectFit: 'cover',
-              backgroundColor: '#F9F9F9'
-            }} 
-          />
-          <h2 style={{ fontSize: '18px', fontWeight: '700', color: '#111', margin: '0', lineHeight: '1.4' }}>
-            with Beatriz Durango
-          </h2>
+          <div style={{ width: '100%', display: 'flex', alignItems: 'center', gap: '8px', margin: '4px 0 0 0' }}>
+            <img 
+              src={profileImg} 
+              alt="Beatriz Durango" 
+              style={{ 
+                width: '32px', 
+                height: '32px', 
+                borderRadius: '50%', 
+                objectFit: 'cover',
+                backgroundColor: '#F9F9F9'
+              }} 
+            />
+            <h2 style={{ fontSize: '16px', fontWeight: '700', color: '#111', margin: '0', lineHeight: '1.4' }}>
+              with Beatriz Durango
+            </h2>
+          </div>
         </div>
         <div style={{ width: '100%' }}>
           <p style={{ fontSize: '14px', color: '#666', margin: '0', lineHeight: '1.4' }}>
