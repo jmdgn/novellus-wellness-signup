@@ -67,8 +67,8 @@ export default function ContactStep({ data, onUpdate, onNext }: ContactStepProps
               src={profileImg} 
               alt="Beatriz Durango" 
               style={{ 
-                width: '32px', 
-                height: '32px', 
+                width: '42px', 
+                height: '42px', 
                 borderRadius: '50%', 
                 objectFit: 'cover',
                 backgroundColor: '#F9F9F9'
