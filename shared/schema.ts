@@ -14,6 +14,8 @@ export const bookings = pgTable("bookings", {
   lastName: text("last_name").notNull(),
   phoneNumber: text("phone_number").notNull(),
   email: text("email").notNull(),
+  emergencyContactName: text("emergency_contact_name"),
+  emergencyContactPhone: text("emergency_contact_phone"),
   timePreferences: jsonb("time_preferences").notNull(), // Array of time slots in priority order
   language: text("language").notNull().default("english"),
   painAreas: jsonb("pain_areas"), // Array of selected pain areas
@@ -50,6 +52,14 @@ export const contactInfoSchema = z.object({
     return /^(0[2-9]\d{8}|614\d{8}|\+614\d{8})$/.test(cleaned) || /^04\d{8}$/.test(cleaned);
   }, "Please enter a valid Australian phone number (e.g., 0412 345 678)"),
   email: z.string().email("Please enter a valid email address"),
+  emergencyContactName: z.string().min(1, "Emergency contact name is required"),
+  emergencyContactPhone: z.string().min(1, "Emergency contact phone is required").refine((phone) => {
+    // Remove all non-digit characters for validation
+    const cleaned = phone.replace(/\D/g, '');
+    // Accept formats: 04xxxxxxxx, +614xxxxxxxx, or 614xxxxxxxx
+    return /^(0[2-9]\d{8}|614\d{8}|\+614\d{8})$/.test(cleaned) || /^04\d{8}$/.test(cleaned);
+  }, "Please enter a valid Australian phone number (e.g., 0412 345 678)"),
+  language: z.enum(["english", "spanish"])
 });
 
 export const timePreferencesSchema = z.object({
