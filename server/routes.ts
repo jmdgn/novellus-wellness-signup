@@ -277,7 +277,7 @@ async function sendMedicalClearanceEmail(booking: any) {
   `;
 
   try {
-    await sendEmail(process.env.SENDGRID_API_KEY, {
+    await sendEmail(process.env.SENDGRID_API_KEY!, {
       to: booking.email,
       from: 'noreply@novelluspilates.com', // You'll need to verify this domain in SendGrid
       subject: 'Medical Clearance Required - Novellus Pilates',
