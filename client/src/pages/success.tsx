@@ -100,7 +100,7 @@ export default function Success() {
                   <div className="mt-1 space-y-1">
                     {booking.timePreferences.map((slot: string, index: number) => (
                       <div key={slot} className="text-sm">
-                        <span className="font-medium">{index + 1}.</span> {timeSlotNames[slot as keyof typeof timeSlotNames]}
+                        <span className="font-medium">{index + 1}.</span> {timeSlotNames[slot as keyof typeof timeSlotNames] || slot}
                       </div>
                     ))}
                   </div>
