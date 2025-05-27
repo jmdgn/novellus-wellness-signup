@@ -134,7 +134,17 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(404).json({ message: "Booking not found" });
       }
       
-      res.json(booking);
+      // Add medical clearance flag for frontend display
+      const needsMedicalClearance = booking.isPregnant || 
+        booking.heartCondition || 
+        booking.chestPain || 
+        booking.dizziness || 
+        booking.asthmaAttack || 
+        booking.diabetesControl || 
+        booking.otherConditions ||
+        (booking.painAreas && Array.isArray(booking.painAreas) && booking.painAreas.length > 0 && !booking.painAreas.includes("none"));
+      
+      res.json({ ...booking, needsMedicalClearance });
     } catch (error: any) {
       res.status(500).json({ message: "Error fetching booking: " + error.message });
     }
