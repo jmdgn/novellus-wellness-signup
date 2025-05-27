@@ -222,7 +222,7 @@ export default function ContactStep({ data, onUpdate, onNext }: ContactStepProps
                 name="emergencyContactPhone"
                 render={({ field }) => (
                   <FormItem style={{ flex: 1 }}>
-                    <FormLabel style={{ fontSize: '14px', fontWeight: '500', color: '#333', marginBottom: '8px', display: 'block' }}>Contact Phone Number</FormLabel>
+                    <FormLabel style={{ fontSize: '14px', fontWeight: '500', color: '#333', marginBottom: '8px', display: 'block' }}>Phone Number</FormLabel>
                     <FormControl>
                       <Input 
                         placeholder="0400 000 000" 
