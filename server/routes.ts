@@ -322,9 +322,19 @@ async function sendConfirmationSMS(booking: any) {
 
   const smsMessage = `🧘‍♀️ Booking Confirmed! Hi ${booking.firstName}, your Introduction Pilates Session is booked for $20 AUD. Your time preferences: ${preferredTimes}. We'll contact you within 24hrs to confirm your exact time. Check your email for full details. - Novellus Pilates`;
 
+  // Format phone number for international format (Australia)
+  let formattedPhone = booking.phoneNumber.replace(/\s+/g, ''); // Remove spaces
+  if (formattedPhone.startsWith('0')) {
+    formattedPhone = '+61' + formattedPhone.substring(1); // Convert 04xx to +614xx
+  } else if (!formattedPhone.startsWith('+')) {
+    formattedPhone = '+61' + formattedPhone; // Add +61 if no country code
+  }
+  
+  console.log("Formatted phone number:", formattedPhone);
+
   try {
     await sendSMS({
-      to: booking.phoneNumber,
+      to: formattedPhone,
       message: smsMessage
     });
     console.log("Confirmation SMS sent successfully to:", booking.phoneNumber);
