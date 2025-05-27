@@ -4,6 +4,7 @@ import Stripe from "stripe";
 import { storage } from "./storage";
 import { insertBookingSchema, contactInfoSchema, timePreferencesSchema, medicalDeclarationSchema } from "@shared/schema";
 import { sendEmail } from "./sendgrid";
+import { sendSMS } from "./twilio";
 
 if (!process.env.STRIPE_SECRET_KEY) {
   throw new Error('Missing required Stripe secret: STRIPE_SECRET_KEY');
@@ -93,8 +94,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
         const updatedBooking = await storage.updateBookingPayment(bookingId, paymentIntentId, "completed");
         
         if (updatedBooking) {
-          // Send confirmation email
+          // Send confirmation email and SMS
           await sendConfirmationEmail(updatedBooking);
+          await sendConfirmationSMS(updatedBooking);
           
           // Add medical clearance flag for frontend display
           const needsMedicalClearance = updatedBooking.isPregnant || 
@@ -296,5 +298,34 @@ async function sendMedicalClearanceEmail(booking: any) {
     console.log("Medical clearance email sent successfully to:", booking.email);
   } catch (error) {
     console.error("Failed to send medical clearance email:", error);
+  }
+}
+
+async function sendConfirmationSMS(booking: any) {
+  if (!process.env.TWILIO_ACCOUNT_SID || !process.env.TWILIO_AUTH_TOKEN || !process.env.TWILIO_PHONE_NUMBER) {
+    console.warn("Twilio credentials not configured, skipping SMS confirmation");
+    return;
+  }
+
+  const timeSlotNames = {
+    morning: "Morning (7-11AM)",
+    afternoon: "Afternoon (1-3PM)", 
+    evening: "Evening (5-7PM)"
+  };
+
+  const preferredTimes = (booking.timePreferences as string[])
+    .map((slot, index) => `${index + 1}. ${timeSlotNames[slot as keyof typeof timeSlotNames] || slot}`)
+    .join(', ');
+
+  const smsMessage = `🧘‍♀️ Booking Confirmed! Hi ${booking.firstName}, your Introduction Pilates Session is booked for $20 AUD. Your time preferences: ${preferredTimes}. We'll contact you within 24hrs to confirm your exact time. Check your email for full details. - Novellus Pilates`;
+
+  try {
+    await sendSMS({
+      to: booking.phoneNumber,
+      message: smsMessage
+    });
+    console.log("Confirmation SMS sent successfully to:", booking.phoneNumber);
+  } catch (error) {
+    console.error("Failed to send confirmation SMS:", error);
   }
 }
