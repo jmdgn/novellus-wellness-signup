@@ -185,6 +185,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
 }
 
 async function sendConfirmationEmail(booking: any) {
+  console.log(`=== CONFIRMATION EMAIL DEBUG ===`);
+  console.log(`Booking ID: ${booking.id}`);
+  console.log(`Recipient: ${booking.email}`);
+  console.log(`Name: ${booking.firstName} ${booking.lastName}`);
+  
   if (!process.env.SENDGRID_API_KEY) {
     console.warn("SENDGRID_API_KEY not configured, skipping confirmation email");
     return;
@@ -210,7 +215,7 @@ async function sendConfirmationEmail(booking: any) {
     <h3>Booking Details:</h3>
     <ul>
       <li><strong>Class:</strong> Introduction Pilates Session (1 hour)</li>
-      <li><strong>Amount Paid:</strong> $20.00 AUD</li>
+      <li><strong>Amount Paid:</strong> $30.00 AUD</li>
       <li><strong>Language:</strong> ${booking.language === 'english' ? 'English' : 'Español'}</li>
       <li><strong>Contact:</strong> ${booking.email}</li>
       <li><strong>Phone:</strong> ${booking.phoneNumber}</li>
@@ -238,16 +243,27 @@ async function sendConfirmationEmail(booking: any) {
   `;
 
   try {
-    await sendEmail(process.env.SENDGRID_API_KEY!, {
+    console.log(`Sending confirmation email...`);
+    console.log(`Subject: Booking Confirmation - Your Introduction Pilates Session`);
+    console.log(`From: noreply@novellus.net.au`);
+    console.log(`Email content length: ${emailContent.length} characters`);
+    
+    const result = await sendEmail(process.env.SENDGRID_API_KEY!, {
       to: booking.email,
       from: 'noreply@novellus.net.au',
       subject: 'Booking Confirmation - Your Introduction Pilates Session',
       html: emailContent
     });
-    console.log("Confirmation email sent successfully to:", booking.email);
+    
+    if (result) {
+      console.log("✅ Confirmation email sent successfully to:", booking.email);
+    } else {
+      console.log("❌ Confirmation email failed to send to:", booking.email);
+    }
   } catch (error) {
-    console.error("Failed to send confirmation email:", error);
+    console.error("❌ Failed to send confirmation email:", error);
   }
+  console.log(`=== END CONFIRMATION EMAIL DEBUG ===`)
 }
 
 async function sendMedicalClearanceEmail(booking: any) {
