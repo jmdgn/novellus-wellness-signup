@@ -23,6 +23,8 @@ export default function ContactStep({ data, onUpdate, onNext }: ContactStepProps
       lastName: data?.lastName || "",
       phoneNumber: data?.phoneNumber || "",
       email: data?.email || "",
+      emergencyContactName: data?.emergencyContactName || "",
+      emergencyContactPhone: data?.emergencyContactPhone || "",
     },
   });
 
