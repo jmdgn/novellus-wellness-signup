@@ -44,11 +44,13 @@ const timeSlots = [
 export default function TimePreferencesStep({ data, onUpdate, onNext, onPrevious }: TimePreferencesStepProps) {
   const [selectedTimes, setSelectedTimes] = useState<string[]>(data?.timePreferences || []);
   const [selectedLanguage, setSelectedLanguage] = useState<"english" | "spanish">(data?.language || "english");
+  const [selectedClassType, setSelectedClassType] = useState<"mat" | "reformer" | "both">(data?.classType || "mat");
 
   const form = useForm<TimePreferences>({
     resolver: zodResolver(timePreferencesSchema),
     defaultValues: {
       timePreferences: data?.timePreferences || [],
+      classType: data?.classType || "mat",
       language: data?.language || "english",
     },
   });
@@ -75,6 +77,11 @@ export default function TimePreferencesStep({ data, onUpdate, onNext, onPrevious
   const handleLanguageSelect = (language: "english" | "spanish") => {
     setSelectedLanguage(language);
     form.setValue("language", language);
+  };
+
+  const handleClassTypeSelect = (classType: "mat" | "reformer" | "both") => {
+    setSelectedClassType(classType);
+    form.setValue("classType", classType);
   };
 
   const onSubmit = (values: TimePreferences) => {
@@ -181,6 +188,40 @@ export default function TimePreferencesStep({ data, onUpdate, onNext, onPrevious
               </div>
             </div>
           )}
+
+          {/* Class Type Preference */}
+          <div className="mb-6">
+            <div className="text-sm text-slate-600 mb-3">My class preference is:</div>
+            <div className="flex space-x-4">
+              <Button
+                type="button"
+                variant={selectedClassType === "mat" ? "default" : "outline"}
+                className="flex-1"
+                style={{ height: '52px', borderRadius: '8px' }}
+                onClick={() => handleClassTypeSelect("mat")}
+              >
+                Mat
+              </Button>
+              <Button
+                type="button"
+                variant={selectedClassType === "reformer" ? "default" : "outline"}
+                className="flex-1"
+                style={{ height: '52px', borderRadius: '8px' }}
+                onClick={() => handleClassTypeSelect("reformer")}
+              >
+                Reformer
+              </Button>
+              <Button
+                type="button"
+                variant={selectedClassType === "both" ? "default" : "outline"}
+                className="flex-1"
+                style={{ height: '52px', borderRadius: '8px' }}
+                onClick={() => handleClassTypeSelect("both")}
+              >
+                Both
+              </Button>
+            </div>
+          </div>
 
           {/* Language Preference */}
           <div className="mb-6">
