@@ -117,7 +117,7 @@ export default function ContactStep({ data, onUpdate, onNext }: ContactStepProps
                 name="firstName"
                 render={({ field }) => (
                   <FormItem style={{ flex: 1 }}>
-                    <FormLabel style={{ fontSize: '14px', fontWeight: '500', color: '#333', marginBottom: '8px', display: 'block' }}>First Name</FormLabel>
+                    <FormLabel style={{ fontSize: '14px', fontWeight: '500', color: '#333', marginBottom: '8px', display: 'block', padding: '0 4px' }}>First Name</FormLabel>
                     <FormControl>
                       <Input 
                         placeholder="Jane" 
@@ -134,7 +134,7 @@ export default function ContactStep({ data, onUpdate, onNext }: ContactStepProps
                 name="lastName"
                 render={({ field }) => (
                   <FormItem style={{ flex: 1 }}>
-                    <FormLabel style={{ fontSize: '14px', fontWeight: '500', color: '#333', marginBottom: '8px', display: 'block' }}>Last Name</FormLabel>
+                    <FormLabel style={{ fontSize: '14px', fontWeight: '500', color: '#333', marginBottom: '8px', display: 'block', padding: '0 4px' }}>Last Name</FormLabel>
                     <FormControl>
                       <Input 
                         placeholder="Citizen" 
@@ -155,7 +155,7 @@ export default function ContactStep({ data, onUpdate, onNext }: ContactStepProps
                 name="phoneNumber"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel style={{ fontSize: '14px', fontWeight: '500', color: '#333', marginBottom: '8px', display: 'block' }}>Phone Number</FormLabel>
+                    <FormLabel style={{ fontSize: '14px', fontWeight: '500', color: '#333', marginBottom: '8px', display: 'block', padding: '0 4px' }}>Phone Number</FormLabel>
                     <FormControl>
                       <Input 
                         placeholder="0400 000 000" 
@@ -180,7 +180,7 @@ export default function ContactStep({ data, onUpdate, onNext }: ContactStepProps
                 name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel style={{ fontSize: '14px', fontWeight: '500', color: '#333', marginBottom: '8px', display: 'block' }}>Email Address</FormLabel>
+                    <FormLabel style={{ fontSize: '14px', fontWeight: '500', color: '#333', marginBottom: '8px', display: 'block', padding: '0 4px' }}>Email Address</FormLabel>
                     <FormControl>
                       <Input 
                         type="email"
@@ -217,7 +217,7 @@ export default function ContactStep({ data, onUpdate, onNext }: ContactStepProps
                     name="emergencyContactName"
                     render={({ field }) => (
                       <FormItem style={{ flex: 1 }}>
-                        <FormLabel style={{ fontSize: '14px', fontWeight: '500', color: '#333', marginBottom: '8px', display: 'block' }}>Contact Name</FormLabel>
+                        <FormLabel style={{ fontSize: '14px', fontWeight: '500', color: '#333', marginBottom: '8px', display: 'block', padding: '0 4px' }}>Contact Name</FormLabel>
                         <FormControl>
                           <Input 
                             placeholder="Emergency Contact Name" 
@@ -234,7 +234,7 @@ export default function ContactStep({ data, onUpdate, onNext }: ContactStepProps
                     name="emergencyContactPhone"
                     render={({ field }) => (
                       <FormItem style={{ flex: 1 }}>
-                        <FormLabel style={{ fontSize: '14px', fontWeight: '500', color: '#333', marginBottom: '8px', display: 'block' }}>Phone Number</FormLabel>
+                        <FormLabel style={{ fontSize: '14px', fontWeight: '500', color: '#333', marginBottom: '8px', display: 'block', padding: '0 4px' }}>Phone Number</FormLabel>
                         <FormControl>
                           <Input 
                             placeholder="0400 000 000" 
