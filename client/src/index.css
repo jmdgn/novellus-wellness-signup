@@ -214,6 +214,22 @@
   color: white !important;
 }
 
+/* Emergency Contact Reveal Animation */
+@keyframes fadeInSlide {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.emergency-contact-reveal {
+  animation: fadeInSlide 0.5s ease-in-out forwards;
+}
+
 /* Custom focus styles for better accessibility */
 @layer utilities {
   .focus-ring {

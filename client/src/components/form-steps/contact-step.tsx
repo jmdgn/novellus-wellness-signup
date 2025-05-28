@@ -197,7 +197,15 @@ export default function ContactStep({ data, onUpdate, onNext }: ContactStepProps
 
             {/* Emergency Contact Section - Only show when main details are completed */}
             {mainDetailsCompleted && (
-              <>
+              <div 
+                style={{ 
+                  width: '100%',
+                  animation: 'fadeInSlide 0.5s ease-in-out forwards',
+                  opacity: 0,
+                  transform: 'translateY(10px)'
+                }}
+                className="emergency-contact-reveal"
+              >
                 <div style={{ width: '100%', margin: '32px 0 16px 0' }}>
                   <h3 style={{ fontSize: '16px', fontWeight: '600', color: '#333', marginBottom: '16px' }}>Emergency Contact</h3>
                 </div>
@@ -243,7 +251,7 @@ export default function ContactStep({ data, onUpdate, onNext }: ContactStepProps
                     )}
                   />
                 </div>
-              </>
+              </div>
             )}
           </form>
         </Form>
