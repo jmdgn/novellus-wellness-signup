@@ -84,7 +84,7 @@ export default function Success() {
               </div>
               <div className="flex justify-between text-sm">
                 <span className="text-slate-600">Amount Paid:</span>
-                <span className="font-medium">$20.00 AUD</span>
+                <span className="font-medium">$30.00 AUD</span>
               </div>
               <div className="flex justify-between text-sm">
                 <span className="text-slate-600">Contact:</span>
