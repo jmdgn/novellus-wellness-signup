@@ -31,12 +31,14 @@ export default function ContactStep({ data, onUpdate, onNext }: ContactStepProps
     onNext();
   };
 
-  // Check if all required fields are filled
-  const isFormValid = form.formState.isValid && 
-    form.watch("firstName") && 
+  // Check if main contact details are completed
+  const mainDetailsCompleted = form.watch("firstName") && 
     form.watch("lastName") && 
     form.watch("phoneNumber") && 
     form.watch("email");
+
+  // Check if all required fields are filled
+  const isFormValid = form.formState.isValid && mainDetailsCompleted;
 
   const handlePhoneChange = (value: string) => {
     // Format Australian phone number as user types
@@ -107,7 +109,7 @@ export default function ContactStep({ data, onUpdate, onNext }: ContactStepProps
 
         {/* Contact Form */}
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} style={{ width: '100%', padding: '16px 20px' }}>
+          <form onSubmit={form.handleSubmit(onSubmit)} style={{ width: '100%', padding: '8px 20px' }}>
             {/* First Name & Last Name Row */}
             <div className="field-row" style={{ display: 'flex', gap: '12px', width: '100%' }}>
               <FormField
@@ -193,52 +195,56 @@ export default function ContactStep({ data, onUpdate, onNext }: ContactStepProps
               />
             </div>
 
-            {/* Emergency Contact Section */}
-            <div style={{ width: '100%', margin: '32px 0 16px 0' }}>
-              <h3 style={{ fontSize: '16px', fontWeight: '600', color: '#333', marginBottom: '16px' }}>Emergency Contact</h3>
-            </div>
+            {/* Emergency Contact Section - Only show when main details are completed */}
+            {mainDetailsCompleted && (
+              <>
+                <div style={{ width: '100%', margin: '32px 0 16px 0' }}>
+                  <h3 style={{ fontSize: '16px', fontWeight: '600', color: '#333', marginBottom: '16px' }}>Emergency Contact</h3>
+                </div>
 
-            {/* Emergency Contact Fields Row */}
-            <div className="field-row" style={{ width: '100%', display: 'flex', gap: '16px' }}>
-              <FormField
-                control={form.control}
-                name="emergencyContactName"
-                render={({ field }) => (
-                  <FormItem style={{ flex: 1 }}>
-                    <FormLabel style={{ fontSize: '14px', fontWeight: '500', color: '#333', marginBottom: '8px', display: 'block' }}>Contact Name</FormLabel>
-                    <FormControl>
-                      <Input 
-                        placeholder="Emergency Contact Name" 
-                        className="form-field"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="emergencyContactPhone"
-                render={({ field }) => (
-                  <FormItem style={{ flex: 1 }}>
-                    <FormLabel style={{ fontSize: '14px', fontWeight: '500', color: '#333', marginBottom: '8px', display: 'block' }}>Phone Number</FormLabel>
-                    <FormControl>
-                      <Input 
-                        placeholder="0400 000 000" 
-                        className="form-field"
-                        {...field}
-                        onChange={(e) => {
-                          const formatted = handlePhoneChange(e.target.value);
-                          field.onChange(formatted);
-                        }}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
+                {/* Emergency Contact Fields Row */}
+                <div className="field-row" style={{ width: '100%', display: 'flex', gap: '16px' }}>
+                  <FormField
+                    control={form.control}
+                    name="emergencyContactName"
+                    render={({ field }) => (
+                      <FormItem style={{ flex: 1 }}>
+                        <FormLabel style={{ fontSize: '14px', fontWeight: '500', color: '#333', marginBottom: '8px', display: 'block' }}>Contact Name</FormLabel>
+                        <FormControl>
+                          <Input 
+                            placeholder="Emergency Contact Name" 
+                            className="form-field"
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="emergencyContactPhone"
+                    render={({ field }) => (
+                      <FormItem style={{ flex: 1 }}>
+                        <FormLabel style={{ fontSize: '14px', fontWeight: '500', color: '#333', marginBottom: '8px', display: 'block' }}>Phone Number</FormLabel>
+                        <FormControl>
+                          <Input 
+                            placeholder="0400 000 000" 
+                            className="form-field"
+                            {...field}
+                            onChange={(e) => {
+                              const formatted = handlePhoneChange(e.target.value);
+                              field.onChange(formatted);
+                            }}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+              </>
+            )}
           </form>
         </Form>
       </div>
