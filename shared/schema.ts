@@ -52,10 +52,8 @@ export const contactInfoSchema = z.object({
     return /^(0[2-9]\d{8}|614\d{8}|\+614\d{8})$/.test(cleaned) || /^04\d{8}$/.test(cleaned);
   }, "Please enter a valid Australian phone number (e.g., 0412 345 678)"),
   email: z.string().email("Please enter a valid email address"),
-  emergencyContactName: z.string().optional(),
-  emergencyContactPhone: z.string().optional().refine((phone) => {
-    // If phone is provided, validate it
-    if (!phone || phone.trim() === '') return true;
+  emergencyContactName: z.string().min(1, "Emergency contact name is required"),
+  emergencyContactPhone: z.string().min(1, "Emergency contact phone is required").refine((phone) => {
     const cleaned = phone.replace(/\D/g, '');
     // Accept formats: 04xxxxxxxx, +614xxxxxxxx, or 614xxxxxxxx
     return /^(0[2-9]\d{8}|614\d{8}|\+614\d{8})$/.test(cleaned) || /^04\d{8}$/.test(cleaned);
