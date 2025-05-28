@@ -25,11 +25,17 @@ export default function ContactStep({ data, onUpdate, onNext }: ContactStepProps
       email: data?.email || "",
       emergencyContactName: data?.emergencyContactName || "",
       emergencyContactPhone: data?.emergencyContactPhone || "",
+      language: data?.language || "english",
     },
   });
 
   const onSubmit = (values: ContactInfo) => {
-    onUpdate(values);
+    // Ensure language is set
+    const completeValues = {
+      ...values,
+      language: "english" as "english" | "spanish"
+    };
+    onUpdate(completeValues);
     onNext();
   };
 
@@ -45,18 +51,12 @@ export default function ContactStep({ data, onUpdate, onNext }: ContactStepProps
     form.watch("emergencyContactPhone");
 
   // Check if all required fields are filled
-  const isFormValid = allFieldsCompleted;
+  const isFormValid = allFieldsCompleted && form.formState.isValid;
 
-  // Debug logging
-  console.log('Form validation debug:', {
-    mainDetailsCompleted,
-    emergencyContactName: form.watch("emergencyContactName"),
-    emergencyContactPhone: form.watch("emergencyContactPhone"),
-    allFieldsCompleted,
-    formStateValid: form.formState.isValid,
-    isFormValid,
-    errors: form.formState.errors
-  });
+  // Set language field when form initializes
+  if (!form.watch("language")) {
+    form.setValue("language", "english");
+  }
 
   const handlePhoneChange = (value: string) => {
     // Format Australian phone number as user types
