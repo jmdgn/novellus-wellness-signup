@@ -109,7 +109,7 @@ export default function ContactStep({ data, onUpdate, onNext }: ContactStepProps
             >
               316-320 Toorak Road, South Yarra
             </a>{' '}
-            for just $30 — a special discounted rate to experience pilates. One-time payment, no subscription.
+            for just $30 — a special discounted rate to experience semi-private pilates in our boutique studio. One-time payment, no subscription.
           </p>
         </div>
       </div>
