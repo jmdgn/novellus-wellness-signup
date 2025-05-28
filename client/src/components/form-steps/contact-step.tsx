@@ -53,10 +53,7 @@ export default function ContactStep({ data, onUpdate, onNext }: ContactStepProps
   // Check if all required fields are filled
   const isFormValid = allFieldsCompleted && form.formState.isValid;
 
-  // Set language field when form initializes
-  if (!form.watch("language")) {
-    form.setValue("language", "english");
-  }
+
 
   const handlePhoneChange = (value: string) => {
     // Format Australian phone number as user types
