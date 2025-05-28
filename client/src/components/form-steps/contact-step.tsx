@@ -45,7 +45,18 @@ export default function ContactStep({ data, onUpdate, onNext }: ContactStepProps
     form.watch("emergencyContactPhone");
 
   // Check if all required fields are filled
-  const isFormValid = form.formState.isValid && allFieldsCompleted;
+  const isFormValid = allFieldsCompleted;
+
+  // Debug logging
+  console.log('Form validation debug:', {
+    mainDetailsCompleted,
+    emergencyContactName: form.watch("emergencyContactName"),
+    emergencyContactPhone: form.watch("emergencyContactPhone"),
+    allFieldsCompleted,
+    formStateValid: form.formState.isValid,
+    isFormValid,
+    errors: form.formState.errors
+  });
 
   const handlePhoneChange = (value: string) => {
     // Format Australian phone number as user types
