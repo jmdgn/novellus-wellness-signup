@@ -53,7 +53,7 @@ const CheckoutForm = ({ formData, onPrevious, submitBooking, isSubmitting }: Pay
         ...formData.contact,
         ...formData.timePreferences,
         ...formData.medical,
-        totalAmount: 2000, // $20 AUD in cents
+        totalAmount: 3000, // $30 AUD in cents
       });
 
       // Create payment intent
@@ -123,7 +123,7 @@ const CheckoutForm = ({ formData, onPrevious, submitBooking, isSubmitting }: Pay
         </div>
         <div style={{ width: '100%' }}>
           <h2 style={{ fontSize: '18px', fontWeight: '600', color: '#666', margin: '0', lineHeight: '1.4' }}>
-            $20.00 AUD
+            $30.00 AUD
           </h2>
         </div>
       </div>
@@ -237,7 +237,7 @@ export default function PaymentStep(props: PaymentStepProps) {
           ...props.formData.contact,
           ...props.formData.timePreferences,
           ...props.formData.medical,
-          totalAmount: 2000,
+          totalAmount: 3000,
         });
 
         // Then create payment intent

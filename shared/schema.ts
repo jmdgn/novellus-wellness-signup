@@ -31,7 +31,7 @@ export const bookings = pgTable("bookings", {
   hasMedicalConditions: boolean("has_medical_conditions").default(false),
   stripePaymentIntentId: text("stripe_payment_intent_id"),
   paymentStatus: text("payment_status").default("pending"), // pending, completed, failed
-  totalAmount: integer("total_amount").notNull().default(2000), // in cents (AUD)
+  totalAmount: integer("total_amount").notNull().default(3000), // in cents (AUD)
   createdAt: timestamp("created_at").defaultNow(),
 });
 
