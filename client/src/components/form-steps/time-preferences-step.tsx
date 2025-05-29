@@ -258,7 +258,7 @@ export default function TimePreferencesStep({ data, onUpdate, onNext, onPrevious
           alignItems: 'center', 
           gap: '16px', 
           width: '100%', 
-          margin: '24px 0',
+          margin: '24px 0 0 0',
           position: 'relative'
         }}>
           {/* Previous Button */}

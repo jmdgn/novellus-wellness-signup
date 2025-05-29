@@ -276,7 +276,7 @@ export default function ContactStep({ data, onUpdate, onNext }: ContactStepProps
         className="next-button-container" 
         style={{ 
           width: '100%', 
-          margin: '24px 0', 
+          margin: '24px 0 0 0', 
           cursor: 'pointer',
           border: isFormValid ? '1px solid #111111' : '1px solid #111',
           background: isFormValid ? '#111111' : '#fff',
