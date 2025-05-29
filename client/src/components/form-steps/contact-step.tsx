@@ -158,7 +158,7 @@ export default function ContactStep({ data, onUpdate, onNext }: ContactStepProps
         }}>
           <div>
             <h3 style={{ 
-              fontSize: '18px', 
+              fontSize: '16px', 
               fontWeight: '600', 
               color: '#111', 
               margin: '0 0 8px 0',
@@ -191,7 +191,7 @@ export default function ContactStep({ data, onUpdate, onNext }: ContactStepProps
               </span>
             </div>
             <span style={{ 
-              fontSize: '16px', 
+              fontSize: '14px', 
               fontWeight: '600', 
               color: '#111'
             }}>
