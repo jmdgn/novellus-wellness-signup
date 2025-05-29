@@ -98,6 +98,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
           await sendConfirmationEmail(updatedBooking);
           await sendConfirmationSMS(updatedBooking);
           
+          // Send booking details to admin
+          await sendAdminBookingNotification(updatedBooking);
+          
           // Add medical clearance flag for frontend display
           const needsMedicalClearance = updatedBooking.isPregnant || 
             updatedBooking.heartCondition || 
@@ -266,6 +269,102 @@ async function sendConfirmationEmail(booking: any) {
     console.error("❌ Failed to send confirmation email:", error);
   }
   console.log(`=== END CONFIRMATION EMAIL DEBUG ===`)
+}
+
+async function sendAdminBookingNotification(booking: any) {
+  if (!process.env.BREVO_API_KEY) {
+    console.warn("BREVO_API_KEY not configured, skipping admin notification email");
+    return;
+  }
+
+  const timeSlotNames = {
+    morning: "Morning (7:00 AM - 11:00 AM)",
+    afternoon: "Afternoon (1:00 PM - 3:00 PM)", 
+    evening: "Evening (5:00 PM - 7:00 PM)"
+  };
+
+  const preferredTimes = (booking.timePreferences as string[])
+    .map((slot, index) => `${index + 1}. ${timeSlotNames[slot as keyof typeof timeSlotNames] || slot}`)
+    .join('\n');
+
+  // Format medical conditions for display
+  const medicalConditions = [];
+  if (booking.isPregnant) medicalConditions.push(`Pregnant (${booking.pregnancyWeeks || 'N/A'} weeks)`);
+  if (booking.heartCondition) medicalConditions.push('Heart condition');
+  if (booking.chestPain) medicalConditions.push('Chest pain');
+  if (booking.dizziness) medicalConditions.push('Dizziness');
+  if (booking.asthmaAttack) medicalConditions.push('Asthma/breathing issues');
+  if (booking.diabetesControl) medicalConditions.push('Diabetes control issues');
+  if (booking.otherConditions) medicalConditions.push('Other medical conditions');
+  if (booking.medicalConditions) medicalConditions.push(`Additional notes: ${booking.medicalConditions}`);
+
+  const painAreas = booking.painAreas && Array.isArray(booking.painAreas) && booking.painAreas.length > 0 
+    ? booking.painAreas.filter(area => area !== 'none').join(', ') 
+    : 'None specified';
+
+  const emailContent = `
+    <h2>New Booking Received - ID #${booking.id}</h2>
+    
+    <h3>Client Information:</h3>
+    <ul>
+      <li><strong>Name:</strong> ${booking.firstName} ${booking.lastName}</li>
+      <li><strong>Email:</strong> ${booking.email}</li>
+      <li><strong>Phone:</strong> ${booking.phoneNumber}</li>
+      <li><strong>Emergency Contact:</strong> ${booking.emergencyContactName || 'Not provided'}</li>
+      <li><strong>Emergency Phone:</strong> ${booking.emergencyContactPhone || 'Not provided'}</li>
+      <li><strong>Language:</strong> ${booking.language === 'english' ? 'English' : 'Español'}</li>
+    </ul>
+    
+    <h3>Class Details:</h3>
+    <ul>
+      <li><strong>Class:</strong> Introduction Pilates Session (1 hour)</li>
+      <li><strong>Amount Paid:</strong> $30.00 AUD</li>
+      <li><strong>Payment Status:</strong> ${booking.paymentStatus}</li>
+      <li><strong>Stripe Payment ID:</strong> ${booking.stripePaymentIntentId}</li>
+    </ul>
+    
+    <h3>Time Preferences (in order of priority):</h3>
+    <pre>${preferredTimes}</pre>
+    
+    <h3>Medical Information:</h3>
+    <p><strong>Pain Areas:</strong> ${painAreas}</p>
+    ${medicalConditions.length > 0 ? `
+    <p><strong>Medical Conditions:</strong></p>
+    <ul>
+      ${medicalConditions.map(condition => `<li>${condition}</li>`).join('')}
+    </ul>
+    ` : '<p><strong>Medical Conditions:</strong> None reported</p>'}
+    
+    <p><strong>Requires Medical Clearance:</strong> ${medicalConditions.length > 0 || (booking.painAreas && booking.painAreas.length > 0 && !booking.painAreas.includes('none')) ? 'Yes' : 'No'}</p>
+    
+    <h3>Booking Details:</h3>
+    <ul>
+      <li><strong>Booking Date:</strong> ${new Date(booking.createdAt).toLocaleString('en-AU', { timeZone: 'Australia/Melbourne' })}</li>
+      <li><strong>Database ID:</strong> ${booking.id}</li>
+    </ul>
+    
+    <hr style="margin: 20px 0;">
+    <p><em>This is an automated notification from the Novellus Pilates booking system.</em></p>
+  `;
+
+  try {
+    console.log(`Sending admin booking notification for booking ID: ${booking.id}`);
+    
+    const result = await sendEmail(process.env.BREVO_API_KEY!, {
+      to: 'contact@novellus.net.au',
+      from: 'noreply@novellus.net.au',
+      subject: `New Booking Received - ${booking.firstName} ${booking.lastName} (ID #${booking.id})`,
+      html: emailContent
+    });
+    
+    if (result) {
+      console.log("✅ Admin booking notification sent successfully");
+    } else {
+      console.log("❌ Admin booking notification failed to send");
+    }
+  } catch (error) {
+    console.error("❌ Failed to send admin booking notification:", error);
+  }
 }
 
 async function sendMedicalClearanceEmail(booking: any) {
