@@ -190,8 +190,8 @@ async function sendConfirmationEmail(booking: any) {
   console.log(`Recipient: ${booking.email}`);
   console.log(`Name: ${booking.firstName} ${booking.lastName}`);
   
-  if (!process.env.SENDGRID_API_KEY) {
-    console.warn("SENDGRID_API_KEY not configured, skipping confirmation email");
+  if (!process.env.BREVO_API_KEY) {
+    console.warn("BREVO_API_KEY not configured, skipping confirmation email");
     return;
   }
 
@@ -248,7 +248,7 @@ async function sendConfirmationEmail(booking: any) {
     console.log(`From: noreply@novellus.net.au`);
     console.log(`Email content length: ${emailContent.length} characters`);
     
-    const result = await sendEmail(process.env.SENDGRID_API_KEY!, {
+    const result = await sendEmail(process.env.BREVO_API_KEY!, {
       to: booking.email,
       from: 'noreply@novellus.net.au',
       subject: 'Booking Confirmation - Your Introduction Pilates Session',
@@ -267,8 +267,8 @@ async function sendConfirmationEmail(booking: any) {
 }
 
 async function sendMedicalClearanceEmail(booking: any) {
-  if (!process.env.SENDGRID_API_KEY) {
-    console.warn("SENDGRID_API_KEY not configured, skipping medical clearance email");
+  if (!process.env.BREVO_API_KEY) {
+    console.warn("BREVO_API_KEY not configured, skipping medical clearance email");
     return;
   }
 
@@ -305,7 +305,7 @@ async function sendMedicalClearanceEmail(booking: any) {
   `;
 
   try {
-    await sendEmail(process.env.SENDGRID_API_KEY!, {
+    await sendEmail(process.env.BREVO_API_KEY!, {
       to: booking.email,
       from: 'noreply@novellus.net.au',
       subject: 'Medical Clearance Required - Novellus Pilates',
