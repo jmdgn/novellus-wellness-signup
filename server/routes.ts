@@ -3,7 +3,7 @@ import { createServer, type Server } from "http";
 import Stripe from "stripe";
 import { storage } from "./storage";
 import { insertBookingSchema, contactInfoSchema, timePreferencesSchema, medicalDeclarationSchema } from "@shared/schema";
-import { sendEmail } from "./sendgrid";
+import { sendEmail } from "./brevo";
 import { sendSMS } from "./twilio";
 
 if (!process.env.STRIPE_SECRET_KEY) {
