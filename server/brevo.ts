@@ -14,7 +14,10 @@ export async function sendEmail(
     console.log('Attempting to send email to:', params.to, 'from:', params.from);
     
     const emailData = {
-      sender: { email: params.from },
+      sender: { 
+        email: params.from,
+        name: "Beatriz @ Novellus Wellness"
+      },
       to: [{ email: params.to }],
       subject: params.subject,
       htmlContent: params.html,
