@@ -122,10 +122,10 @@ export default function ContactStep({ data, onUpdate, onNext }: ContactStepProps
         height: '180px', 
         boxShadow: '2px 2px 16px rgba(0, 0, 0, 0.12)',
         margin: '24px 0 0 0',
-        padding: '20px',
+        padding: '16px',
         display: 'flex',
         alignItems: 'center',
-        gap: '20px'
+        gap: '16px'
       }}>
         {/* Class Image */}
         <div style={{ 
