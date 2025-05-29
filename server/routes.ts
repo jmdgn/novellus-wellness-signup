@@ -206,11 +206,13 @@ async function sendConfirmationEmail(booking: any) {
     .join('\n');
 
   const emailContent = `
-    <h2>Booking Confirmation - Introduction Pilates Session</h2>
+    <h2>Booking Confirmation - 1hr Semi-Private Pilates Session</h2>
     
     <p>Dear ${booking.firstName} ${booking.lastName},</p>
     
     <p>Thank you for booking your Introduction Pilates Session! We're excited to welcome you to our studio.</p>
+    
+    <p>Our studio is located at <a href="https://maps.google.com/?q=316-320+Toorak+Road+South+Yarra+VIC+Australia" target="_blank" rel="noopener noreferrer" style="color: #0095F6; text-decoration: underline;">316-320 Toorak Road, South Yarra</a> with accessible street parking options and a short walk from Toorak Station.</p>
     
     <h3>Booking Details:</h3>
     <ul>
@@ -224,9 +226,9 @@ async function sendConfirmationEmail(booking: any) {
     <h3>Your Time Preferences (in order of priority):</h3>
     <pre>${preferredTimes}</pre>
     
-    <p>We will contact you within 24 hours to confirm your exact class time based on your preferences and availability.</p>
+    <p>You will receive an email within the next week with the confirmed details of your class time. While we'll do our best to ensure you receive your first time preference we cannot guarantee all time slots will be available due to current demand.</p>
     
-    <p>What to bring:</p>
+    <p><strong>What to bring:</strong></p>
     <ul>
       <li>Comfortable workout clothing</li>
       <li>Water bottle</li>
@@ -234,12 +236,12 @@ async function sendConfirmationEmail(booking: any) {
       <li>Positive attitude!</li>
     </ul>
     
-    <p>If you have any questions, please don't hesitate to contact us.</p>
+    <p>If you have any questions, or would like to cancel your booking please don't hesitate to <a href="mailto:contact@novellus.net.au" style="color: #0095F6; text-decoration: underline;">contact us</a>.</p>
     
     <p>We look forward to seeing you at the studio!</p>
     
     <p>Best regards,<br/>
-    The Pirouette Team</p>
+    Beatriz Durango - Novellus Wellness</p>
   `;
 
   try {
