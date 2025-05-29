@@ -113,6 +113,94 @@ export default function ContactStep({ data, onUpdate, onNext }: ContactStepProps
           </p>
         </div>
       </div>
+
+      {/* Class Information Panel */}
+      <div style={{ 
+        background: '#fff', 
+        borderRadius: '12px', 
+        width: '100%', 
+        height: '180px', 
+        boxShadow: '2px 2px 16px rgba(0, 0, 0, 0.12)',
+        margin: '24px 0 0 0',
+        padding: '20px',
+        display: 'flex',
+        alignItems: 'center',
+        gap: '20px'
+      }}>
+        {/* Class Image */}
+        <div style={{ 
+          width: '185px', 
+          height: '148px', 
+          borderRadius: '8px', 
+          background: '#ccc', 
+          flexShrink: 0,
+          overflow: 'hidden'
+        }}>
+          <img 
+            src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+            alt="Pilates class"
+            style={{
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover'
+            }}
+          />
+        </div>
+
+        {/* Class Details */}
+        <div style={{ 
+          display: 'flex', 
+          flexDirection: 'column', 
+          gap: '8px', 
+          flex: 1,
+          height: '100%',
+          justifyContent: 'space-between'
+        }}>
+          <div>
+            <h3 style={{ 
+              fontSize: '18px', 
+              fontWeight: '600', 
+              color: '#111', 
+              margin: '0 0 8px 0',
+              lineHeight: '1.2'
+            }}>
+              1hr Semi Private Pilates Class
+            </h3>
+            <p style={{ 
+              fontSize: '14px', 
+              color: '#666', 
+              margin: '0',
+              lineHeight: '1.4'
+            }}>
+              Choose between Mat, Reformer or both in a class no larger than 3 people.
+            </p>
+          </div>
+          
+          <div style={{ 
+            display: 'flex', 
+            justifyContent: 'space-between', 
+            alignItems: 'center',
+            marginTop: 'auto'
+          }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z" fill="#666"/>
+              </svg>
+              <span style={{ fontSize: '14px', color: '#666', fontWeight: '500' }}>
+                4 July, 2025
+              </span>
+            </div>
+            <span style={{ 
+              fontSize: '16px', 
+              fontWeight: '600', 
+              color: '#111'
+            }}>
+              $30.00 AUD
+            </span>
+          </div>
+        </div>
+      </div>
+
       {/* Form Inner Container */}
       <div className="form-inner pl-[0px] pr-[0px] pt-[8px] pb-[8px]" style={{ width: '100%', margin: '24px 0 0 0' }}>
         {/* Class Info Header */}
