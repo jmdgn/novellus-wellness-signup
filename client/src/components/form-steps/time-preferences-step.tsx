@@ -17,7 +17,7 @@ interface TimePreferencesStepProps {
 const timeSlots = [
   {
     id: "morning",
-    name: "Morning",
+    name: "Morning - 4 July 2025",
     time: "7.00 am to 11.00 am",
     icon: Sun,
     iconColor: "text-yellow-500",
@@ -25,7 +25,7 @@ const timeSlots = [
   },
   {
     id: "afternoon", 
-    name: "Afternoon",
+    name: "Afternoon - 4 July 2025",
     time: "1.00 pm to 3.00 pm",
     icon: Sun,
     iconColor: "text-orange-500",
@@ -33,7 +33,7 @@ const timeSlots = [
   },
   {
     id: "evening",
-    name: "Evening", 
+    name: "Evening - 4 July 2025", 
     time: "5.00 pm to 7.00 pm",
     icon: Moon,
     iconColor: "text-indigo-500",
