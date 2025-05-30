@@ -115,7 +115,7 @@ export default function ContactStep({ data, onUpdate, onNext }: ContactStepProps
       </div>
 
       {/* Class Information Panel */}
-      <div style={{ 
+      <div class="info-panel-full" style={{ 
         background: '#fff', 
         borderRadius: '12px', 
         width: '100%', 
@@ -128,7 +128,7 @@ export default function ContactStep({ data, onUpdate, onNext }: ContactStepProps
         gap: '16px'
       }}>
         {/* Class Image */}
-        <div style={{ 
+        <div class="support-img-frame" style={{ 
           width: '185px', 
           height: '148px', 
           borderRadius: '8px', 
@@ -166,7 +166,7 @@ export default function ContactStep({ data, onUpdate, onNext }: ContactStepProps
             }}>
               1hr Semi Private Pilates Class
             </h3>
-            <p style={{ 
+            <p class="infoCard-textBody" style={{ 
               fontSize: '14px', 
               color: '#666', 
               margin: '0',
