@@ -39,7 +39,6 @@ app.use((req, res, next) => {
 (async () => {
   const server = await registerRoutes(app);
 
-  // Fix the syntax error here:
   app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
     const status = err.status || err.statusCode || 500;
     const message = err.message || "Internal Server Error";
@@ -48,19 +47,22 @@ app.use((req, res, next) => {
     throw err;
   });
 
-  // importantly only setup vite in development and after
-  // setting up all the other routes so the catch-all route
-  // doesn't interfere with the other routes
+  // TEMPORARILY SKIP STATIC FILE SERVING TO TEST
   if (app.get("env") === "development") {
     await setupVite(app, server);
   } else {
-    serveStatic(app);
+    // Instead of serveStatic(app), just serve a simple response
+    app.use("*", (_req, res) => {
+      res.json({ 
+        message: "API is running", 
+        environment: process.env.NODE_ENV,
+        timestamp: new Date().toISOString() 
+      });
+    });
   }
 
-  // Use Railway's assigned port or fallback to 5000
   const port = parseInt(process.env.PORT || "5000");
   
-  // Add more detailed logging:
   console.log(`🚀 Starting server...`);
   console.log(`📍 Environment: ${process.env.NODE_ENV || 'development'}`);
   console.log(`🔌 Port: ${port}`);
