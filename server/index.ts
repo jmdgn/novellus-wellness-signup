@@ -1,6 +1,10 @@
 import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
+import { exec } from 'child_process';
+import { promisify } from 'util';
+
+const execAsync = promisify(exec);
 
 const app = express();
 app.use(express.json());
@@ -60,6 +64,18 @@ app.use((req, res, next) => {
   console.log(`📍 Environment: ${process.env.NODE_ENV || 'development'}`);
   console.log(`🔌 Port: ${port}`);
   console.log(`💾 Database configured: ${!!process.env.DATABASE_URL}`);
+
+  // Run database migrations in production
+  if (process.env.NODE_ENV === 'production') {
+    try {
+      console.log('🗄️ Running database migrations...');
+      await execAsync('npx drizzle-kit push');
+      console.log('✅ Database migrations completed');
+    } catch (error) {
+      console.error('❌ Database migration failed:', error);
+      // Continue anyway - don't crash the server
+    }
+  }
   
   server.listen({
     port,
