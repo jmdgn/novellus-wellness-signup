@@ -39,6 +39,7 @@ app.use((req, res, next) => {
 (async () => {
   const server = await registerRoutes(app);
 
+  // Fix the syntax error here:
   app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
     const status = err.status || err.statusCode || 500;
     const message = err.message || "Internal Server Error";
@@ -56,15 +57,21 @@ app.use((req, res, next) => {
     serveStatic(app);
   }
 
-  // ALWAYS serve the app on port 5000
-  // this serves both the API and the client.
-  // It is the only port that is not firewalled.
-  const port = process.env.PORT || 5000;
+  // Use Railway's assigned port or fallback to 5000
+  const port = parseInt(process.env.PORT || "5000");
+  
+  // Add more detailed logging:
+  console.log(`🚀 Starting server...`);
+  console.log(`📍 Environment: ${process.env.NODE_ENV || 'development'}`);
+  console.log(`🔌 Port: ${port}`);
+  console.log(`💾 Database configured: ${!!process.env.DATABASE_URL}`);
+  
   server.listen({
     port,
     host: "0.0.0.0",
     reusePort: true,
   }, () => {
     log(`serving on port ${port}`);
+    console.log(`✅ Server successfully started on http://0.0.0.0:${port}`);
   });
 })();
