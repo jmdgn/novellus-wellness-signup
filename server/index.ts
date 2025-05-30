@@ -47,18 +47,11 @@ app.use((req, res, next) => {
     throw err;
   });
 
-  // TEMPORARILY SKIP STATIC FILE SERVING TO TEST
+  // RESTORE static file serving now that the path issue is fixed
   if (app.get("env") === "development") {
     await setupVite(app, server);
   } else {
-    // Instead of serveStatic(app), just serve a simple response
-    app.use("*", (_req, res) => {
-      res.json({ 
-        message: "API is running", 
-        environment: process.env.NODE_ENV,
-        timestamp: new Date().toISOString() 
-      });
-    });
+    serveStatic(app);
   }
 
   const port = parseInt(process.env.PORT || "5000");
