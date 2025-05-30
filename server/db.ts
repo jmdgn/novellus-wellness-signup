@@ -3,8 +3,11 @@ import { drizzle } from 'drizzle-orm/neon-serverless';
 import ws from "ws";
 import * as schema from "@shared/schema";
 
-// Disable WebSocket for Railway compatibility
+// Disable WebSocket completely for Railway compatibility
 neonConfig.webSocketConstructor = undefined;
+neonConfig.useSecureWebSocket = false;
+neonConfig.forceNeon = false;
+neonConfig.fetchConnectionCache = true;
 
 if (!process.env.DATABASE_URL) {
   throw new Error(
