@@ -16,11 +16,37 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
 
 export async function registerRoutes(app: Express): Promise<Server> {
   
+  // Add health check route at the very beginning
+  app.get("/api/health", async (req, res) => {
+    try {
+      // Test database connection
+      const testBooking = await storage.getAllBookings();
+      res.json({ 
+        status: "ok", 
+        timestamp: new Date().toISOString(),
+        database: "connected",
+        bookingCount: testBooking.length,
+        environment: process.env.NODE_ENV,
+        stripeConfigured: !!process.env.STRIPE_SECRET_KEY,
+        brevoConfigured: !!process.env.BREVO_API_KEY
+      });
+    } catch (error: any) {
+      res.status(500).json({
+        status: "error",
+        message: error.message,
+        database: "error"
+      });
+    }
+  });
+  
   // Create booking (steps 1-3)
   app.post("/api/booking", async (req, res) => {
     try {
+      console.log("📝 Received booking request:", JSON.stringify(req.body, null, 2));
       const validatedData = insertBookingSchema.parse(req.body);
+      console.log("✅ Validation passed, creating booking...");
       const booking = await storage.createBooking(validatedData);
+      console.log("✅ Booking created with ID:", booking.id);
       
       // Send medical clearance email if needed
       const needsMedicalClearance = booking.isPregnant || 
@@ -38,6 +64,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       
       res.json(booking);
     } catch (error: any) {
+      console.error("❌ Booking error:", error);
       res.status(400).json({ message: "Validation error: " + error.message });
     }
   });
@@ -109,7 +136,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
             updatedBooking.asthmaAttack || 
             updatedBooking.diabetesControl || 
             updatedBooking.otherConditions ||
-            (updatedBooking.painAreas && Array.isArray(updatedBooking.painAreas) && updatedBooking.painAreas.length > 0 && !updatedBooking.painAreas.includes("none"));
+            (updatedBooking.painAreas && Array.isArray(updatedBooking.painAreas) && updatedBookings.painAreas.length > 0 && !updatedBooking.painAreas.includes("none"));
           
           res.json({ 
             success: true, 
