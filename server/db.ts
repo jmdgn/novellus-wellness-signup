@@ -13,4 +13,8 @@ export const pool = new Pool({
   ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false
 });
 
+<<<<<<< HEAD
 export const db = drizzle(pool, { schema });
+=======
+export const db = drizzle(pool, { schema });
+>>>>>>> 4132737 (Add favicon and fix database/payment issues)
