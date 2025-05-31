@@ -374,11 +374,11 @@
 
 .info-panel-full {
   flex-direction: column;
-  height: 100%; }
+  height: 100% !important; }
 
 .support-img-frame {
-  width: 100%;
-  height: 100%; }
+  width: 100% !important;
+  height: 100% !important; }
 
 p.infoCard-textBody {
   margin-bottom: 1rem; }
@@ -391,5 +391,8 @@ p.infoCard-textBody {
   position: fixed;
   bottom: 2rem;
   max-width: 90%; }
+
+.infoPanel-textContent {
+  gap: 2rem !important; }
 
 }
