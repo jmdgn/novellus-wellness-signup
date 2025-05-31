@@ -429,7 +429,7 @@ async function sendMedicalClearanceEmail(booking: any) {
     <p>If you have any questions about this process, please contact us at your convenience.</p>
     
     <p>Best regards,<br/>
-    The Pirouette Team</p>
+    Beatriz Durango - Novellus Wellness</p>
   `;
 
   try {

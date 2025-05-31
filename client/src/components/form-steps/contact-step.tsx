@@ -53,22 +53,25 @@ export default function ContactStep({ data, onUpdate, onNext }: ContactStepProps
   // Check if all required fields are filled
   const isFormValid = allFieldsCompleted && form.formState.isValid;
 
-
-
+  // IMPROVED: Phone number formatting that's more user-friendly for deletion
   const handlePhoneChange = (value: string) => {
-    // Format Australian phone number as user types
+    // Allow empty value
+    if (!value) return '';
+    
+    // Only format when user is not in the middle of deleting
+    // This gives users more control over deletion
     const cleaned = value.replace(/\D/g, '');
-    let formatted = cleaned;
     
-    if (cleaned.startsWith('61')) {
-      formatted = '+' + cleaned;
-    } else if (cleaned.startsWith('0')) {
-      if (cleaned.length > 4) {
-        formatted = cleaned.slice(0, 4) + ' ' + cleaned.slice(4, 7) + ' ' + cleaned.slice(7, 10);
-      }
+    // Don't over-format - only format complete groups
+    if (cleaned.length <= 4) {
+      return cleaned;
+    } else if (cleaned.length <= 7) {
+      return `${cleaned.slice(0, 4)} ${cleaned.slice(4)}`;
+    } else {
+      // Limit to 10 digits and format
+      const truncated = cleaned.slice(0, 10);
+      return `${truncated.slice(0, 4)} ${truncated.slice(4, 7)} ${truncated.slice(7)}`;
     }
-    
-    return formatted.slice(0, 15); // Limit length
   };
 
   return (
@@ -115,7 +118,7 @@ export default function ContactStep({ data, onUpdate, onNext }: ContactStepProps
       </div>
 
       {/* Class Information Panel */}
-      <div class="info-panel-full" style={{ 
+      <div className="info-panel-full" style={{ 
         background: '#fff', 
         borderRadius: '12px', 
         width: '100%', 
@@ -128,7 +131,7 @@ export default function ContactStep({ data, onUpdate, onNext }: ContactStepProps
         gap: '16px'
       }}>
         {/* Class Image */}
-        <div class="support-img-frame" style={{ 
+        <div className="support-img-frame" style={{ 
           width: '185px', 
           height: '148px', 
           borderRadius: '8px', 
@@ -148,7 +151,7 @@ export default function ContactStep({ data, onUpdate, onNext }: ContactStepProps
         </div>
 
         {/* Class Details */}
-        <div class="infoPanel-textContent" style={{ 
+        <div className="infoPanel-textContent" style={{ 
           display: 'flex', 
           flexDirection: 'column', 
           gap: '8px', 
@@ -166,7 +169,7 @@ export default function ContactStep({ data, onUpdate, onNext }: ContactStepProps
             }}>
               1hr Semi Private Pilates Class
             </h3>
-            <p class="infoCard-textBody" style={{ 
+            <p className="infoCard-textBody" style={{ 
               fontSize: '14px', 
               color: '#666', 
               margin: '0',
