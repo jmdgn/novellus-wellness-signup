@@ -253,7 +253,7 @@ export default function TimePreferencesStep({ data, onUpdate, onNext, onPrevious
         </div>
 
         {/* Navigation Container */}
-        <div style={{ 
+        <div className="button-containerFull" style={{ 
           display: 'flex', 
           alignItems: 'center', 
           gap: '16px', 
