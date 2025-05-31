@@ -358,6 +358,9 @@
 
 @media only screen and (max-width: 768px) {
 
+h1 {
+  line-height: 1.2; }
+
 .mt-6 {
   display: none; }
 
@@ -400,5 +403,11 @@ p.infoCard-textBody {
 
 .timePref-formContainer .p-4 {
   padding: 0 !important; }
+
+.bg-white.border.border-slate-200.rounded-lg.p-4 {
+  padding: 1rem !important; }
+
+.ml-9 {
+  margin-left: 0 !important; }
 
 }
