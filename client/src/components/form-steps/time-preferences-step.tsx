@@ -115,7 +115,7 @@ export default function TimePreferencesStep({ data, onUpdate, onNext, onPrevious
       {/* Form Inner Container */}
       <div className="form-inner" style={{ width: '100%', margin: '24px 0 0 0' }}>
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} style={{ width: '100%', padding: '16px 20px' }}>
+          <form className="timePref-formContainer" onSubmit={form.handleSubmit(onSubmit)} style={{ width: '100%', padding: '16px 20px' }}>
           {/* Accordion Time Slots */}
           <div className="space-y-4 mb-6">
             <Accordion type="multiple" className="space-y-3">
