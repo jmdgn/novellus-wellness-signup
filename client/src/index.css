@@ -398,4 +398,7 @@ p.infoCard-textBody {
   bottom: 0 !important;
   left: 0 !important; }
 
+.timePref-formContainer .p-4 {
+  padding: 0 !important; }
+
 }
