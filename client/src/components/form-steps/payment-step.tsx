@@ -155,7 +155,7 @@ const CheckoutForm = ({ formData, onPrevious, submitBooking, isSubmitting }: Pay
       </div>
 
       {/* Navigation Container */}
-      <div style={{ 
+      <div className="button-containerFull" style={{ 
         display: 'flex', 
         alignItems: 'center', 
         gap: '16px', 
