@@ -137,7 +137,7 @@ export default function ContactStep({ data, onUpdate, onNext }: ContactStepProps
           overflow: 'hidden'
         }}>
           <img 
-            src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+            src="https://images.unsplash.com/photo-1717500252573-d31d4bf5ddf1?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cGlsYXRlc3xlbnwwfHwwfHx8MA%3D%3D"
             alt="Pilates class"
             style={{
               width: '100%',
