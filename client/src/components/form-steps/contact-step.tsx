@@ -360,24 +360,26 @@ export default function ContactStep({ data, onUpdate, onNext }: ContactStepProps
         </Form>
       </div>
       {/* Navigation Button */}
-      <div 
-        className="next-button-container" 
-        style={{ 
-          width: '100%', 
-          margin: '24px 0 0 0', 
-          cursor: 'pointer',
-          border: isFormValid ? '1px solid #111111' : '1px solid #111',
-          background: isFormValid ? '#111111' : '#fff',
-          color: isFormValid ? '#FFF' : '#111'
-        }}
-        onClick={form.handleSubmit(onSubmit)}
-      >
-        <div style={{ flexShrink: 0 }}>
-          <div className="step-text" style={{ color: 'inherit' }}>Step 1 of 4</div>
-        </div>
-        <div style={{ flexShrink: 0 }}>
-          <div className="action-text" style={{ color: 'inherit' }}>
-            Next step
+      <div className="button-containerFull">
+        <div 
+          className="next-button-container" 
+          style={{ 
+            width: '100%', 
+            margin: '24px 0 0 0', 
+            cursor: 'pointer',
+            border: isFormValid ? '1px solid #111111' : '1px solid #111',
+            background: isFormValid ? '#111111' : '#fff',
+            color: isFormValid ? '#FFF' : '#111'
+          }}
+          onClick={form.handleSubmit(onSubmit)}
+        >
+          <div style={{ flexShrink: 0 }}>
+            <div className="step-text" style={{ color: 'inherit' }}>Step 1 of 4</div>
+          </div>
+          <div style={{ flexShrink: 0 }}>
+            <div className="action-text" style={{ color: 'inherit' }}>
+              Next step
+            </div>
           </div>
         </div>
       </div>
