@@ -148,7 +148,7 @@ export default function ContactStep({ data, onUpdate, onNext }: ContactStepProps
         </div>
 
         {/* Class Details */}
-        <div style={{ 
+        <div class="infoPanel-textContent" style={{ 
           display: 'flex', 
           flexDirection: 'column', 
           gap: '8px', 
