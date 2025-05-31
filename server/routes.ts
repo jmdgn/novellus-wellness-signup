@@ -136,7 +136,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
             updatedBooking.asthmaAttack || 
             updatedBooking.diabetesControl || 
             updatedBooking.otherConditions ||
-            (updatedBooking.painAreas && Array.isArray(updatedBooking.painAreas) && updatedBookings.painAreas.length > 0 && !updatedBooking.painAreas.includes("none"));
+            (updatedBooking.painAreas && Array.isArray(updatedBooking.painAreas) && updatedBooking.painAreas.length > 0 && !updatedBooking.painAreas.includes("none"));
           
           res.json({ 
             success: true, 
