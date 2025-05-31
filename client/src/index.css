@@ -392,6 +392,7 @@ p.infoCard-textBody {
 
 .button-containerFull {
   position: fixed !important;
+  width: 100% !important;
   margin: 0 !important;
   padding: 2rem 1rem !important;
   bottom: 0 !important;
