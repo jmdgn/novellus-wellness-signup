@@ -359,7 +359,7 @@
 @media only screen and (max-width: 768px) {
 
 h1 {
-  line-height: 1.2; }
+  line-height: 1.2 !important; }
 
 .mt-6 {
   display: none; }
@@ -407,7 +407,16 @@ p.infoCard-textBody {
 .bg-white.border.border-slate-200.rounded-lg.p-4 {
   padding: 1rem !important; }
 
+.bg-amber-50.border.border-amber-200.rounded-lg.p-4 {
+  padding: 1.5rem !important; }
+
+.mb-4 {
+  margin-bottom: 1.5rem !important; }
+
 .ml-9 {
   margin-left: 0 !important; }
+
+.rounded-lg.p-4 {
+  padding: 0 !important; }
 
 }
