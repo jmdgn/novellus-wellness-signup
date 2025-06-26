@@ -107,6 +107,10 @@ This is a full-stack web application for a Pilates booking system called "Novell
 
 ## Changelog
 - June 26, 2025. Initial setup
+- June 26, 2025. Updated medical clearance email logic:
+  - Pain area selection (question 1) no longer triggers medical clearance requirement
+  - Medical clearance emails now only sent after payment completion (not during booking creation)
+  - Fixed duplicate medical clearance email issue
 
 ## User Preferences
 
