@@ -48,19 +48,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const booking = await storage.createBooking(validatedData);
       console.log("✅ Booking created with ID:", booking.id);
       
-      // Send medical clearance email if needed
-      const needsMedicalClearance = booking.isPregnant || 
-        booking.heartCondition || 
-        booking.chestPain || 
-        booking.dizziness || 
-        booking.asthmaAttack || 
-        booking.diabetesControl || 
-        booking.otherConditions ||
-        (booking.painAreas && Array.isArray(booking.painAreas) && booking.painAreas.length > 0 && !booking.painAreas.includes("none"));
-        
-      if (needsMedicalClearance) {
-        await sendMedicalClearanceEmail(booking);
-      }
+      // Note: Medical clearance email will be sent after payment completion
       
       res.json(booking);
     } catch (error: any) {
@@ -128,15 +116,19 @@ export async function registerRoutes(app: Express): Promise<Server> {
           // Send booking details to admin
           await sendAdminBookingNotification(updatedBooking);
           
-          // Add medical clearance flag for frontend display
+          // Check if medical clearance is needed (questions 2-8 only, not pain areas)
           const needsMedicalClearance = updatedBooking.isPregnant || 
             updatedBooking.heartCondition || 
             updatedBooking.chestPain || 
             updatedBooking.dizziness || 
             updatedBooking.asthmaAttack || 
             updatedBooking.diabetesControl || 
-            updatedBooking.otherConditions ||
-            (updatedBooking.painAreas && Array.isArray(updatedBooking.painAreas) && updatedBooking.painAreas.length > 0 && !updatedBooking.painAreas.includes("none"));
+            updatedBooking.otherConditions;
+            
+          // Send medical clearance email if needed (after payment completion)
+          if (needsMedicalClearance) {
+            await sendMedicalClearanceEmail(updatedBooking);
+          }
           
           res.json({ 
             success: true, 
@@ -166,15 +158,14 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(404).json({ message: "Booking not found" });
       }
       
-      // Add medical clearance flag for frontend display
+      // Add medical clearance flag for frontend display (questions 2-8 only, not pain areas)
       const needsMedicalClearance = booking.isPregnant || 
         booking.heartCondition || 
         booking.chestPain || 
         booking.dizziness || 
         booking.asthmaAttack || 
         booking.diabetesControl || 
-        booking.otherConditions ||
-        (booking.painAreas && Array.isArray(booking.painAreas) && booking.painAreas.length > 0 && !booking.painAreas.includes("none"));
+        booking.otherConditions;
       
       res.json({ ...booking, needsMedicalClearance });
     } catch (error: any) {
@@ -326,7 +317,7 @@ async function sendAdminBookingNotification(booking: any) {
   if (booking.medicalConditions) medicalConditions.push(`Additional notes: ${booking.medicalConditions}`);
 
   const painAreas = booking.painAreas && Array.isArray(booking.painAreas) && booking.painAreas.length > 0 
-    ? booking.painAreas.filter(area => area !== 'none').join(', ') 
+    ? (booking.painAreas as string[]).filter((area: string) => area !== 'none').join(', ') 
     : 'None specified';
 
   const emailContent = `
@@ -362,7 +353,7 @@ async function sendAdminBookingNotification(booking: any) {
     </ul>
     ` : '<p><strong>Medical Conditions:</strong> None reported</p>'}
     
-    <p><strong>Requires Medical Clearance:</strong> ${medicalConditions.length > 0 || (booking.painAreas && booking.painAreas.length > 0 && !booking.painAreas.includes('none')) ? 'Yes' : 'No'}</p>
+    <p><strong>Requires Medical Clearance:</strong> ${medicalConditions.length > 0 ? 'Yes' : 'No'}</p>
     
     <h3>Booking Details:</h3>
     <ul>
