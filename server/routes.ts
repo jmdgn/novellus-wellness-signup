@@ -253,7 +253,6 @@ async function sendConfirmationEmail(booking: any) {
     <ul>
       <li>Comfortable workout clothing</li>
       <li>Water bottle</li>
-      <li>Towel</li>
       <li>Positive attitude!</li>
     </ul>
     

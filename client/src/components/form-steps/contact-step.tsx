@@ -103,7 +103,7 @@ export default function ContactStep({ data, onUpdate, onNext }: ContactStepProps
         </div>
         <div style={{ width: '100%' }}>
           <p style={{ fontSize: '14px', color: '#666', margin: '0', lineHeight: '1.4' }}>
-            Book your 1-hour introduction class at{' '}
+            Book your 2x 1-hour introduction classes at{' '}
             <a 
               href="https://maps.google.com/?q=316-320+Toorak+Road+South+Yarra+VIC+Australia" 
               target="_blank" 
@@ -112,7 +112,7 @@ export default function ContactStep({ data, onUpdate, onNext }: ContactStepProps
             >
               316-320 Toorak Road, South Yarra
             </a>{' '}
-            for just $30 — a special discounted rate to experience semi-private pilates in our boutique studio. One-time payment, no subscription.
+            for just $30. A special discounted rate to experience semi-private pilates in our boutique studio. One-time payment, no subscription.
           </p>
         </div>
       </div>
@@ -190,7 +190,7 @@ export default function ContactStep({ data, onUpdate, onNext }: ContactStepProps
                 <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z" fill="#666"/>
               </svg>
               <span style={{ fontSize: '14px', color: '#666', fontWeight: '500' }}>
-                4 July, 2025
+                11 July, 2025
               </span>
             </div>
             <span style={{ 

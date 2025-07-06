@@ -3,6 +3,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import { Elements, PaymentElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { ChevronLeft } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
@@ -28,6 +29,8 @@ const CheckoutForm = ({ formData, onPrevious, submitBooking, isSubmitting }: Pay
   const [, setLocation] = useLocation();
   const [isProcessing, setIsProcessing] = useState(false);
   const [termsAccepted, setTermsAccepted] = useState(false);
+  const [cancellationPolicyAccepted, setCancellationPolicyAccepted] = useState(false);
+  const [showCancellationPolicy, setShowCancellationPolicy] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -40,6 +43,15 @@ const CheckoutForm = ({ formData, onPrevious, submitBooking, isSubmitting }: Pay
       toast({
         title: "Terms Required",
         description: "Please accept the terms and conditions to continue.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    if (!cancellationPolicyAccepted) {
+      toast({
+        title: "Cancellation Policy Required",
+        description: "Please accept the cancellation policy to continue.",
         variant: "destructive",
       });
       return;
@@ -136,7 +148,7 @@ const CheckoutForm = ({ formData, onPrevious, submitBooking, isSubmitting }: Pay
         </div>
 
         {/* Terms and Conditions */}
-        <div className="rounded-lg p-4">
+        <div className="rounded-lg p-4 space-y-4">
           <div className="flex items-start space-x-3">
             <Checkbox 
               id="terms"
@@ -147,6 +159,27 @@ const CheckoutForm = ({ formData, onPrevious, submitBooking, isSubmitting }: Pay
             />
             <label htmlFor="terms" className="text-xs text-slate-600 leading-relaxed cursor-pointer">
               I agree that the information I have given on this document is true and correct. I have read and understood all wording written in this document. I take full responsibility for my actions at any and all times on site, off site and on-line. This includes during any workouts, classes, practices and use of equipment whilst engaged in activities.
+            </label>
+          </div>
+
+          <div className="flex items-start space-x-3">
+            <Checkbox 
+              id="cancellation"
+              checked={cancellationPolicyAccepted}
+              onCheckedChange={(checked) => setCancellationPolicyAccepted(checked === true)}
+              className="mt-1 checkbox-custom"
+              style={{ width: '24px', height: '24px', borderRadius: '6px' }}
+            />
+            <label htmlFor="cancellation" className="text-xs text-slate-600 leading-relaxed cursor-pointer">
+              I have read and agree to the{' '}
+              <button
+                type="button"
+                onClick={() => setShowCancellationPolicy(true)}
+                className="text-blue-600 underline hover:text-blue-800"
+              >
+                cancellation policy
+              </button>
+              . I understand that cancellations made within 24 hours of the class will result in forfeiture of payment.
             </label>
           </div>
         </div>
@@ -220,6 +253,29 @@ const CheckoutForm = ({ formData, onPrevious, submitBooking, isSubmitting }: Pay
           </div>
         </div>
       </div>
+
+      {/* Cancellation Policy Dialog */}
+      <Dialog open={showCancellationPolicy} onOpenChange={setShowCancellationPolicy}>
+        <DialogContent className="max-w-md">
+          <DialogHeader>
+            <DialogTitle>Cancellation Policy</DialogTitle>
+          </DialogHeader>
+          <div className="space-y-4 text-sm text-gray-700">
+            <p>
+              We understand that plans can change. To receive a full refund of your booking fee ($30.00 AUD), please ensure you cancel at least 24 hours before your scheduled class.
+            </p>
+            <p>
+              Cancellations made within 24 hours of the class start time will forfeit the full payment. No refunds will be issued for late cancellations or no-shows.
+            </p>
+            <p>
+              If you're unable to attend due to a medical emergency, please get in touch — we're happy to review these on a case-by-case basis.
+            </p>
+            <p className="font-medium">
+              Thank you for your understanding and cooperation.
+            </p>
+          </div>
+        </DialogContent>
+      </Dialog>
     </>
   );
 };
