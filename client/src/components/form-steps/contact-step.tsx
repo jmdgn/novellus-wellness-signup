@@ -167,7 +167,7 @@ export default function ContactStep({ data, onUpdate, onNext }: ContactStepProps
               margin: '0 0 8px 0',
               lineHeight: '1.2'
             }}>
-              1hr Semi Private Pilates Class
+              2x 1hr Semi-Private Pilates Classes
             </h3>
             <p className="infoCard-textBody" style={{ 
               fontSize: '14px', 
