@@ -173,27 +173,27 @@ export default function TimePreferencesStep({ data, onUpdate, onNext, onPrevious
           <form onSubmit={form.handleSubmit(onSubmit)} style={{ width: '100%' }}>
             
             {/* Calendar Section */}
-            <div className="mb-6">
-              <h3 className="text-lg font-medium text-slate-800 mb-3">Select a Friday</h3>
-              <div className="flex justify-center">
+            <div style={{ marginBottom: '40px' }}>
+              <div style={{ width: '100%' }}>
                 <Calendar
                   mode="single"
                   selected={selectedDate}
                   onSelect={handleDateSelect}
                   disabled={(date) => !isFriday(date)}
-                  className="rounded-md border"
+                  className="rounded-md border w-full"
+                  style={{ width: '100%' }}
                 />
               </div>
               {selectedDate && (
-                <p className="text-center text-sm text-slate-600 mt-2">
+                <p className="text-center text-sm text-slate-600 mt-3">
                   Selected: {format(selectedDate, 'EEEE, MMMM d, yyyy')}
                 </p>
               )}
             </div>
 
             {/* Time Selection */}
-            <div className="mb-6">
-              <h3 className="text-lg font-medium text-slate-800 mb-3">Available Times</h3>
+            <div style={{ marginBottom: '40px' }}>
+              <h3 className="text-lg font-medium text-slate-800 mb-4">Available Times</h3>
               <div className="grid grid-cols-5 gap-2">
                 {availableTimes.map((time) => {
                   const isSelected = selectedTimes.includes(time);
@@ -236,7 +236,7 @@ export default function TimePreferencesStep({ data, onUpdate, onNext, onPrevious
 
             {/* Selected Times Summary */}
             {selectedTimes.length > 0 && (
-              <div className="mb-6 p-4 bg-slate-50 rounded-lg">
+              <div style={{ marginBottom: '40px', padding: '16px', backgroundColor: '#f8fafc', borderRadius: '8px' }}>
                 <div className="text-sm font-medium text-slate-700 mb-2">Your time preferences (in priority order):</div>
                 <div className="space-y-1">
                   {selectedTimes.map((time, index) => (
@@ -249,8 +249,8 @@ export default function TimePreferencesStep({ data, onUpdate, onNext, onPrevious
             )}
 
             {/* Class Preference Section */}
-            <div className="mb-6">
-              <h3 className="text-lg font-medium text-slate-800 mb-3">My class preference</h3>
+            <div style={{ marginBottom: '40px' }}>
+              <h3 className="text-lg font-medium text-slate-800 mb-4">My class preference</h3>
               <div className="space-y-3">
                 {[
                   { value: "mat", label: "Mat Pilates", desc: "Floor-based exercises using body weight and small props" },
@@ -276,8 +276,8 @@ export default function TimePreferencesStep({ data, onUpdate, onNext, onPrevious
             </div>
 
             {/* Language Preference Section */}
-            <div className="mb-6">
-              <h3 className="text-lg font-medium text-slate-800 mb-3">I want my class in</h3>
+            <div style={{ marginBottom: '40px' }}>
+              <h3 className="text-lg font-medium text-slate-800 mb-4">I want my class in</h3>
               <div className="flex gap-4">
                 {[
                   { value: "english", label: "English" },

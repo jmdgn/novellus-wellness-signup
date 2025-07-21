@@ -237,6 +237,24 @@
   }
 }
 
+/* Full width calendar styling */
+.rdp {
+  width: 100% !important;
+}
+
+.rdp-table {
+  width: 100% !important;
+}
+
+.rdp-month {
+  width: 100% !important;
+}
+
+.rdp-caption {
+  justify-content: center !important;
+  margin-bottom: 16px !important;
+}
+
 /* Smooth animations */
 .step-transition {
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
