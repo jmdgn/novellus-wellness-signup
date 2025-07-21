@@ -299,38 +299,42 @@ export default function TimePreferencesStep({ data, onUpdate, onNext, onPrevious
               </div>
             </div>
 
-            {/* Navigation - Step 1 has no Previous button */}
-            <div style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              padding: '16px 20px',
-              borderTop: '1px solid #E5E7EB',
-              marginTop: '24px'
-            }}>
-              <div style={{ fontSize: '14px', color: '#6B7280', fontWeight: '500' }}>
-                Step 1 of 4
-              </div>
-              
-              <Button
-                type="submit"
-                disabled={!isFormValid}
-                style={{
-                  backgroundColor: isFormValid ? '#111' : '#E5E7EB',
-                  color: isFormValid ? '#FFF' : '#9CA3AF',
-                  border: 'none',
-                  borderRadius: '6px',
-                  padding: '12px 24px',
-                  fontSize: '14px',
-                  fontWeight: '500',
-                  cursor: isFormValid ? 'pointer' : 'not-allowed'
-                }}
-              >
-                Next step
-              </Button>
-            </div>
+
           </form>
         </Form>
+      </div>
+
+      {/* Navigation Container - Step 1 has no Previous button */}
+      <div className="button-containerFull" style={{ 
+        display: 'flex', 
+        alignItems: 'center', 
+        gap: '16px', 
+        width: '100%', 
+        margin: '24px 0 0 0',
+        position: 'relative'
+      }}>
+        {/* Next Button - Step 1 only */}
+        <div 
+          className="next-button-container" 
+          style={{ 
+            flex: 1,
+            cursor: isFormValid ? 'pointer' : 'not-allowed',
+            border: isFormValid ? '1px solid #111111' : '1px solid #CCC',
+            background: isFormValid ? '#111111' : '#fff',
+            color: isFormValid ? '#FFF' : '#111',
+            opacity: isFormValid ? 1 : 0.6
+          }}
+          onClick={isFormValid ? form.handleSubmit(onSubmit) : undefined}
+        >
+          <div style={{ flexShrink: 0 }}>
+            <div className="step-text" style={{ color: 'inherit' }}>Step 1 of 4</div>
+          </div>
+          <div style={{ flexShrink: 0 }}>
+            <div className="action-text" style={{ color: 'inherit' }}>
+              Next step
+            </div>
+          </div>
+        </div>
       </div>
     </>
   );
