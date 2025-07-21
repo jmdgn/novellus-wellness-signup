@@ -89,24 +89,88 @@ export default function TimePreferencesStep({ data, onUpdate, onNext, onPrevious
 
   return (
     <>
-      {/* Title Group */}
-      <div style={{ flexDirection: 'column', alignItems: 'flex-start', gap: '10px', width: '100%', display: 'flex' }}>
-        <div style={{ width: '100%' }}>
-          <h1 style={{ fontSize: '28px', fontWeight: '700', color: '#111', margin: '0', lineHeight: '1.6' }}>
-            Book a Class Time
-          </h1>
+      {/* Header Section with Class Info */}
+      <div style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: '24px' }}>
+        {/* Title */}
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', width: '100%' }}>
+          <div>
+            <h1 style={{ fontSize: '28px', fontWeight: '700', color: '#111', margin: '0', lineHeight: '1.2' }}>
+              Try Novellus Pilates
+            </h1>
+            <p style={{ fontSize: '18px', fontWeight: '500', color: '#111', margin: '8px 0 0 0', lineHeight: '1.3' }}>
+              with Beatriz Durango
+            </p>
+          </div>
+          <div style={{ width: '60px', height: '60px', borderRadius: '50%', overflow: 'hidden', flexShrink: 0 }}>
+            <img 
+              src="https://images.unsplash.com/photo-1494790108755-2616c9e98c53?w=120&h=120&fit=crop&crop=face"
+              alt="Beatriz Durango"
+              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+            />
+          </div>
         </div>
+
+        {/* Description */}
         <div style={{ width: '100%' }}>
-          <p style={{ fontSize: '14px', color: '#666', margin: '0', lineHeight: '1.4' }}>
-            Select a Friday and up to 3 time preferences in order of priority
+          <p style={{ fontSize: '14px', color: '#666', margin: '0', lineHeight: '1.5' }}>
+            Book your 2x 1-hour introduction classes at{' '}
+            <span style={{ color: '#3B82F6', textDecoration: 'underline' }}>
+              316-320 Toorak Road, South Yarra
+            </span>{' '}
+            for just $30. A special discounted rate to experience semi-private pilates in our boutique studio. One-time payment, no subscription.
           </p>
+        </div>
+
+        {/* Class Info Card */}
+        <div style={{ 
+          width: '100%', 
+          backgroundColor: '#F8F9FA', 
+          borderRadius: '12px', 
+          padding: '16px',
+          display: 'flex',
+          gap: '16px',
+          alignItems: 'center'
+        }}>
+          <div style={{ width: '80px', height: '60px', borderRadius: '8px', overflow: 'hidden', flexShrink: 0 }}>
+            <img 
+              src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=160&h=120&fit=crop"
+              alt="Pilates Studio"
+              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+            />
+          </div>
+          <div style={{ flex: 1 }}>
+            <h3 style={{ fontSize: '16px', fontWeight: '600', color: '#111', margin: '0 0 4px 0' }}>
+              2x 1hr Semi-Private Pilates Classes
+            </h3>
+            <p style={{ fontSize: '14px', color: '#666', margin: '0', lineHeight: '1.4' }}>
+              Choose between Mat, Reformer or both in a class no larger than 3 people.
+            </p>
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '4px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z" fill="#666"/>
+              </svg>
+              <span style={{ fontSize: '13px', color: '#666', fontWeight: '500' }}>18 July, 2025</span>
+            </div>
+            <span style={{ fontSize: '16px', fontWeight: '600', color: '#111' }}>$30.00 AUD</span>
+          </div>
         </div>
       </div>
 
-      {/* Form Inner Container */}
-      <div className="form-inner" style={{ width: '100%', margin: '24px 0 0 0' }}>
+      {/* Book a Class Section */}
+      <div style={{ width: '100%', marginTop: '32px' }}>
+        <div style={{ marginBottom: '16px' }}>
+          <h2 style={{ fontSize: '20px', fontWeight: '600', color: '#111', margin: '0 0 4px 0' }}>
+            Book a Class
+          </h2>
+          <p style={{ fontSize: '14px', color: '#666', margin: '0' }}>
+            Select a Friday and up to 3 time preferences in order of priority
+          </p>
+        </div>
+
         <Form {...form}>
-          <form className="timePref-formContainer" onSubmit={form.handleSubmit(onSubmit)} style={{ width: '100%', padding: '16px 20px' }}>
+          <form onSubmit={form.handleSubmit(onSubmit)} style={{ width: '100%' }}>
             
             {/* Calendar Section */}
             <div className="mb-6">
@@ -235,24 +299,34 @@ export default function TimePreferencesStep({ data, onUpdate, onNext, onPrevious
               </div>
             </div>
 
-            {/* Navigation Buttons */}
-            <div className="flex items-center justify-between pt-6">
-              <Button
-                type="button"
-                variant="ghost"
-                onClick={onPrevious}
-                className="flex items-center gap-2 text-slate-600 hover:text-slate-800"
-              >
-                <ChevronLeft className="w-4 h-4" />
-                Previous
-              </Button>
+            {/* Navigation - Step 1 has no Previous button */}
+            <div style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              padding: '16px 20px',
+              borderTop: '1px solid #E5E7EB',
+              marginTop: '24px'
+            }}>
+              <div style={{ fontSize: '14px', color: '#6B7280', fontWeight: '500' }}>
+                Step 1 of 4
+              </div>
               
               <Button
                 type="submit"
                 disabled={!isFormValid}
-                className="bg-blue-600 hover:bg-blue-700 text-white px-8"
+                style={{
+                  backgroundColor: isFormValid ? '#111' : '#E5E7EB',
+                  color: isFormValid ? '#FFF' : '#9CA3AF',
+                  border: 'none',
+                  borderRadius: '6px',
+                  padding: '12px 24px',
+                  fontSize: '14px',
+                  fontWeight: '500',
+                  cursor: isFormValid ? 'pointer' : 'not-allowed'
+                }}
               >
-                Continue
+                Next step
               </Button>
             </div>
           </form>

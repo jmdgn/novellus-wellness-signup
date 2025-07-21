@@ -225,24 +225,56 @@ export default function ContactStep({ data, onUpdate, onNext, onPrevious }: Cont
               </div>
             </div>
 
-            {/* Navigation Buttons */}
-            <div className="flex items-center justify-between pt-6">
-              <Button
-                type="button"
-                variant="ghost"
-                onClick={onPrevious}
-                className="flex items-center gap-2 text-slate-600 hover:text-slate-800"
-              >
-                <ChevronLeft className="w-4 h-4" />
-                Previous
-              </Button>
+            {/* Navigation - Step 2 has both Previous and Next */}
+            <div style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              padding: '16px 20px',
+              borderTop: '1px solid #E5E7EB',
+              marginTop: '24px'
+            }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+                <div style={{ fontSize: '14px', color: '#6B7280', fontWeight: '500' }}>
+                  Step 2 of 4
+                </div>
+                <Button
+                  type="button"
+                  onClick={onPrevious}
+                  style={{
+                    backgroundColor: 'transparent',
+                    color: '#6B7280',
+                    border: '1px solid #E5E7EB',
+                    borderRadius: '6px',
+                    padding: '8px 16px',
+                    fontSize: '14px',
+                    fontWeight: '500',
+                    cursor: 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '4px'
+                  }}
+                >
+                  <ChevronLeft className="w-4 h-4" />
+                  Previous
+                </Button>
+              </div>
               
               <Button
                 type="submit"
                 disabled={!isFormValid}
-                className="bg-blue-600 hover:bg-blue-700 text-white px-8"
+                style={{
+                  backgroundColor: isFormValid ? '#111' : '#E5E7EB',
+                  color: isFormValid ? '#FFF' : '#9CA3AF',
+                  border: 'none',
+                  borderRadius: '6px',
+                  padding: '12px 24px',
+                  fontSize: '14px',
+                  fontWeight: '500',
+                  cursor: isFormValid ? 'pointer' : 'not-allowed'
+                }}
               >
-                Continue
+                Next step
               </Button>
             </div>
           </form>
