@@ -27,17 +27,18 @@ export default function BookingForm() {
     switch (currentStep) {
       case 1:
         return (
-          <ContactStep
-            data={formData.contact}
-            onUpdate={(data) => updateFormData({ contact: data })}
+          <TimePreferencesStep
+            data={formData.timePreferences}
+            onUpdate={(data) => updateFormData({ timePreferences: data })}
             onNext={handleNext}
+            onPrevious={handlePrevious}
           />
         );
       case 2:
         return (
-          <TimePreferencesStep
-            data={formData.timePreferences}
-            onUpdate={(data) => updateFormData({ timePreferences: data })}
+          <ContactStep
+            data={formData.contact}
+            onUpdate={(data) => updateFormData({ contact: data })}
             onNext={handleNext}
             onPrevious={handlePrevious}
           />
