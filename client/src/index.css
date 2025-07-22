@@ -121,6 +121,17 @@
     table.w-full {
       width: auto !important;
     }
+    
+    /* Calendar width matching title on mobile */
+    .rdp {
+      width: fit-content !important;
+      margin: 0 auto !important;
+    }
+    
+    .rdp-table {
+      width: fit-content !important;
+      margin: 0 auto !important;
+    }
   }
 
   /* Calendar available dates bold styling */
