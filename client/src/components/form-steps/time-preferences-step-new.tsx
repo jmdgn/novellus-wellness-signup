@@ -21,6 +21,8 @@ export default function TimePreferencesStep({ data, onUpdate, onNext }: TimePref
   const [selectedLanguage, setSelectedLanguage] = useState<"english" | "spanish">(data?.language || "english");
   const [selectedClassType, setSelectedClassType] = useState<"semi-private" | "private">(data?.classType || "semi-private");
   const [selectedClassPreference, setSelectedClassPreference] = useState<"mat" | "reformer" | "both">("mat");
+  const [showTooltip, setShowTooltip] = useState(false);
+  const [tooltipMessage, setTooltipMessage] = useState("");
 
   const form = useForm<TimePreferences>({
     resolver: zodResolver(timePreferencesSchema),
@@ -78,6 +80,35 @@ export default function TimePreferencesStep({ data, onUpdate, onNext }: TimePref
     
     onUpdate(values);
     onNext();
+  };
+
+  // Function to check missing fields and show tooltip
+  const checkMissingFields = () => {
+    const missingFields = [];
+
+    if (!selectedDate) missingFields.push("Date selection");
+    if (selectedTimes.length === 0) missingFields.push("Time preference(s)");
+
+    if (missingFields.length > 0) {
+      const message = missingFields.length === 1 
+        ? `Please complete: ${missingFields[0]}`
+        : `Please complete: ${missingFields.slice(0, -1).join(", ")} and ${missingFields[missingFields.length - 1]}`;
+      
+      setTooltipMessage(message);
+      setShowTooltip(true);
+      
+      // Hide tooltip after 4 seconds
+      setTimeout(() => setShowTooltip(false), 4000);
+      
+      return false;
+    }
+    return true;
+  };
+
+  const handleNextClick = () => {
+    if (checkMissingFields()) {
+      form.handleSubmit(onSubmit)();
+    }
   };
 
 
@@ -298,25 +329,52 @@ export default function TimePreferencesStep({ data, onUpdate, onNext }: TimePref
           className="next-button-container" 
           style={{ 
             flex: 1,
-            cursor: isFormValid ? 'pointer' : 'not-allowed',
+            cursor: 'pointer',
             border: isFormValid ? '1px solid #111111' : '1px solid #CCC',
             background: isFormValid ? '#111111' : '#fff',
             color: isFormValid ? '#FFF' : '#111',
-            opacity: isFormValid ? 1 : 0.6,
-            marginTop: '48px'
+            marginTop: '48px',
+            position: 'relative'
           }}
-          onClick={(e) => {
-            if (isFormValid) {
-              form.handleSubmit(onSubmit)(e);
-            }
-          }}
+          onClick={handleNextClick}
         >
+          {/* Tooltip */}
+          {showTooltip && (
+            <div style={{
+              position: 'absolute',
+              bottom: '100%',
+              left: '50%',
+              transform: 'translateX(-50%)',
+              backgroundColor: '#333',
+              color: 'white',
+              padding: '8px 12px',
+              borderRadius: '6px',
+              fontSize: '12px',
+              whiteSpace: 'nowrap',
+              marginBottom: '8px',
+              zIndex: 1000,
+              boxShadow: '0 2px 8px rgba(0,0,0,0.2)'
+            }}>
+              {tooltipMessage}
+              <div style={{
+                position: 'absolute',
+                top: '100%',
+                left: '50%',
+                transform: 'translateX(-50%)',
+                width: 0,
+                height: 0,
+                borderLeft: '5px solid transparent',
+                borderRight: '5px solid transparent',
+                borderTop: '5px solid #333'
+              }} />
+            </div>
+          )}
           <div style={{ flexShrink: 0 }}>
-            <div className="step-text" style={{ color: 'inherit' }}>Step 1 of 4</div>
+            <div className="step-text" style={{ color: 'inherit' }}>Step 3 of 4</div>
           </div>
           <div style={{ flexShrink: 0 }}>
             <div className="action-text" style={{ color: 'inherit' }}>
-              Next step
+              Medical Declaration
             </div>
           </div>
         </div>

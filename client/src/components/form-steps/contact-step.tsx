@@ -6,6 +6,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
 import { ChevronLeft } from "lucide-react";
+import { useState } from "react";
 
 interface ContactStepProps {
   data?: Partial<ContactInfo>;
@@ -16,6 +17,8 @@ interface ContactStepProps {
 
 export default function ContactStep({ data, onUpdate, onNext, onPrevious }: ContactStepProps) {
   const { toast } = useToast();
+  const [showTooltip, setShowTooltip] = useState(false);
+  const [tooltipMessage, setTooltipMessage] = useState("");
   
   const form = useForm<ContactInfo>({
     resolver: zodResolver(contactInfoSchema),
@@ -86,6 +89,40 @@ export default function ContactStep({ data, onUpdate, onNext, onPrevious }: Cont
   const isEmailValid = (email: string) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
+  };
+
+  // Function to check missing fields and show tooltip
+  const checkMissingFields = () => {
+    const values = form.getValues();
+    const missingFields = [];
+
+    if (!values.firstName) missingFields.push("First Name");
+    if (!values.lastName) missingFields.push("Last Name");
+    if (!values.phoneNumber || !isPhoneValid(values.phoneNumber)) missingFields.push("Valid Phone Number");
+    if (!values.email || !isEmailValid(values.email)) missingFields.push("Valid Email Address");
+    if (!values.emergencyContactName) missingFields.push("Emergency Contact Name");
+    if (!values.emergencyContactPhone || !isPhoneValid(values.emergencyContactPhone)) missingFields.push("Valid Emergency Contact Phone");
+
+    if (missingFields.length > 0) {
+      const message = missingFields.length === 1 
+        ? `Please complete: ${missingFields[0]}`
+        : `Please complete: ${missingFields.slice(0, -1).join(", ")} and ${missingFields[missingFields.length - 1]}`;
+      
+      setTooltipMessage(message);
+      setShowTooltip(true);
+      
+      // Hide tooltip after 4 seconds
+      setTimeout(() => setShowTooltip(false), 4000);
+      
+      return false;
+    }
+    return true;
+  };
+
+  const handleNextClick = () => {
+    if (checkMissingFields()) {
+      form.handleSubmit(onSubmit)();
+    }
   };
 
   return (
@@ -287,14 +324,45 @@ export default function ContactStep({ data, onUpdate, onNext, onPrevious }: Cont
           className="next-button-container" 
           style={{ 
             flex: 1,
-            cursor: isFormValid ? 'pointer' : 'not-allowed',
+            cursor: 'pointer',
             border: isFormValid ? '1px solid #111111' : '1px solid #CCC',
             background: isFormValid ? '#111111' : '#fff',
             color: isFormValid ? '#FFF' : '#111',
-            opacity: isFormValid ? 1 : 0.6
+            position: 'relative'
           }}
-          onClick={isFormValid ? form.handleSubmit(onSubmit) : undefined}
+          onClick={handleNextClick}
         >
+          {/* Tooltip */}
+          {showTooltip && (
+            <div style={{
+              position: 'absolute',
+              bottom: '100%',
+              left: '50%',
+              transform: 'translateX(-50%)',
+              backgroundColor: '#333',
+              color: 'white',
+              padding: '8px 12px',
+              borderRadius: '6px',
+              fontSize: '12px',
+              whiteSpace: 'nowrap',
+              marginBottom: '8px',
+              zIndex: 1000,
+              boxShadow: '0 2px 8px rgba(0,0,0,0.2)'
+            }}>
+              {tooltipMessage}
+              <div style={{
+                position: 'absolute',
+                top: '100%',
+                left: '50%',
+                transform: 'translateX(-50%)',
+                width: 0,
+                height: 0,
+                borderLeft: '5px solid transparent',
+                borderRight: '5px solid transparent',
+                borderTop: '5px solid #333'
+              }} />
+            </div>
+          )}
           <div style={{ flexShrink: 0 }}>
             <div className="step-text" style={{ color: 'inherit' }}>Step 2 of 4</div>
           </div>

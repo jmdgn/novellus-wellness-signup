@@ -69,6 +69,8 @@ const healthQuestions = [
 
 export default function MedicalDeclarationStep({ data, onUpdate, onNext, onPrevious }: MedicalDeclarationStepProps) {
   const [selectedPainAreas, setSelectedPainAreas] = useState<string[]>(data?.painAreas || []);
+  const [showTooltip, setShowTooltip] = useState(false);
+  const [tooltipMessage, setTooltipMessage] = useState("");
   const [pregnancyWeeks, setPregnancyWeeks] = useState<number | undefined>(data?.pregnancyWeeks);
   const [responses, setResponses] = useState<{
     isPregnant: boolean | null;
@@ -177,6 +179,48 @@ export default function MedicalDeclarationStep({ data, onUpdate, onNext, onPrevi
 
   // Check if form is valid (all questions answered)
   const isFormValid = allQuestionsAnswered && (!responses.isPregnant || pregnancyWeeks);
+
+  // Function to check missing fields and show tooltip
+  const checkMissingFields = () => {
+    const missingFields = [];
+
+    // Check if any pain area is selected
+    if (selectedPainAreas.length === 0) {
+      missingFields.push("Pain area selection (even if 'None')");
+    }
+
+    // Check if all health questions are answered
+    const unansweredQuestions = Object.entries(responses).filter(([key, value]) => value === null);
+    if (unansweredQuestions.length > 0) {
+      missingFields.push(`Health questionnaire (${unansweredQuestions.length} unanswered)`);
+    }
+
+    // Check pregnancy weeks if pregnant
+    if (responses.isPregnant && !pregnancyWeeks) {
+      missingFields.push("Pregnancy weeks");
+    }
+
+    if (missingFields.length > 0) {
+      const message = missingFields.length === 1 
+        ? `Please complete: ${missingFields[0]}`
+        : `Please complete: ${missingFields.slice(0, -1).join(", ")} and ${missingFields[missingFields.length - 1]}`;
+      
+      setTooltipMessage(message);
+      setShowTooltip(true);
+      
+      // Hide tooltip after 4 seconds
+      setTimeout(() => setShowTooltip(false), 4000);
+      
+      return false;
+    }
+    return true;
+  };
+
+  const handleNextClick = () => {
+    if (checkMissingFields()) {
+      form.handleSubmit(onSubmit)();
+    }
+  };
 
   return (
     <>
@@ -364,16 +408,48 @@ export default function MedicalDeclarationStep({ data, onUpdate, onNext, onPrevi
             cursor: 'pointer',
             border: isFormValid ? '1px solid #111111' : '1px solid #111',
             background: isFormValid ? '#111111' : '#fff',
-            color: isFormValid ? '#FFF' : '#111'
+            color: isFormValid ? '#FFF' : '#111',
+            position: 'relative'
           }}
-          onClick={form.handleSubmit(onSubmit)}
+          onClick={handleNextClick}
         >
+          {/* Tooltip */}
+          {showTooltip && (
+            <div style={{
+              position: 'absolute',
+              bottom: '100%',
+              left: '50%',
+              transform: 'translateX(-50%)',
+              backgroundColor: '#333',
+              color: 'white',
+              padding: '8px 12px',
+              borderRadius: '6px',
+              fontSize: '12px',
+              whiteSpace: 'nowrap',
+              marginBottom: '8px',
+              zIndex: 1000,
+              boxShadow: '0 2px 8px rgba(0,0,0,0.2)'
+            }}>
+              {tooltipMessage}
+              <div style={{
+                position: 'absolute',
+                top: '100%',
+                left: '50%',
+                transform: 'translateX(-50%)',
+                width: 0,
+                height: 0,
+                borderLeft: '5px solid transparent',
+                borderRight: '5px solid transparent',
+                borderTop: '5px solid #333'
+              }} />
+            </div>
+          )}
           <div style={{ flexShrink: 0 }}>
-            <div className="step-text" style={{ color: 'inherit' }}>Step 3 of 4</div>
+            <div className="step-text" style={{ color: 'inherit' }}>Step 4 of 4</div>
           </div>
           <div style={{ flexShrink: 0 }}>
             <div className="action-text" style={{ color: 'inherit' }}>
-              Next step
+              Payment
             </div>
           </div>
         </div>
