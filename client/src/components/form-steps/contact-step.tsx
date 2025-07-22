@@ -91,20 +91,18 @@ export default function ContactStep({ data, onUpdate, onNext, onPrevious }: Cont
         </div>
       </div>
 
-      {/* Form Inner Container */}
-      <div className="form-inner" style={{ width: '100%', margin: '16px 0 0 0' }}>
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} style={{ width: '100%' }}>
-            
-            {/* Your Details Section */}
-            <div className="bg-white border border-slate-200 rounded-lg p-6 mb-6 w-full">
-              <div className="space-y-4">
-                {/* First Name & Last Name Row */}
-                <div className="grid grid-cols-2 gap-4">
-                  <FormField
-                    control={form.control}
-                    name="firstName"
-                    render={({ field }) => (
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="w-full" style={{ margin: '16px 0 0 0' }}>
+          
+          {/* Your Details Section */}
+          <div className="bg-white border border-slate-200 rounded-lg p-6 mb-6 w-full">
+            <div className="space-y-4">
+              {/* First Name & Last Name Row */}
+              <div className="grid grid-cols-2 gap-4">
+                <FormField
+                  control={form.control}
+                  name="firstName"
+                  render={({ field }) => (
                       <FormItem>
                         <FormLabel className="text-sm font-medium text-slate-700">First Name</FormLabel>
                         <FormControl>
@@ -117,11 +115,11 @@ export default function ContactStep({ data, onUpdate, onNext, onPrevious }: Cont
                         <FormMessage />
                       </FormItem>
                     )}
-                  />
-                  <FormField
-                    control={form.control}
-                    name="lastName"
-                    render={({ field }) => (
+                />
+                <FormField
+                  control={form.control}
+                  name="lastName"
+                  render={({ field }) => (
                       <FormItem>
                         <FormLabel className="text-sm font-medium text-slate-700">Last Name</FormLabel>
                         <FormControl>
@@ -135,14 +133,14 @@ export default function ContactStep({ data, onUpdate, onNext, onPrevious }: Cont
                       </FormItem>
                     )}
                   />
-                </div>
+              </div>
 
-                {/* Phone Number & Email Address Row */}
-                <div className="grid grid-cols-2 gap-4">
-                  <FormField
-                    control={form.control}
-                    name="phoneNumber"
-                    render={({ field }) => (
+              {/* Phone Number & Email Address Row */}
+              <div className="grid grid-cols-2 gap-4">
+                <FormField
+                  control={form.control}
+                  name="phoneNumber"
+                  render={({ field }) => (
                       <FormItem>
                         <FormLabel className="text-sm font-medium text-slate-700">Phone Number</FormLabel>
                         <FormControl>
@@ -159,12 +157,12 @@ export default function ContactStep({ data, onUpdate, onNext, onPrevious }: Cont
                         <FormMessage />
                       </FormItem>
                     )}
-                  />
+                />
 
-                  <FormField
-                    control={form.control}
-                    name="email"
-                    render={({ field }) => (
+                <FormField
+                  control={form.control}
+                  name="email"
+                  render={({ field }) => (
                       <FormItem>
                         <FormLabel className="text-sm font-medium text-slate-700">Email Address</FormLabel>
                         <FormControl>
@@ -179,14 +177,14 @@ export default function ContactStep({ data, onUpdate, onNext, onPrevious }: Cont
                       </FormItem>
                     )}
                   />
-                </div>
               </div>
             </div>
+          </div>
 
-            {/* Emergency Contact Section - White Panel */}
-            <div className="bg-white border border-slate-200 rounded-lg p-6 mb-6 w-full">
-              <div className="grid grid-cols-2 gap-4">
-                <FormField
+          {/* Emergency Contact Section - White Panel */}
+          <div className="bg-white border border-slate-200 rounded-lg p-6 mb-6 w-full">
+            <div className="grid grid-cols-2 gap-4">
+              <FormField
                   control={form.control}
                   name="emergencyContactName"
                   render={({ field }) => (
@@ -202,8 +200,8 @@ export default function ContactStep({ data, onUpdate, onNext, onPrevious }: Cont
                       <FormMessage />
                     </FormItem>
                   )}
-                />
-                <FormField
+              />
+              <FormField
                   control={form.control}
                   name="emergencyContactPhone"
                   render={({ field }) => (
@@ -227,10 +225,8 @@ export default function ContactStep({ data, onUpdate, onNext, onPrevious }: Cont
               </div>
             </div>
 
-
-          </form>
-        </Form>
-      </div>
+        </form>
+      </Form>
 
       {/* Navigation Container - Step 2 has both Previous and Next */}
       <div className="button-containerFull" style={{ 
