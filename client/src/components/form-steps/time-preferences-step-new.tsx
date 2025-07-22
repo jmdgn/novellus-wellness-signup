@@ -111,18 +111,24 @@ export default function TimePreferencesStep({ data, onUpdate, onNext }: TimePref
               {/* Time Selection - Right Column */}
               <div className="flex-1">
                 <h3 className="text-[14px] font-normal text-black mb-4">Select up to 3 time preferences</h3>
-                <div className="grid grid-cols-3 gap-3">
+                <div className="grid grid-cols-3 gap-2.5">
                   {allTimes.map((time) => (
                     <button
                       key={time}
                       type="button"
                       onClick={() => handleTimeSelection(time)}
-                      className={`p-3 rounded-lg border text-center text-xs font-medium transition-colors ${
+                      className={`relative p-3 border text-center text-xs font-medium transition-colors ${
                         selectedTimes.includes(time)
-                          ? "bg-blue-50 border-blue-200 text-blue-900"
-                          : "bg-white border-gray-200 text-gray-700 hover:border-gray-300"
+                          ? "bg-blue-500 border-blue-500 text-white rounded-lg"
+                          : "bg-white border-gray-200 text-gray-700 hover:border-gray-300 rounded-lg"
                       }`}
+                      style={{ borderRadius: '8px' }}
                     >
+                      {selectedTimes.includes(time) && (
+                        <div className="absolute top-1 right-1 bg-white text-blue-500 rounded-full w-4 h-4 flex items-center justify-center text-xs font-bold">
+                          {selectedTimes.indexOf(time) + 1}
+                        </div>
+                      )}
                       {time}
                     </button>
                   ))}
@@ -155,7 +161,7 @@ export default function TimePreferencesStep({ data, onUpdate, onNext }: TimePref
             </p>
           </div>
 
-          <div className="flex gap-6">
+          <div className="flex gap-4">
             {[
               { value: "semi-private", label: "Semi-private", icon: "👥" },
               { value: "private", label: "Private", icon: "👤" },
@@ -164,18 +170,25 @@ export default function TimePreferencesStep({ data, onUpdate, onNext }: TimePref
                 key={option.value}
                 type="button"
                 onClick={() => handleClassTypeSelect(option.value as "semi-private" | "private")}
-                className={`bg-white border border-[#ddd] rounded-xl p-4 pr-8 pl-4 flex items-center gap-4 transition-colors ${
+                className={`border p-4 pr-8 pl-4 flex items-center gap-4 transition-colors ${
                   selectedClassType === option.value
-                    ? "border-blue-500 bg-blue-50"
-                    : "hover:border-gray-300"
+                    ? "border-blue-500 bg-blue-500 text-white"
+                    : "bg-white border-[#ddd] text-black hover:border-gray-300"
                 }`}
+                style={{ borderRadius: '12px' }}
               >
-                <div className="bg-[#e0f2fe] rounded-lg p-2.5 h-10 flex items-center justify-center">
-                  <span className="text-[20px] font-semibold leading-normal tracking-[0.4px] text-black">
+                <div className={`p-2.5 h-10 flex items-center justify-center ${
+                  selectedClassType === option.value
+                    ? "bg-white/20"
+                    : "bg-[#e0f2fe]"
+                }`} style={{ borderRadius: '6px' }}>
+                  <span className={`text-[20px] font-semibold leading-normal tracking-[0.4px] ${
+                    selectedClassType === option.value ? "text-white" : "text-black"
+                  }`}>
                     {option.icon}
                   </span>
                 </div>
-                <span className="text-[16px] font-medium text-black">
+                <span className="text-[16px] font-medium">
                   {option.label}
                 </span>
               </button>
@@ -194,7 +207,7 @@ export default function TimePreferencesStep({ data, onUpdate, onNext }: TimePref
             </p>
           </div>
 
-          <div className="flex gap-6">
+          <div className="flex gap-4">
             {[
               { value: "mat", label: "Mat", icon: "🧘" },
               { value: "reformer", label: "Reformer", icon: "⚙️" },
@@ -204,18 +217,25 @@ export default function TimePreferencesStep({ data, onUpdate, onNext }: TimePref
                 key={option.value}
                 type="button"
                 onClick={() => handleClassPreferenceSelect(option.value as "mat" | "reformer" | "both")}
-                className={`bg-white border border-[#ddd] rounded-xl p-4 pr-8 pl-4 flex items-center gap-4 transition-colors ${
+                className={`border p-4 pr-8 pl-4 flex items-center gap-4 transition-colors ${
                   selectedClassPreference === option.value
-                    ? "border-blue-500 bg-blue-50"
-                    : "hover:border-gray-300"
+                    ? "border-blue-500 bg-blue-500 text-white"
+                    : "bg-white border-[#ddd] text-black hover:border-gray-300"
                 }`}
+                style={{ borderRadius: '12px' }}
               >
-                <div className="bg-[#e0f2fe] rounded-lg p-2.5 h-10 flex items-center justify-center">
-                  <span className="text-[20px] font-semibold leading-normal tracking-[0.4px] text-black">
+                <div className={`p-2.5 h-10 flex items-center justify-center ${
+                  selectedClassPreference === option.value
+                    ? "bg-white/20"
+                    : "bg-[#e0f2fe]"
+                }`} style={{ borderRadius: '6px' }}>
+                  <span className={`text-[20px] font-semibold leading-normal tracking-[0.4px] ${
+                    selectedClassPreference === option.value ? "text-white" : "text-black"
+                  }`}>
                     {option.icon}
                   </span>
                 </div>
-                <span className="text-[16px] font-medium text-black">
+                <span className="text-[16px] font-medium">
                   {option.label}
                 </span>
               </button>
@@ -234,7 +254,7 @@ export default function TimePreferencesStep({ data, onUpdate, onNext }: TimePref
             </p>
           </div>
 
-          <div className="flex gap-6">
+          <div className="flex gap-4">
             {[
               { value: "english", label: "English", icon: "🇺🇸" },
               { value: "spanish", label: "Spanish", icon: "🇪🇸" },
@@ -243,18 +263,25 @@ export default function TimePreferencesStep({ data, onUpdate, onNext }: TimePref
                 key={option.value}
                 type="button"
                 onClick={() => handleLanguageSelect(option.value as "english" | "spanish")}
-                className={`bg-white border border-[#ddd] rounded-xl p-4 pr-8 pl-4 flex items-center gap-4 transition-colors ${
+                className={`border p-4 pr-8 pl-4 flex items-center gap-4 transition-colors ${
                   selectedLanguage === option.value
-                    ? "border-blue-500 bg-blue-50"
-                    : "hover:border-gray-300"
+                    ? "border-blue-500 bg-blue-500 text-white"
+                    : "bg-white border-[#ddd] text-black hover:border-gray-300"
                 }`}
+                style={{ borderRadius: '12px' }}
               >
-                <div className="bg-[#e0f2fe] rounded-lg p-2.5 h-10 flex items-center justify-center">
-                  <span className="text-[20px] font-semibold leading-normal tracking-[0.4px] text-black">
+                <div className={`p-2.5 h-10 flex items-center justify-center ${
+                  selectedLanguage === option.value
+                    ? "bg-white/20"
+                    : "bg-[#e0f2fe]"
+                }`} style={{ borderRadius: '6px' }}>
+                  <span className={`text-[20px] font-semibold leading-normal tracking-[0.4px] ${
+                    selectedLanguage === option.value ? "text-white" : "text-black"
+                  }`}>
                     {option.icon}
                   </span>
                 </div>
-                <span className="text-[16px] font-medium text-black">
+                <span className="text-[16px] font-medium">
                   {option.label}
                 </span>
               </button>
