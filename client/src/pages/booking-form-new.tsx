@@ -160,7 +160,7 @@ export default function BookingForm({}: BookingFormProps) {
                     </div>
                     <div className="flex items-center gap-[10px]">
                       <span 
-                        className={`text-[14px] font-normal leading-[18px] ${
+                        className={`text-[12px] font-normal leading-[18px] ${
                           step.active ? 'text-black' : 'text-[#5555554d]'
                         }`}
                       >

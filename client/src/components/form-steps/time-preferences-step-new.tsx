@@ -77,8 +77,8 @@ export default function TimePreferencesStep({ data, onUpdate, onNext }: TimePref
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
         {/* Step 1: Date & Time Selection */}
-        <div className="flex flex-col gap-6 w-full">
-          <div className="flex flex-col gap-3">
+        <div className="flex flex-col gap-12 w-full">
+          <div className="flex flex-col gap-1">
             <h2 className="text-[20px] font-semibold leading-6 tracking-[-0.22px] text-black">
               1. Select Class Date & Time
             </h2>
@@ -140,8 +140,8 @@ export default function TimePreferencesStep({ data, onUpdate, onNext }: TimePref
         </div>
 
         {/* Step 2: Class Type */}
-        <div className="flex flex-col gap-6 w-full">
-          <div className="flex flex-col gap-3">
+        <div className="flex flex-col gap-12 w-full">
+          <div className="flex flex-col gap-1">
             <h2 className="text-[20px] font-semibold leading-6 tracking-[-0.22px] text-black">
               2. What kind of classes are you interested in?
             </h2>
@@ -154,11 +154,12 @@ export default function TimePreferencesStep({ data, onUpdate, onNext }: TimePref
             {[
               { value: "mat", label: "Mat Pilates", icon: "🧘" },
               { value: "reformer", label: "Reformer", icon: "⚙️" },
+              { value: "both", label: "Both", icon: "💪" },
             ].map((option) => (
               <button
                 key={option.value}
                 type="button"
-                onClick={() => handleClassTypeSelect(option.value as "mat" | "reformer")}
+                onClick={() => handleClassTypeSelect(option.value as "mat" | "reformer" | "both")}
                 className={`bg-white border border-[#ddd] rounded-xl p-4 pr-8 pl-4 flex items-center gap-4 transition-colors ${
                   selectedClassType === option.value
                     ? "border-blue-500 bg-blue-50"
@@ -179,8 +180,8 @@ export default function TimePreferencesStep({ data, onUpdate, onNext }: TimePref
         </div>
 
         {/* Step 3: Language */}
-        <div className="flex flex-col gap-6 w-full">
-          <div className="flex flex-col gap-3">
+        <div className="flex flex-col gap-12 w-full">
+          <div className="flex flex-col gap-1">
             <h2 className="text-[20px] font-semibold leading-6 tracking-[-0.22px] text-black">
               3. What language would you prefer?
             </h2>
