@@ -62,12 +62,16 @@ export default function BookingForm({}: BookingFormProps) {
   const handleNext = () => {
     if (currentStep < 4) {
       setCurrentStep(currentStep + 1);
+      // Scroll to top of screen when moving to next step
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
 
   const handlePrevious = () => {
     if (currentStep > 1) {
       setCurrentStep(currentStep - 1);
+      // Scroll to top of screen when moving to previous step
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
 
@@ -261,7 +265,7 @@ export default function BookingForm({}: BookingFormProps) {
       </div>
 
       {/* Main Content Area with padding for fixed header */}
-      <div className="flex-1 flex flex-col items-center gap-4 pb-32" style={{ paddingTop: '320px' }}>
+      <div className="main-content-area flex-1 flex flex-col items-center gap-4 pb-32" style={{ paddingTop: '320px' }}>
         {/* Form Container */}
         <div className="flex flex-col gap-4 w-full max-w-[820px] px-4 md:px-0">
           {renderCurrentStep()}

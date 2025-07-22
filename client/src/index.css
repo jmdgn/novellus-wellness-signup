@@ -101,6 +101,11 @@
       margin-right: 0 !important;
       margin-left: auto !important;
     }
+    
+    /* Mobile padding-top adjustment */
+    .main-content-area {
+      padding-top: 280px !important;
+    }
   }
 
   /* Calendar available dates bold styling */
