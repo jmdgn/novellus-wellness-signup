@@ -116,6 +116,11 @@
     .space-y-6 {
       padding: 0 !important;
     }
+    
+    /* Table width override on mobile */
+    table.w-full {
+      width: auto !important;
+    }
   }
 
   /* Calendar available dates bold styling */
