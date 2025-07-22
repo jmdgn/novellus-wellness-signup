@@ -69,6 +69,15 @@ export default function TimePreferencesStep({ data, onUpdate, onNext }: TimePref
 
   // Check if all prerequisites are met - only check what's in the schema
   const isFormValid = selectedDate && selectedTimes.length > 0;
+  
+  // Debug logging
+  console.log("Step 1 - Validation check:", {
+    hasSelectedDate: !!selectedDate,
+    selectedTimesLength: selectedTimes.length,
+    isFormValid,
+    selectedDateISO: selectedDate?.toISOString(),
+    selectedTimes
+  });
 
   const onSubmit = (values: TimePreferences) => {
     console.log("Step 1 - Form submitted with values:", values);
@@ -313,7 +322,24 @@ export default function TimePreferencesStep({ data, onUpdate, onNext }: TimePref
             opacity: isFormValid ? 1 : 0.6,
             marginTop: '24px'
           }}
-          onClick={isFormValid ? form.handleSubmit(onSubmit) : undefined}
+          onClick={(e) => {
+            console.log("Step 1 - Button clicked");
+            console.log("Step 1 - isFormValid:", isFormValid);
+            console.log("Step 1 - selectedDate:", selectedDate);
+            console.log("Step 1 - selectedTimes:", selectedTimes);
+            console.log("Step 1 - form values:", form.getValues());
+            
+            if (isFormValid) {
+              console.log("Step 1 - Calling form.handleSubmit");
+              form.handleSubmit(onSubmit)(e);
+            } else {
+              console.log("Step 1 - Form not valid, not submitting");
+              console.log("Step 1 - Missing requirements:", {
+                hasDate: !!selectedDate,
+                hasTime: selectedTimes.length > 0
+              });
+            }
+          }}
         >
           <div style={{ flexShrink: 0 }}>
             <div className="step-text" style={{ color: 'inherit' }}>Step 1 of 4</div>
