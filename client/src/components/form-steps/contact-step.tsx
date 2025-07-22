@@ -80,7 +80,7 @@ export default function ContactStep({ data, onUpdate, onNext, onPrevious }: Cont
       {/* Title Group */}
       <div style={{ flexDirection: 'column', alignItems: 'flex-start', gap: '10px', width: '100%', display: 'flex' }}>
         <div style={{ width: '100%' }}>
-          <h1 style={{ fontSize: '28px', fontWeight: '700', color: '#111', margin: '0', lineHeight: '1.6' }}>
+          <h1 className="text-[18px] font-semibold leading-6 tracking-[-0.22px] text-black">
             Your Details
           </h1>
         </div>

@@ -129,12 +129,12 @@ const CheckoutForm = ({ formData, onPrevious, submitBooking, isSubmitting }: Pay
       {/* Title Group */}
       <div style={{ flexDirection: 'column', alignItems: 'flex-start', gap: '10px', width: '100%', display: 'flex' }}>
         <div style={{ width: '100%' }}>
-          <h1 style={{ fontSize: '28px', fontWeight: '700', color: '#111', margin: '0', lineHeight: '1.6' }}>
+          <h1 className="text-[18px] font-semibold leading-6 tracking-[-0.22px] text-black">
             Payment & Confirmation
           </h1>
         </div>
         <div style={{ width: '100%' }}>
-          <h2 style={{ fontSize: '18px', fontWeight: '600', color: '#666', margin: '0', lineHeight: '1.4' }}>
+          <h2 className="text-[14px] font-normal leading-[22px] tracking-[0.16px] text-[#999]">
             $30.00 AUD
           </h2>
         </div>

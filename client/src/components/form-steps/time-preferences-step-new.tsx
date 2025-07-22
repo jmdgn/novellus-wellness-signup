@@ -69,30 +69,13 @@ export default function TimePreferencesStep({ data, onUpdate, onNext }: TimePref
 
   // Check if all prerequisites are met - only check what's in the schema
   const isFormValid = selectedDate && selectedTimes.length > 0;
-  
-  // Debug logging
-  console.log("Step 1 - Validation check:", {
-    hasSelectedDate: !!selectedDate,
-    selectedTimesLength: selectedTimes.length,
-    isFormValid,
-    selectedDateISO: selectedDate?.toISOString(),
-    selectedTimes
-  });
 
   const onSubmit = (values: TimePreferences) => {
-    console.log("Step 1 - Form submitted with values:", values);
-    console.log("Step 1 - isFormValid:", isFormValid);
-    console.log("Step 1 - selectedDate:", selectedDate);
-    console.log("Step 1 - selectedTimes:", selectedTimes);
-    console.log("Step 1 - form errors:", form.formState.errors);
-    
     if (values.timePreferences.length === 0) {
-      console.log("Step 1 - Setting error: no time preferences");
       form.setError("timePreferences", { message: "Please select at least one time preference" });
       return;
     }
     
-    console.log("Step 1 - Calling onUpdate and onNext");
     onUpdate(values);
     onNext();
   };
@@ -172,7 +155,7 @@ export default function TimePreferencesStep({ data, onUpdate, onNext }: TimePref
         </div>
 
         {/* Step 2: Class Type */}
-        <div className="flex flex-col gap-6 w-full">
+        <div className="flex flex-col gap-4 w-full">
           <div className="flex flex-col gap-1">
             <h2 className="text-[18px] font-semibold leading-6 tracking-[-0.22px] text-black">
               2. Choose class type
@@ -209,7 +192,7 @@ export default function TimePreferencesStep({ data, onUpdate, onNext }: TimePref
                     {option.icon}
                   </span>
                 </div>
-                <span className="text-[16px] font-medium">
+                <span className="text-[14px] font-medium">
                   {option.label}
                 </span>
               </button>
@@ -218,7 +201,7 @@ export default function TimePreferencesStep({ data, onUpdate, onNext }: TimePref
         </div>
 
         {/* Step 3: Class Preference */}
-        <div className="flex flex-col gap-6 w-full">
+        <div className="flex flex-col gap-4 w-full">
           <div className="flex flex-col gap-1">
             <h2 className="text-[18px] font-semibold leading-6 tracking-[-0.22px] text-black">
               3. Select class preference
@@ -256,7 +239,7 @@ export default function TimePreferencesStep({ data, onUpdate, onNext }: TimePref
                     {option.icon}
                   </span>
                 </div>
-                <span className="text-[16px] font-medium">
+                <span className="text-[14px] font-medium">
                   {option.label}
                 </span>
               </button>
@@ -265,7 +248,7 @@ export default function TimePreferencesStep({ data, onUpdate, onNext }: TimePref
         </div>
 
         {/* Step 4: Language */}
-        <div className="flex flex-col gap-6 w-full">
+        <div className="flex flex-col gap-4 w-full">
           <div className="flex flex-col gap-1">
             <h2 className="text-[18px] font-semibold leading-6 tracking-[-0.22px] text-black">
               4. What language would you prefer?
@@ -302,7 +285,7 @@ export default function TimePreferencesStep({ data, onUpdate, onNext }: TimePref
                     {option.icon}
                   </span>
                 </div>
-                <span className="text-[16px] font-medium">
+                <span className="text-[14px] font-medium">
                   {option.label}
                 </span>
               </button>
@@ -320,24 +303,11 @@ export default function TimePreferencesStep({ data, onUpdate, onNext }: TimePref
             background: isFormValid ? '#111111' : '#fff',
             color: isFormValid ? '#FFF' : '#111',
             opacity: isFormValid ? 1 : 0.6,
-            marginTop: '24px'
+            marginTop: '48px'
           }}
           onClick={(e) => {
-            console.log("Step 1 - Button clicked");
-            console.log("Step 1 - isFormValid:", isFormValid);
-            console.log("Step 1 - selectedDate:", selectedDate);
-            console.log("Step 1 - selectedTimes:", selectedTimes);
-            console.log("Step 1 - form values:", form.getValues());
-            
             if (isFormValid) {
-              console.log("Step 1 - Calling form.handleSubmit");
               form.handleSubmit(onSubmit)(e);
-            } else {
-              console.log("Step 1 - Form not valid, not submitting");
-              console.log("Step 1 - Missing requirements:", {
-                hasDate: !!selectedDate,
-                hasTime: selectedTimes.length > 0
-              });
             }
           }}
         >

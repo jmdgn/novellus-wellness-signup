@@ -183,12 +183,12 @@ export default function MedicalDeclarationStep({ data, onUpdate, onNext, onPrevi
       {/* Title Group */}
       <div style={{ flexDirection: 'column', alignItems: 'flex-start', gap: '10px', width: '100%', display: 'flex' }}>
         <div style={{ width: '100%' }}>
-          <h1 style={{ fontSize: '28px', fontWeight: '700', color: '#111', margin: '0', lineHeight: '1.6' }}>
+          <h1 className="text-[18px] font-semibold leading-6 tracking-[-0.22px] text-black">
             Medical History & Information
           </h1>
         </div>
         <div style={{ width: '100%' }}>
-          <p style={{ fontSize: '14px', color: '#666', margin: '0', lineHeight: '1.4' }}>
+          <p className="text-[14px] font-normal leading-[22px] tracking-[0.16px] text-[#999]">
             <strong>Important:</strong> Please answer these questions as honestly as you can and to the best of your knowledge.
           </p>
         </div>
