@@ -96,94 +96,95 @@ export default function ContactStep({ data, onUpdate, onNext, onPrevious }: Cont
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} style={{ width: '100%', padding: '16px 20px' }}>
             
-            {/* Main Contact Details */}
-            <div className="space-y-4 mb-6">
-              {/* First Name & Last Name Row */}
-              <div className="grid grid-cols-2 gap-4">
-                <FormField
-                  control={form.control}
-                  name="firstName"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="text-sm font-medium text-slate-700">First Name</FormLabel>
-                      <FormControl>
-                        <Input 
-                          placeholder="Jane" 
-                          className="border-slate-200"
-                          {...field}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="lastName"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="text-sm font-medium text-slate-700">Last Name</FormLabel>
-                      <FormControl>
-                        <Input 
-                          placeholder="Citizen" 
-                          className="border-slate-200"
-                          {...field}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
+            {/* Your Details Section */}
+            <div className="bg-white border border-slate-200 rounded-lg p-6 mb-6">
+              <div className="space-y-4">
+                {/* First Name & Last Name Row */}
+                <div className="grid grid-cols-2 gap-4">
+                  <FormField
+                    control={form.control}
+                    name="firstName"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-sm font-medium text-slate-700">First Name</FormLabel>
+                        <FormControl>
+                          <Input 
+                            placeholder="Jane" 
+                            className="border-slate-200"
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="lastName"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-sm font-medium text-slate-700">Last Name</FormLabel>
+                        <FormControl>
+                          <Input 
+                            placeholder="Citizen" 
+                            className="border-slate-200"
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
 
-              {/* Phone Number & Email Address Row */}
-              <div className="grid grid-cols-2 gap-4">
-                <FormField
-                  control={form.control}
-                  name="phoneNumber"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="text-sm font-medium text-slate-700">Phone Number</FormLabel>
-                      <FormControl>
-                        <Input 
-                          placeholder="0400 000 000" 
-                          className="border-slate-200"
-                          {...field}
-                          onChange={(e) => {
-                            const formatted = handlePhoneChange(e.target.value);
-                            field.onChange(formatted);
-                          }}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
+                {/* Phone Number & Email Address Row */}
+                <div className="grid grid-cols-2 gap-4">
+                  <FormField
+                    control={form.control}
+                    name="phoneNumber"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-sm font-medium text-slate-700">Phone Number</FormLabel>
+                        <FormControl>
+                          <Input 
+                            placeholder="0400 000 000" 
+                            className="border-slate-200"
+                            {...field}
+                            onChange={(e) => {
+                              const formatted = handlePhoneChange(e.target.value);
+                              field.onChange(formatted);
+                            }}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
 
-                <FormField
-                  control={form.control}
-                  name="email"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="text-sm font-medium text-slate-700">Email Address</FormLabel>
-                      <FormControl>
-                        <Input 
-                          type="email"
-                          placeholder="jane.citizen@email.com" 
-                          className="border-slate-200"
-                          {...field}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
+                  <FormField
+                    control={form.control}
+                    name="email"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-sm font-medium text-slate-700">Email Address</FormLabel>
+                        <FormControl>
+                          <Input 
+                            type="email"
+                            placeholder="jane.citizen@email.com" 
+                            className="border-slate-200"
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
               </div>
             </div>
 
-            {/* Emergency Contact Section */}
-            <div className="mb-6">
-              <h3 style={{ fontSize: '18px', fontWeight: '500', color: '#1e293b', marginBottom: '16px' }}>Emergency Contact</h3>
+            {/* Emergency Contact Section - Grey Panel */}
+            <div className="bg-slate-50 border border-slate-200 rounded-lg p-6 mb-6">
               <div className="grid grid-cols-2 gap-4">
                 <FormField
                   control={form.control}
@@ -194,7 +195,7 @@ export default function ContactStep({ data, onUpdate, onNext, onPrevious }: Cont
                       <FormControl>
                         <Input 
                           placeholder="Emergency contact full name" 
-                          className="border-slate-200"
+                          className="border-slate-200 bg-white"
                           {...field}
                         />
                       </FormControl>
@@ -211,7 +212,7 @@ export default function ContactStep({ data, onUpdate, onNext, onPrevious }: Cont
                       <FormControl>
                         <Input 
                           placeholder="0400 000 000" 
-                          className="border-slate-200"
+                          className="border-slate-200 bg-white"
                           {...field}
                           onChange={(e) => {
                             const formatted = handlePhoneChange(e.target.value);
