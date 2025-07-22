@@ -120,8 +120,8 @@ export default function BookingForm({}: BookingFormProps) {
   return (
     <div className="min-h-screen bg-white">
       {/* Fixed Header */}
-      <div className="header-outer fixed top-0 left-0 right-0 bg-white z-50" style={{ borderBottom: '2px solid #eee', height: '280px' }}>
-        <div className="header-container-inner w-full h-full flex flex-col justify-center items-center relative">
+      <div className="header-outer fixed top-0 left-0 right-0 bg-white z-50" style={{ borderBottom: '2px solid #eee' }}>
+        <div className="header-container-inner w-full flex flex-col justify-center items-center relative p-8">
           
           {/* Logo - Top Left Corner */}
           <div className="logoContainer absolute top-6 left-6 w-[130px] h-[44px] overflow-hidden">
@@ -211,7 +211,7 @@ export default function BookingForm({}: BookingFormProps) {
       </div>
 
       {/* Main Content Area with padding for fixed header */}
-      <div className="flex-1 flex flex-col items-center gap-16 pb-32" style={{ paddingTop: '320px' }}>
+      <div className="flex-1 flex flex-col items-center gap-16 pb-32" style={{ paddingTop: '280px' }}>
         {/* Form Container */}
         <div className="flex flex-col gap-24 w-full max-w-[910px]">
           {renderCurrentStep()}
