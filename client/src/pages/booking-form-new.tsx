@@ -132,7 +132,7 @@ export default function BookingForm({}: BookingFormProps) {
           </div>
 
           {/* Step Progress Container - Top */}
-          <div className="step-progress-container w-full max-w-[900px] mx-auto mb-8">
+          <div className="step-progress-container w-full max-w-[900px] mx-auto mb-4">
             <div className="flex items-center justify-center gap-16">
               {[
                 { number: 1, title: "Select Date & Time", active: currentStep === 1 },
@@ -174,7 +174,7 @@ export default function BookingForm({}: BookingFormProps) {
           </div>
 
           {/* Text and Image Container - Bottom */}
-          <div className="text-image-container w-full max-w-[900px] mx-auto flex items-center justify-between">
+          <div className="text-image-container w-full max-w-[900px] mx-auto flex items-center justify-between mt-4">
             {/* Text Group - Left Side */}
             <div className="introContent-text flex flex-col items-start gap-4 flex-1">
               <div className="flex items-center gap-[10px]">
