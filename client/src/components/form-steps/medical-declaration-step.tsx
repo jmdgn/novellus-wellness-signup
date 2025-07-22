@@ -188,13 +188,8 @@ export default function MedicalDeclarationStep({ data, onUpdate, onNext, onPrevi
           </h1>
         </div>
         <div style={{ width: '100%' }}>
-          <p className="text-[14px] font-normal leading-[22px] tracking-[0.16px] text-[#999]">
-            <strong>Important:</strong> Please answer these questions as honestly as you can and to the best of your knowledge.
-          </p>
-        </div>
-        <div style={{ width: '100%' }}>
           <p style={{ fontSize: '14px', color: '#666', margin: '0', lineHeight: '1.4' }}>
-            Your answers will help us tailor a class suited to your body, concerns and conditions.
+            <strong>Important:</strong> Please answer these questions as honestly as you can and to the best of your knowledge. Your answers will help us tailor a class suited to your body, concerns and conditions.
           </p>
         </div>
       </div>

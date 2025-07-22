@@ -380,7 +380,7 @@ h1 {
   transform: translate(-50%); }
 
 .p-4 {
-  padding: 6rem 0 0 0; }
+  padding: 1rem 0 0 0; }
 
 .form-card {
   padding: 24px 20px 112px 20px !important;
@@ -430,4 +430,9 @@ p.infoCard-textBody {
 .rounded-lg.p-4 {
   padding: 0 !important; }
 
+}
+
+/* Form labels with consistent left margin */
+label {
+  margin-left: 4px;
 }

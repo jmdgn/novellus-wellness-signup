@@ -288,24 +288,39 @@ export default function PaymentStep(props: PaymentStepProps) {
     // Create a temporary booking to get payment intent
     const initializePayment = async () => {
       try {
+        console.log("🚀 Starting payment initialization...");
+        console.log("Form data:", props.formData);
+        
         // First create the booking
+        console.log("📝 Creating booking...");
         const booking = await props.submitBooking({
           ...props.formData.contact,
           ...props.formData.timePreferences,
           ...props.formData.medical,
           totalAmount: 3000,
         });
+        console.log("✅ Booking created:", booking);
 
         // Then create payment intent
+        console.log("💳 Creating payment intent for booking ID:", booking.id);
         const response = await apiRequest("POST", "/api/create-payment-intent", {
           bookingId: booking.id,
         });
+        
+        if (!response.ok) {
+          const errorText = await response.text();
+          console.error("❌ Payment intent API error:", response.status, errorText);
+          throw new Error(`Payment API error: ${response.status} - ${errorText}`);
+        }
+        
         const data = await response.json();
+        console.log("✅ Payment intent response:", data);
         setClientSecret(data.clientSecret);
       } catch (error: any) {
+        console.error("❌ Payment initialization error:", error);
         toast({
           title: "Error",
-          description: "Failed to initialize payment",
+          description: `Failed to initialize payment: ${error.message}`,
           variant: "destructive",
         });
       }
