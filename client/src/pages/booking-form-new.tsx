@@ -4,6 +4,7 @@ import ContactStep from "@/components/form-steps/contact-step";
 import MedicalDeclarationStep from "@/components/form-steps/medical-declaration-step";
 import PaymentStep from "@/components/form-steps/payment-step";
 import type { ContactInfo, TimePreferences, MedicalDeclaration } from "@shared/schema";
+import bdProfilePath from "@assets/bd-profile_1753224323951.png";
 
 interface FormData {
   contact: Partial<ContactInfo>;
@@ -253,9 +254,9 @@ export default function BookingForm({}: BookingFormProps) {
             </div>
 
             {/* Profile Image - Hidden on Mobile */}
-            <div className="hidden md:flex introProfile-image bg-[#f5f5f5] rounded-lg items-center justify-center h-[100px] w-[100px] overflow-hidden flex-shrink-0">
+            <div className="hidden md:flex introProfile-image bg-[#f5f5f5] items-center justify-center h-[100px] w-[100px] overflow-hidden flex-shrink-0" style={{ borderRadius: '8px' }}>
               <img 
-                src="https://signup.novellus.net.au/static/media/profile-img.f5ef5de6cb4d654bc3cb.png" 
+                src={bdProfilePath}
                 alt="Beatriz Durango"
                 className="w-[100px] h-[100px] object-cover"
               />
