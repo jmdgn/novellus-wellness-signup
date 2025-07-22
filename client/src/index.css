@@ -86,7 +86,7 @@
     
     /* Step 2 container padding on mobile */
     .p-6 {
-      padding: 1rem !important;
+      padding: 1.5rem 1rem !important;
     }
   }
 
