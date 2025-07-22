@@ -29,6 +29,7 @@ export default function TimePreferencesStep({ data, onUpdate, onNext }: TimePref
       timePreferences: data?.timePreferences || [],
       classType: data?.classType || "semi-private",
       language: data?.language || "english",
+      classPreference: "mat",
     },
   });
 
@@ -65,17 +66,27 @@ export default function TimePreferencesStep({ data, onUpdate, onNext }: TimePref
 
   const handleClassPreferenceSelect = (preference: "mat" | "reformer" | "both") => {
     setSelectedClassPreference(preference);
+    form.setValue("classPreference", preference);
   };
 
   // Check if all prerequisites are met
   const isFormValid = selectedDate && selectedTimes.length > 0 && selectedClassType && selectedClassPreference && selectedLanguage;
 
   const onSubmit = (values: TimePreferences) => {
+    console.log("Form submitted with values:", values);
     if (values.timePreferences.length === 0) {
       form.setError("timePreferences", { message: "Please select at least one time preference" });
       return;
     }
-    onUpdate(values);
+    
+    // Include the class preference that might not be in the form values
+    const completeValues = {
+      ...values,
+      classPreference: selectedClassPreference
+    };
+    
+    console.log("Calling onUpdate with:", completeValues);
+    onUpdate(completeValues);
     onNext();
   };
 
@@ -307,7 +318,7 @@ export default function TimePreferencesStep({ data, onUpdate, onNext }: TimePref
           onClick={isFormValid ? form.handleSubmit(onSubmit) : undefined}
         >
           <div style={{ flexShrink: 0 }}>
-            <div className="step-text" style={{ color: 'inherit' }}>Step 2 of 4</div>
+            <div className="step-text" style={{ color: 'inherit' }}>Step 1 of 4</div>
           </div>
           <div style={{ flexShrink: 0 }}>
             <div className="action-text" style={{ color: 'inherit' }}>
