@@ -20,6 +20,7 @@ export default function TimePreferencesStep({ data, onUpdate, onNext }: TimePref
   const [selectedTimes, setSelectedTimes] = useState<string[]>(data?.timePreferences || []);
   const [selectedLanguage, setSelectedLanguage] = useState<"english" | "spanish">(data?.language || "english");
   const [selectedClassType, setSelectedClassType] = useState<"semi-private" | "private">(data?.classType || "semi-private");
+  const [selectedClassPreference, setSelectedClassPreference] = useState<"mat" | "reformer" | "both">("mat");
 
   const form = useForm<TimePreferences>({
     resolver: zodResolver(timePreferencesSchema),
@@ -60,6 +61,10 @@ export default function TimePreferencesStep({ data, onUpdate, onNext }: TimePref
   const handleClassTypeSelect = (classType: "semi-private" | "private") => {
     setSelectedClassType(classType);
     form.setValue("classType", classType);
+  };
+
+  const handleClassPreferenceSelect = (preference: "mat" | "reformer" | "both") => {
+    setSelectedClassPreference(preference);
   };
 
   const onSubmit = (values: TimePreferences) => {
@@ -178,11 +183,51 @@ export default function TimePreferencesStep({ data, onUpdate, onNext }: TimePref
           </div>
         </div>
 
-        {/* Step 3: Language */}
+        {/* Step 3: Class Preference */}
         <div className="flex flex-col gap-6 w-full">
           <div className="flex flex-col gap-1">
             <h2 className="text-[18px] font-semibold leading-6 tracking-[-0.22px] text-black">
-              3. What language would you prefer?
+              3. Select class preference
+            </h2>
+            <p className="text-[14px] font-normal leading-[22px] tracking-[0.16px] text-[#999]">
+              Choose your preferred class style.
+            </p>
+          </div>
+
+          <div className="flex gap-6">
+            {[
+              { value: "mat", label: "Mat", icon: "🧘" },
+              { value: "reformer", label: "Reformer", icon: "⚙️" },
+              { value: "both", label: "Both", icon: "💪" },
+            ].map((option) => (
+              <button
+                key={option.value}
+                type="button"
+                onClick={() => handleClassPreferenceSelect(option.value as "mat" | "reformer" | "both")}
+                className={`bg-white border border-[#ddd] rounded-xl p-4 pr-8 pl-4 flex items-center gap-4 transition-colors ${
+                  selectedClassPreference === option.value
+                    ? "border-blue-500 bg-blue-50"
+                    : "hover:border-gray-300"
+                }`}
+              >
+                <div className="bg-[#e0f2fe] rounded-lg p-2.5 h-10 flex items-center justify-center">
+                  <span className="text-[20px] font-semibold leading-normal tracking-[0.4px] text-black">
+                    {option.icon}
+                  </span>
+                </div>
+                <span className="text-[16px] font-medium text-black">
+                  {option.label}
+                </span>
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Step 4: Language */}
+        <div className="flex flex-col gap-6 w-full">
+          <div className="flex flex-col gap-1">
+            <h2 className="text-[18px] font-semibold leading-6 tracking-[-0.22px] text-black">
+              4. What language would you prefer?
             </h2>
             <p className="text-[14px] font-normal leading-[22px] tracking-[0.16px] text-[#999]">
               Choose your preferred language for the classes.
