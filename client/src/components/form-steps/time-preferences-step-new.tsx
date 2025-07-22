@@ -29,7 +29,6 @@ export default function TimePreferencesStep({ data, onUpdate, onNext }: TimePref
       timePreferences: data?.timePreferences || [],
       classType: data?.classType || "semi-private",
       language: data?.language || "english",
-      classPreference: "mat",
     },
   });
 
@@ -66,27 +65,26 @@ export default function TimePreferencesStep({ data, onUpdate, onNext }: TimePref
 
   const handleClassPreferenceSelect = (preference: "mat" | "reformer" | "both") => {
     setSelectedClassPreference(preference);
-    form.setValue("classPreference", preference);
   };
 
-  // Check if all prerequisites are met
-  const isFormValid = selectedDate && selectedTimes.length > 0 && selectedClassType && selectedClassPreference && selectedLanguage;
+  // Check if all prerequisites are met - only check what's in the schema
+  const isFormValid = selectedDate && selectedTimes.length > 0;
 
   const onSubmit = (values: TimePreferences) => {
-    console.log("Form submitted with values:", values);
+    console.log("Step 1 - Form submitted with values:", values);
+    console.log("Step 1 - isFormValid:", isFormValid);
+    console.log("Step 1 - selectedDate:", selectedDate);
+    console.log("Step 1 - selectedTimes:", selectedTimes);
+    console.log("Step 1 - form errors:", form.formState.errors);
+    
     if (values.timePreferences.length === 0) {
+      console.log("Step 1 - Setting error: no time preferences");
       form.setError("timePreferences", { message: "Please select at least one time preference" });
       return;
     }
     
-    // Include the class preference that might not be in the form values
-    const completeValues = {
-      ...values,
-      classPreference: selectedClassPreference
-    };
-    
-    console.log("Calling onUpdate with:", completeValues);
-    onUpdate(completeValues);
+    console.log("Step 1 - Calling onUpdate and onNext");
+    onUpdate(values);
     onNext();
   };
 
