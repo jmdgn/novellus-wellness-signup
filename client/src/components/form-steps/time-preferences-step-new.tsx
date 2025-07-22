@@ -13,20 +13,20 @@ interface TimePreferencesStepProps {
   onNext: () => void;
 }
 
-const allTimes = ["7.00 am", "8.00 am", "9.00 am", "10.00 am", "1.00 pm", "2.00 pm", "3.00 pm", "5.00 pm", "6.00 pm", "7.00 pm"];
+const allTimes = ["7.00 am", "8.30 am", "10.00 am", "11.30 am", "2.30 pm", "4.00 pm"];
 
 export default function TimePreferencesStep({ data, onUpdate, onNext }: TimePreferencesStepProps) {
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(data?.selectedDate ? new Date(data.selectedDate) : undefined);
   const [selectedTimes, setSelectedTimes] = useState<string[]>(data?.timePreferences || []);
   const [selectedLanguage, setSelectedLanguage] = useState<"english" | "spanish">(data?.language || "english");
-  const [selectedClassType, setSelectedClassType] = useState<"mat" | "reformer" | "both">(data?.classType || "mat");
+  const [selectedClassType, setSelectedClassType] = useState<"semi-private" | "private">(data?.classType || "semi-private");
 
   const form = useForm<TimePreferences>({
     resolver: zodResolver(timePreferencesSchema),
     defaultValues: {
       selectedDate: data?.selectedDate,
       timePreferences: data?.timePreferences || [],
-      classType: data?.classType || "mat",
+      classType: data?.classType || "semi-private",
       language: data?.language || "english",
     },
   });
@@ -57,7 +57,7 @@ export default function TimePreferencesStep({ data, onUpdate, onNext }: TimePref
     form.setValue("language", language);
   };
 
-  const handleClassTypeSelect = (classType: "mat" | "reformer" | "both") => {
+  const handleClassTypeSelect = (classType: "semi-private" | "private") => {
     setSelectedClassType(classType);
     form.setValue("classType", classType);
   };
@@ -79,7 +79,7 @@ export default function TimePreferencesStep({ data, onUpdate, onNext }: TimePref
         {/* Step 1: Date & Time Selection */}
         <div className="flex flex-col gap-6 w-full">
           <div className="flex flex-col gap-1">
-            <h2 className="text-[20px] font-semibold leading-6 tracking-[-0.22px] text-black">
+            <h2 className="text-[18px] font-semibold leading-6 tracking-[-0.22px] text-black">
               1. Select Class Date & Time
             </h2>
             <p className="text-[14px] font-normal leading-[22px] tracking-[0.16px] text-[#999]">
@@ -142,8 +142,8 @@ export default function TimePreferencesStep({ data, onUpdate, onNext }: TimePref
         {/* Step 2: Class Type */}
         <div className="flex flex-col gap-6 w-full">
           <div className="flex flex-col gap-1">
-            <h2 className="text-[20px] font-semibold leading-6 tracking-[-0.22px] text-black">
-              2. What kind of classes are you interested in?
+            <h2 className="text-[18px] font-semibold leading-6 tracking-[-0.22px] text-black">
+              2. Choose class type
             </h2>
             <p className="text-[14px] font-normal leading-[22px] tracking-[0.16px] text-[#999]">
               Please select your preferred class type.
@@ -152,14 +152,13 @@ export default function TimePreferencesStep({ data, onUpdate, onNext }: TimePref
 
           <div className="flex gap-6">
             {[
-              { value: "mat", label: "Mat Pilates", icon: "🧘" },
-              { value: "reformer", label: "Reformer", icon: "⚙️" },
-              { value: "both", label: "Both", icon: "💪" },
+              { value: "semi-private", label: "Semi-private", icon: "👥" },
+              { value: "private", label: "Private", icon: "👤" },
             ].map((option) => (
               <button
                 key={option.value}
                 type="button"
-                onClick={() => handleClassTypeSelect(option.value as "mat" | "reformer" | "both")}
+                onClick={() => handleClassTypeSelect(option.value as "semi-private" | "private")}
                 className={`bg-white border border-[#ddd] rounded-xl p-4 pr-8 pl-4 flex items-center gap-4 transition-colors ${
                   selectedClassType === option.value
                     ? "border-blue-500 bg-blue-50"
@@ -182,7 +181,7 @@ export default function TimePreferencesStep({ data, onUpdate, onNext }: TimePref
         {/* Step 3: Language */}
         <div className="flex flex-col gap-6 w-full">
           <div className="flex flex-col gap-1">
-            <h2 className="text-[20px] font-semibold leading-6 tracking-[-0.22px] text-black">
+            <h2 className="text-[18px] font-semibold leading-6 tracking-[-0.22px] text-black">
               3. What language would you prefer?
             </h2>
             <p className="text-[14px] font-normal leading-[22px] tracking-[0.16px] text-[#999]">

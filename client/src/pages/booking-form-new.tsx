@@ -133,7 +133,7 @@ export default function BookingForm({}: BookingFormProps) {
 
           {/* Step Progress Container - Top */}
           <div className="step-progress-container w-full max-w-[820px] mx-auto mb-4">
-            <div className="flex items-center justify-evenly">
+            <div className="flex items-center justify-between">
               {[
                 { number: 1, title: "Select Date & Time", active: currentStep === 1 },
                 { number: 2, title: "Contact Details", active: currentStep === 2 },
@@ -174,11 +174,11 @@ export default function BookingForm({}: BookingFormProps) {
           </div>
 
           {/* Text and Image Container - Bottom */}
-          <div className="text-image-container w-full max-w-[820px] mx-auto flex items-center justify-between mt-4">
+          <div className="text-image-container w-full max-w-[820px] mx-auto flex items-center justify-between mt-4 gap-8">
             {/* Text Group - Left Side */}
             <div className="introContent-text flex flex-col items-start gap-4 flex-1">
               <div className="flex items-center gap-[10px]">
-                <h1 className="text-black text-[32px] font-normal leading-9 tracking-[-0.32px]">
+                <h1 className="text-black text-[24px] font-semibold leading-9 tracking-[-0.32px]">
                   Try Novellus Pilates with Beatriz Durango
                 </h1>
               </div>
@@ -199,7 +199,7 @@ export default function BookingForm({}: BookingFormProps) {
             </div>
 
             {/* Profile Image - Right Side */}
-            <div className="introProfile-image bg-[#f5f5f5] rounded-lg flex items-center justify-center h-[100px] w-[100px] overflow-hidden flex-shrink-0 ml-8">
+            <div className="introProfile-image bg-[#f5f5f5] rounded-lg flex items-center justify-center h-[100px] w-[100px] overflow-hidden flex-shrink-0">
               <img 
                 src="https://signup.novellus.net.au/static/media/profile-img.f5ef5de6cb4d654bc3cb.png" 
                 alt="Beatriz Durango"
