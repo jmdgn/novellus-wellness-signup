@@ -94,10 +94,10 @@ export default function ContactStep({ data, onUpdate, onNext, onPrevious }: Cont
       {/* Form Inner Container */}
       <div className="form-inner" style={{ width: '100%', margin: '16px 0 0 0' }}>
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} style={{ width: '100%', padding: '16px 20px' }}>
+          <form onSubmit={form.handleSubmit(onSubmit)} style={{ width: '100%' }}>
             
             {/* Your Details Section */}
-            <div className="bg-white border border-slate-200 rounded-lg p-6 mb-6">
+            <div className="bg-white border border-slate-200 rounded-lg p-6 mb-6 w-full">
               <div className="space-y-4">
                 {/* First Name & Last Name Row */}
                 <div className="grid grid-cols-2 gap-4">
@@ -183,8 +183,8 @@ export default function ContactStep({ data, onUpdate, onNext, onPrevious }: Cont
               </div>
             </div>
 
-            {/* Emergency Contact Section - Grey Panel */}
-            <div className="bg-slate-50 border border-slate-200 rounded-lg p-6 mb-6">
+            {/* Emergency Contact Section - White Panel */}
+            <div className="bg-white border border-slate-200 rounded-lg p-6 mb-6 w-full">
               <div className="grid grid-cols-2 gap-4">
                 <FormField
                   control={form.control}
@@ -195,7 +195,7 @@ export default function ContactStep({ data, onUpdate, onNext, onPrevious }: Cont
                       <FormControl>
                         <Input 
                           placeholder="Emergency contact full name" 
-                          className="border-slate-200 bg-white"
+                          className="border-slate-200"
                           {...field}
                         />
                       </FormControl>
@@ -212,7 +212,7 @@ export default function ContactStep({ data, onUpdate, onNext, onPrevious }: Cont
                       <FormControl>
                         <Input 
                           placeholder="0400 000 000" 
-                          className="border-slate-200 bg-white"
+                          className="border-slate-200"
                           {...field}
                           onChange={(e) => {
                             const formatted = handlePhoneChange(e.target.value);
