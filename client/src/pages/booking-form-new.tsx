@@ -213,7 +213,7 @@ export default function BookingForm({}: BookingFormProps) {
       {/* Main Content Area with padding for fixed header */}
       <div className="flex-1 flex flex-col items-center gap-16 pb-32" style={{ paddingTop: '280px' }}>
         {/* Form Container */}
-        <div className="flex flex-col gap-24 w-full max-w-[910px]">
+        <div className="flex flex-col gap-24 w-full max-w-[820px]">
           {renderCurrentStep()}
         </div>
       </div>

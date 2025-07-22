@@ -71,6 +71,11 @@
 }
 
 @layer components {
+  /* Calendar available dates bold styling */
+  .rdp-day_button:not([disabled]):not(.rdp-day_selected) {
+    font-weight: 600 !important;
+  }
+
   .ocean-gradient {
     background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
   }

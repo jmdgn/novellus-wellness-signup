@@ -101,7 +101,7 @@ export default function TimePreferencesStep({ data, onUpdate, onNext }: TimePref
               </div>
 
               {/* Divider */}
-              <div className="w-px bg-gray-300 mx-6 h-full min-h-[300px]"></div>
+              <div className="w-px bg-[#ebebeb] self-stretch mx-8"></div>
 
               {/* Time Selection - Right Column */}
               <div className="flex-1">
