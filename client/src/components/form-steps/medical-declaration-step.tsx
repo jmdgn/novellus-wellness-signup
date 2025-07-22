@@ -445,11 +445,11 @@ export default function MedicalDeclarationStep({ data, onUpdate, onNext, onPrevi
             </div>
           )}
           <div style={{ flexShrink: 0 }}>
-            <div className="step-text" style={{ color: 'inherit' }}>Step 4 of 4</div>
+            <div className="step-text" style={{ color: 'inherit' }}>Step 3 of 4</div>
           </div>
           <div style={{ flexShrink: 0 }}>
             <div className="action-text" style={{ color: 'inherit' }}>
-              Payment
+              Next step
             </div>
           </div>
         </div>
