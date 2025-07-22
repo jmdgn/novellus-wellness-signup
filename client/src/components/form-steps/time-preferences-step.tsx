@@ -174,14 +174,13 @@ export default function TimePreferencesStep({ data, onUpdate, onNext, onPrevious
             
             {/* Calendar Section */}
             <div style={{ marginBottom: '40px' }}>
-              <div style={{ width: '100%' }}>
+              <div className="flex justify-center">
                 <Calendar
                   mode="single"
                   selected={selectedDate}
                   onSelect={handleDateSelect}
                   disabled={(date) => !isFriday(date)}
-                  className="rounded-md border w-full"
-                  style={{ width: '100%' }}
+                  className="rounded-md border"
                 />
               </div>
               {selectedDate && (
@@ -193,7 +192,7 @@ export default function TimePreferencesStep({ data, onUpdate, onNext, onPrevious
 
             {/* Time Selection */}
             <div style={{ marginBottom: '40px' }}>
-              <h3 className="text-lg font-medium text-slate-800 mb-4">Available Times</h3>
+              <h3 style={{ fontSize: '18px', fontWeight: '500', color: '#1e293b', marginBottom: '16px' }}>Available Times</h3>
               <div className="grid grid-cols-5 gap-2">
                 {availableTimes.map((time) => {
                   const isSelected = selectedTimes.includes(time);
@@ -250,7 +249,7 @@ export default function TimePreferencesStep({ data, onUpdate, onNext, onPrevious
 
             {/* Class Preference Section */}
             <div style={{ marginBottom: '40px' }}>
-              <h3 className="text-lg font-medium text-slate-800 mb-4">My class preference</h3>
+              <h3 style={{ fontSize: '18px', fontWeight: '500', color: '#1e293b', marginBottom: '16px' }}>My class preference</h3>
               <div className="space-y-3">
                 {[
                   { value: "mat", label: "Mat Pilates", desc: "Floor-based exercises using body weight and small props" },
@@ -277,7 +276,7 @@ export default function TimePreferencesStep({ data, onUpdate, onNext, onPrevious
 
             {/* Language Preference Section */}
             <div style={{ marginBottom: '40px' }}>
-              <h3 className="text-lg font-medium text-slate-800 mb-4">I want my class in</h3>
+              <h3 style={{ fontSize: '18px', fontWeight: '500', color: '#1e293b', marginBottom: '16px' }}>I want my class in</h3>
               <div className="flex gap-4">
                 {[
                   { value: "english", label: "English" },

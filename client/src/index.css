@@ -237,19 +237,7 @@
   }
 }
 
-/* Full width calendar styling */
-.rdp {
-  width: 100% !important;
-}
-
-.rdp-table {
-  width: 100% !important;
-}
-
-.rdp-month {
-  width: 100% !important;
-}
-
+/* Calendar styling */
 .rdp-caption {
   justify-content: center !important;
   margin-bottom: 16px !important;

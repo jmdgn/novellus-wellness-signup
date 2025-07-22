@@ -182,7 +182,7 @@ export default function ContactStep({ data, onUpdate, onNext, onPrevious }: Cont
 
             {/* Emergency Contact Section */}
             <div className="mb-6">
-              <h3 className="text-lg font-medium text-slate-800 mb-4">Emergency Contact</h3>
+              <h3 style={{ fontSize: '18px', fontWeight: '500', color: '#1e293b', marginBottom: '16px' }}>Emergency Contact</h3>
               <div className="space-y-4">
                 <FormField
                   control={form.control}
