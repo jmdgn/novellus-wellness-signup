@@ -103,7 +103,7 @@ export default function TimePreferencesStep({ data, onUpdate, onNext, onPrevious
           </div>
           <div style={{ width: '60px', height: '60px', borderRadius: '50%', overflow: 'hidden', flexShrink: 0 }}>
             <img 
-              src="https://images.unsplash.com/photo-1494790108755-2616c9e98c53?w=120&h=120&fit=crop&crop=face"
+              src="https://signup.novellus.net.au/assets/profile-img-C5BLdDxc.png"
               alt="Beatriz Durango"
               style={{ width: '100%', height: '100%', objectFit: 'cover' }}
             />
