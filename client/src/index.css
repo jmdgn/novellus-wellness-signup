@@ -106,6 +106,16 @@
     .main-content-area {
       padding-top: 280px !important;
     }
+    
+    /* Step 4 payment form mobile styles */
+    .form-inner {
+      background: #FFF !important;
+      padding: 0 !important;
+    }
+    
+    .space-y-6 {
+      padding: 0 !important;
+    }
   }
 
   /* Calendar available dates bold styling */
