@@ -23,20 +23,30 @@ export default function BookingForm({}: BookingFormProps) {
     contact: {
       firstName: "",
       lastName: "",
-      phone: "",
+      phoneNumber: "",
       email: "",
       emergencyContactName: "",
       emergencyContactPhone: "",
+      language: "english" as "english" | "spanish",
     },
-    timePreferences: [],
+    timePreferences: {
+      selectedDate: "",
+      timePreferences: [],
+      classType: "semi-private" as "semi-private" | "private",
+      language: "english" as "english" | "spanish",
+    },
     medical: {
       painAreas: [],
-      hasInjuries: false,
-      injuryDetails: "",
-      hasMedicalConditions: false,
-      medicalConditions: "",
       isPregnant: false,
-      agreeToTerms: false,
+      pregnancyWeeks: undefined,
+      heartCondition: false,
+      chestPain: false,
+      dizziness: false,
+      asthmaAttack: false,
+      diabetesControl: false,
+      otherConditions: false,
+      medicalConditions: "",
+      hasMedicalConditions: false,
     },
   });
 
@@ -56,13 +66,30 @@ export default function BookingForm({}: BookingFormProps) {
     }
   };
 
-  const submitBooking = async () => {
+  const submitBooking = async (bookingData: any) => {
     setIsSubmitting(true);
     try {
-      // Submit booking logic here
-      console.log("Submitting booking:", formData);
+      console.log("📝 Creating booking...");
+      console.log("Submitting booking:", bookingData);
+      
+      const response = await fetch("/api/booking", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(bookingData),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const booking = await response.json();
+      console.log("✅ Booking created:", booking);
+      return booking;
     } catch (error) {
-      console.error("Error submitting booking:", error);
+      console.error("❌ Error creating booking:", error);
+      throw error;
     } finally {
       setIsSubmitting(false);
     }
