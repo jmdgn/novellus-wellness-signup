@@ -307,7 +307,8 @@ export default function MedicalDeclarationStep({ data, onUpdate, onNext, onPrevi
                   <FormControl>
                     <Textarea
                       placeholder="Please provide details about your medical conditions..."
-                      className="form-field min-h-[100px]"
+                      className="border-[#CCC] rounded-[8px] min-h-[100px] data-[valid=true]:border-[#0095F6] p-3"
+                      data-valid={!!field.value && !form.formState.errors.medicalConditions}
                       {...field}
                     />
                   </FormControl>

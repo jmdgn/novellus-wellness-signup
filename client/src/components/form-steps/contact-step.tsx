@@ -108,8 +108,8 @@ export default function ContactStep({ data, onUpdate, onNext, onPrevious }: Cont
                         <FormControl>
                           <Input 
                             placeholder="Jane" 
-                            className="border-[#CCC] rounded-[8px] data-[filled=true]:border-[#0095F6]"
-                            data-filled={!!field.value}
+                            className="border-[#CCC] rounded-[8px] data-[valid=true]:border-[#0095F6]"
+                            data-valid={!!field.value && !form.formState.errors.firstName}
                             {...field}
                           />
                         </FormControl>
@@ -126,8 +126,8 @@ export default function ContactStep({ data, onUpdate, onNext, onPrevious }: Cont
                         <FormControl>
                           <Input 
                             placeholder="Citizen" 
-                            className="border-[#CCC] rounded-[8px] data-[filled=true]:border-[#0095F6]"
-                            data-filled={!!field.value}
+                            className="border-[#CCC] rounded-[8px] data-[valid=true]:border-[#0095F6]"
+                            data-valid={!!field.value && !form.formState.errors.lastName}
                             {...field}
                           />
                         </FormControl>
@@ -148,8 +148,8 @@ export default function ContactStep({ data, onUpdate, onNext, onPrevious }: Cont
                         <FormControl>
                           <Input 
                             placeholder="0400 000 000" 
-                            className="border-[#CCC] rounded-[8px] data-[filled=true]:border-[#0095F6]"
-                            data-filled={!!field.value}
+                            className="border-[#CCC] rounded-[8px] data-[valid=true]:border-[#0095F6]"
+                            data-valid={!!field.value && !form.formState.errors.phoneNumber}
                             {...field}
                             onChange={(e) => {
                               const formatted = handlePhoneChange(e.target.value);
@@ -172,8 +172,8 @@ export default function ContactStep({ data, onUpdate, onNext, onPrevious }: Cont
                           <Input 
                             type="email"
                             placeholder="jane.citizen@email.com" 
-                            className="border-[#CCC] rounded-[8px] data-[filled=true]:border-[#0095F6]"
-                            data-filled={!!field.value}
+                            className="border-[#CCC] rounded-[8px] data-[valid=true]:border-[#0095F6]"
+                            data-valid={!!field.value && !form.formState.errors.email}
                             {...field}
                           />
                         </FormControl>
@@ -197,8 +197,8 @@ export default function ContactStep({ data, onUpdate, onNext, onPrevious }: Cont
                       <FormControl>
                         <Input 
                           placeholder="Emergency contact full name" 
-                          className="border-[#CCC] rounded-[8px] data-[filled=true]:border-[#0095F6]"
-                          data-filled={!!field.value}
+                          className="border-[#CCC] rounded-[8px] data-[valid=true]:border-[#0095F6]"
+                          data-valid={!!field.value && !form.formState.errors.emergencyContactName}
                           {...field}
                         />
                       </FormControl>
@@ -215,8 +215,8 @@ export default function ContactStep({ data, onUpdate, onNext, onPrevious }: Cont
                       <FormControl>
                         <Input 
                           placeholder="0400 000 000" 
-                          className="border-[#CCC] rounded-[8px] data-[filled=true]:border-[#0095F6]"
-                          data-filled={!!field.value}
+                          className="border-[#CCC] rounded-[8px] data-[valid=true]:border-[#0095F6]"
+                          data-valid={!!field.value && !form.formState.errors.emergencyContactPhone}
                           {...field}
                           onChange={(e) => {
                             const formatted = handlePhoneChange(e.target.value);
