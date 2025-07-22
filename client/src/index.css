@@ -71,6 +71,11 @@
 }
 
 @layer components {
+  /* Calendar table width override */
+  .rdp-table.w-full {
+    width: auto !important;
+  }
+  
   /* Mobile calendar table width */
   @media (max-width: 768px) {
     .rdp-table {
