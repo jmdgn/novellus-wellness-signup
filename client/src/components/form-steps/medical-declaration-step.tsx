@@ -200,7 +200,7 @@ export default function MedicalDeclarationStep({ data, onUpdate, onNext, onPrevi
       </div>
 
       {/* Form Inner Container */}
-      <div className="form-inner" style={{ width: '100%', margin: '24px 0 0 0' }}>
+      <div className="form-inner" style={{ width: '100%', margin: '16px 0 0 0' }}>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} style={{ width: '100%', padding: '16px 20px' }} className="space-y-6">
           

@@ -260,7 +260,7 @@ export default function TimePreferencesStep({ data, onUpdate, onNext }: TimePref
 
           <div className="flex gap-4">
             {[
-              { value: "english", label: "English", icon: "🇺🇸" },
+              { value: "english", label: "English", icon: "🇦🇺" },
               { value: "spanish", label: "Spanish", icon: "🇪🇸" },
             ].map((option) => (
               <button
