@@ -82,12 +82,13 @@ export default function MedicalDeclarationStep({ data, onUpdate, onNext, onPrevi
     otherConditions: boolean | null;
   }>({
     isPregnant: data?.isPregnant ?? null,
-    heartCondition: data?.heartCondition ?? null,
-    chestPain: data?.chestPain ?? null,
-    dizziness: data?.dizziness ?? null,
-    asthmaAttack: data?.asthmaAttack ?? null,
-    diabetesControl: data?.diabetesControl ?? null,
-    otherConditions: data?.otherConditions ?? null,
+    // Questions 2-8 should start unselected to ensure honest responses
+    heartCondition: data?.heartCondition !== undefined ? data.heartCondition : null,
+    chestPain: data?.chestPain !== undefined ? data.chestPain : null,
+    dizziness: data?.dizziness !== undefined ? data.dizziness : null,
+    asthmaAttack: data?.asthmaAttack !== undefined ? data.asthmaAttack : null,
+    diabetesControl: data?.diabetesControl !== undefined ? data.diabetesControl : null,
+    otherConditions: data?.otherConditions !== undefined ? data.otherConditions : null,
   });
 
   const form = useForm<MedicalDeclaration>({
@@ -96,12 +97,13 @@ export default function MedicalDeclarationStep({ data, onUpdate, onNext, onPrevi
       painAreas: data?.painAreas || [],
       isPregnant: data?.isPregnant ?? false,
       pregnancyWeeks: data?.pregnancyWeeks,
-      heartCondition: data?.heartCondition ?? false,
-      chestPain: data?.chestPain ?? false,
-      dizziness: data?.dizziness ?? false,
-      asthmaAttack: data?.asthmaAttack ?? false,
-      diabetesControl: data?.diabetesControl ?? false,
-      otherConditions: data?.otherConditions ?? false,
+      // Questions 2-8 should be unselected by default for honest responses
+      heartCondition: data?.heartCondition !== undefined ? data.heartCondition : false,
+      chestPain: data?.chestPain !== undefined ? data.chestPain : false,
+      dizziness: data?.dizziness !== undefined ? data.dizziness : false,
+      asthmaAttack: data?.asthmaAttack !== undefined ? data.asthmaAttack : false,
+      diabetesControl: data?.diabetesControl !== undefined ? data.diabetesControl : false,
+      otherConditions: data?.otherConditions !== undefined ? data.otherConditions : false,
       medicalConditions: data?.medicalConditions || "",
       hasMedicalConditions: data?.hasMedicalConditions || false,
     },
