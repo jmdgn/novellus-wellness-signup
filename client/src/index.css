@@ -135,9 +135,14 @@
   }
   
   /* Option button padding adjustment for class type, preference, and language */
-  .py-4 {
-    padding-top: 0.25rem !important;
-    padding-bottom: 0.25rem !important;
+  button.p-4 {
+    padding: 0.5rem !important;
+  }
+  
+  @media (min-width: 768px) {
+    button.p-4 {
+      padding: 0.5rem 2rem 0.5rem 1rem !important;
+    }
   }
 
   /* Calendar available dates bold styling */
