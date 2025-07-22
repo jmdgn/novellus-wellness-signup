@@ -119,73 +119,92 @@ export default function BookingForm({}: BookingFormProps) {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Fixed Header */}
-      <div className="header-outer fixed top-0 left-0 right-0 bg-white border-b border-gray-100 z-50">
-        <div className="header-container-inner max-w-6xl mx-auto p-6">
-          <div className="headContainer-top flex items-center justify-between mb-6">
-            <div className="logoContainer">
-              <svg width="117" height="40" viewBox="0 0 117 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <g clipPath="url(#clip0_4321_3704)">
-                  <path d="M83.8072 39.24C83.5612 39.24 83.3257 39.2055 83.1007 39.1365C82.8757 39.0645 82.6972 38.973 82.5652 38.862L82.7677 38.4075C82.8937 38.5065 83.0497 38.589 83.2357 38.655C83.4217 38.721 83.6122 38.754 83.8072 38.754C83.9722 38.754 84.1057 38.736 84.2077 38.7C84.3097 38.664 84.3847 38.616 84.4327 38.556C84.4807 38.493 84.5047 38.4225 84.5047 38.343C84.5047 38.2635 84.4807 38.193 84.4327 38.1315C84.3847 38.07 84.3097 38.022 84.2077 37.986C84.1057 37.95 83.9722 37.932 83.8072 37.932H83.5612V37.446H83.8072C83.9932 37.446 84.1507 37.4265 84.2797 37.3875C84.4087 37.3485 84.5077 37.2915 84.5767 37.2165C84.6457 37.1415 84.6802 37.05 84.6802 36.942C84.6802 36.834 84.6457 36.7425 84.5767 36.6675C84.5077 36.5925 84.4087 36.5355 84.2797 36.4965C84.1507 36.4575 83.9932 36.438 83.8072 36.438C83.6212 36.438 83.4307 36.471 83.2357 36.537C83.0497 36.603 82.8937 36.6855 82.7677 36.7845L82.5652 36.33C82.6972 36.219 82.8757 36.1275 83.1007 36.0555C83.3257 35.9865 83.5612 35.952 83.8072 35.952C84.1027 35.952 84.3622 35.9985 84.5857 36.0915C84.8092 36.1845 84.9847 36.315 85.1122 36.483C85.2397 36.651 85.3035 36.8475 85.3035 37.0725C85.3035 37.236 85.2712 37.383 85.2067 37.5135C85.1422 37.644 85.0517 37.752 84.9352 37.8375C85.0877 37.914 85.2067 38.022 85.2922 38.1615C85.3777 38.301 85.4205 38.4615 85.4205 38.643C85.4205 38.877 85.3535 39.078 85.2195 39.246C85.0855 39.414 84.8977 39.543 84.6562 39.633C84.4147 39.723 84.1327 39.768 83.8102 39.768L83.8072 39.24Z" fill="black"/>
-                  <path d="M75.8611 39.7065C75.5206 39.7065 75.2176 39.6345 74.9521 39.4905C74.6866 39.3465 74.4781 39.1425 74.3266 38.8785C74.1751 38.6145 74.0993 38.3055 74.0993 37.9515C74.0993 37.5975 74.1751 37.2885 74.3266 37.0245C74.4781 36.7605 74.6866 36.5565 74.9521 36.4125C75.2176 36.2685 75.5206 36.1965 75.8611 36.1965C76.2016 36.1965 76.5046 36.2685 76.7701 36.4125C77.0356 36.5565 77.2441 36.7605 77.3956 37.0245C77.5471 37.2885 77.6229 37.5975 77.6229 37.9515C77.6229 38.3055 77.5471 38.6145 77.3956 38.8785C77.2441 39.1425 77.0356 39.3465 76.7701 39.4905C76.5046 39.6345 76.2016 39.7065 75.8611 39.7065ZM75.8611 39.2205C76.0471 39.2205 76.2106 39.174 76.3516 39.081C76.4926 38.988 76.6036 38.8575 76.6846 38.6895C76.7656 38.5215 76.8061 38.327 76.8061 38.106C76.8061 37.885 76.7656 37.6905 76.6846 37.5225C76.6036 37.3545 76.4926 37.224 76.3516 37.131C76.2106 37.038 76.0471 36.9915 75.8611 36.9915C75.6751 36.9915 75.5116 37.038 75.3706 37.131C75.2296 37.224 75.1186 37.3545 75.0376 37.5225C74.9566 37.6905 74.9161 37.885 74.9161 38.106C74.9161 38.327 74.9566 38.5215 75.0376 38.6895C75.1186 38.8575 75.2296 38.988 75.3706 39.081C75.5116 39.174 75.6751 39.2205 75.8611 39.2205Z" fill="black"/>
-                </g>
-                <defs>
-                  <clipPath id="clip0_4321_3704">
-                    <rect width="117" height="40" fill="white"/>
-                  </clipPath>
-                </defs>
-              </svg>
+      {/* Fixed Header - Following Figma Specification */}
+      <div className="header-outer fixed top-0 left-0 right-0 bg-white z-50" style={{ borderBottom: '2px solid #eee', height: '280px' }}>
+        <div className="header-container-inner w-full h-full flex items-start justify-start max-w-[1920px] mx-auto relative">
+          
+          {/* Logo - Top Left Corner */}
+          <div className="logoContainer absolute top-6 left-6 w-[130px] h-[44px] overflow-hidden">
+            <svg width="130" height="44" viewBox="0 0 130 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M93.1193 43.6C92.8459 43.6 92.5843 43.5617 92.3343 43.485C92.0843 43.405 91.8859 43.3033 91.7393 43.18L91.9643 42.675C92.1043 42.785 92.2776 42.8767 92.4843 42.95C92.6909 43.0233 92.9026 43.06 93.1193 43.06C93.3026 43.06 93.4509 43.04 93.5643 43C93.6776 42.96 93.7609 42.9067 93.8143 42.84C93.8676 42.77 93.8943 42.6917 93.8943 42.605C93.8943 42.4983 93.8559 42.4133 93.7793 42.35C93.7026 42.2833 93.6026 42.2317 93.4793 42.195C93.3593 42.155 93.2243 42.1183 93.0793 42.0817C92.9343 42.0417 92.7876 42.005 92.6393 41.9717C92.4943 41.935 92.3593 41.8867 92.2343 41.8267C92.1126 41.7633 92.0143 41.6767 91.9393 41.567C91.8676 41.4533 91.8293 41.31 91.8293 41.137C91.8293 40.96 91.8809 40.7983 91.9843 40.652C92.0909 40.5017 92.2509 40.38 92.4643 40.287C92.6809 40.1907 92.9526 40.142 93.2793 40.142C93.4993 40.142 93.7176 40.1687 93.9343 40.222C94.1509 40.2753 94.3426 40.3517 94.5093 40.451L94.3043 40.947C94.1409 40.8553 93.9726 40.7837 93.7993 40.7323C93.6259 40.6777 93.4576 40.6503 93.2943 40.6503C93.1076 40.6503 92.9593 40.6737 92.8493 40.7203C92.7426 40.7637 92.6643 40.8203 92.6143 40.89C92.5676 40.9597 92.5443 41.038 92.5443 41.125C92.5443 41.2283 92.5809 41.3133 92.6543 41.38C92.7309 41.443 92.8293 41.4947 92.9493 41.535C93.0726 41.575 93.2076 41.6133 93.3543 41.65C93.5043 41.683 93.6526 41.7213 93.7993 41.765C93.9493 41.8087 94.0876 41.8653 94.2143 41.935C94.3443 42.0047 94.4493 42.0963 94.5293 42.21C94.6126 42.3237 94.6543 42.4697 94.6543 42.648C94.6543 42.8293 94.5993 42.996 94.4893 43.148C94.3826 43.297 94.2176 43.416 93.9943 43.505C93.7709 43.591 93.4876 43.634 93.1443 43.634L93.1193 43.6Z" fill="black"/>
+              <path d="M84.7247 43.6C84.4514 43.6 84.1897 43.5617 83.9397 43.485C83.6897 43.405 83.4914 43.3033 83.3447 43.18L83.5697 42.675C83.7097 42.785 83.8831 42.8767 84.0897 42.95C84.2964 43.0233 84.5081 43.06 84.7247 43.06C84.9081 43.06 85.0564 43.04 85.1697 43C85.2831 42.96 85.3664 42.9067 85.4197 42.84C85.4731 42.77 85.4997 42.6917 85.4997 42.605C85.4997 42.4983 85.4614 42.4133 85.3847 42.35C85.3081 42.2833 85.2081 42.2317 85.0847 42.195C84.9647 42.155 84.8297 42.1183 84.6847 42.0817C84.5397 42.0417 84.3931 42.005 84.2447 41.9717C84.0997 41.935 83.9647 41.8867 83.8397 41.8267C83.7181 41.7633 83.6197 41.6767 83.5447 41.567C83.4731 41.4533 83.4347 41.31 83.4347 41.137C83.4347 40.96 83.4864 40.7983 83.5897 40.652C83.6964 40.5017 83.8564 40.38 84.0697 40.287C84.2864 40.1907 84.5581 40.142 84.8847 40.142C85.1047 40.142 85.3231 40.1687 85.5397 40.222C85.7564 40.2753 85.9481 40.3517 86.1147 40.451L85.9097 40.947C85.7464 40.8553 85.5781 40.7837 85.4047 40.7323C85.2314 40.6777 85.0631 40.6503 84.8997 40.6503C84.7131 40.6503 84.5647 40.6737 84.4547 40.7203C84.3481 40.7637 84.2697 40.8203 84.2197 40.89C84.1731 40.9597 84.1497 41.038 84.1497 41.125C84.1497 41.2283 84.1864 41.3133 84.2597 41.38C84.3364 41.443 84.4347 41.4947 84.5547 41.535C84.6781 41.575 84.8131 41.6133 84.9597 41.65C85.1097 41.683 85.2581 41.7213 85.4047 41.765C85.5547 41.8087 85.6931 41.8653 85.8197 41.935C85.9497 42.0047 86.0547 42.0963 86.1347 42.21C86.2181 42.3237 86.2597 42.4697 86.2597 42.648C86.2597 42.8293 86.2047 42.996 86.0947 43.148C85.9881 43.297 85.8231 43.416 85.5997 43.505C85.3764 43.591 85.0931 43.634 84.7497 43.634L84.7247 43.6Z" fill="black"/>
+            </svg>
+          </div>
+
+          {/* Main Content Layout following Figma - Profile, Text, Steps in horizontal layout */}
+          <div className="flex items-start w-full pt-16 px-8 max-w-[1920px] mx-auto">
+            
+            {/* Profile Image Frame */}
+            <div className="introProfile-image bg-[#f5f5f5] rounded-lg flex items-center justify-end h-[100px] overflow-hidden flex-shrink-0">
+              <img 
+                src="https://signup.novellus.net.au/static/media/profile-img.f5ef5de6cb4d654bc3cb.png" 
+                alt="Beatriz Durango"
+                className="w-[140px] h-[140px] object-cover"
+                style={{ background: '#d3d3d3 url() 50% / cover no-repeat' }}
+              />
             </div>
-            <div className="progressContainer flex items-center gap-3">
-              {[1, 2, 3, 4].map((step) => (
-                <div key={step} className="flex items-center gap-3">
-                  <div
-                    className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium ${
-                      step === currentStep
-                        ? "bg-blue-600 text-white"
-                        : step < currentStep
-                        ? "bg-green-500 text-white"
-                        : "bg-gray-200 text-gray-600"
-                    }`}
-                  >
-                    {step < currentStep ? "✓" : step}
-                  </div>
-                  {step < 4 && (
-                    <div
-                      className={`w-8 h-0.5 ${
-                        step < currentStep ? "bg-green-500" : "bg-gray-200"
+
+            {/* Text Group */}
+            <div className="introContent-text flex flex-col items-start gap-4 w-[755px] ml-8">
+              <div className="flex items-center gap-[10px]">
+                <h1 className="text-black text-[32px] font-normal leading-9 tracking-[-0.32px]" style={{ fontFamily: 'RM Neue' }}>
+                  Try Novellus Pilates with Beatriz Durango
+                </h1>
+              </div>
+              <div className="flex items-center gap-[10px] w-full">
+                <p className="text-[#777] text-[14px] font-normal leading-5 tracking-[0.14px] flex-1 underline" style={{ fontFamily: 'RM Neue', textDecorationLine: 'underline' }}>
+                  Book your 2x 1-hour introduction classes at 316-320 Toorak Road, South Yarra for just $30. A special rate to experience semi-private pilates in our boutique studio. One-time payment, no subscription required.
+                </p>
+              </div>
+            </div>
+
+            {/* Step Container */}
+            <div className="flex items-center gap-16 ml-auto">
+              {[
+                { number: 1, title: "Class Time & Type", active: currentStep === 1 },
+                { number: 2, title: "Your Details", active: currentStep === 2 },
+                { number: 3, title: "Medical Information", active: currentStep === 3 },
+                { number: 4, title: "Payment Details", active: currentStep === 4 }
+              ].map((step) => (
+                <div key={step.number} className="flex items-start gap-2">
+                  <div className="flex items-center gap-[10px] pt-2">
+                    <div 
+                      className={`w-[10px] h-[10px] rounded-full ${
+                        step.active ? 'bg-black' : 'bg-[#5555554d]'
                       }`}
                     />
-                  )}
+                  </div>
+                  <div className="flex flex-col items-start">
+                    <div className="flex items-center gap-[10px]">
+                      <span 
+                        className={`text-[16px] font-semibold leading-6 w-[46px] ${
+                          step.active ? 'text-black' : 'text-[#5555554d]'
+                        }`}
+                        style={{ fontFamily: 'RM Neue' }}
+                      >
+                        Step {step.number}
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-[10px]">
+                      <span 
+                        className={`text-[14px] font-normal leading-[18px] ${
+                          step.active ? 'text-black' : 'text-[#5555554d]'
+                        }`}
+                        style={{ fontFamily: 'RM Neue' }}
+                      >
+                        {step.title}
+                      </span>
+                    </div>
+                  </div>
                 </div>
               ))}
-            </div>
-          </div>
-          
-          <div className="headContainer-bottom flex items-center justify-between">
-            <div className="introContent-text">
-              <h1 className="text-xl font-semibold text-gray-900 mb-1">
-                Try Novellus Pilates with Beatriz Durango
-              </h1>
-              <p className="text-gray-600 text-sm">
-                Book your 2x 1hr introduction classes for $30 AUD
-              </p>
-            </div>
-            <div className="introProfile-image">
-              <div className="w-16 h-16 bg-pink-100 rounded-lg overflow-hidden">
-                <img 
-                  src="https://signup.novellus.net.au/static/media/profile-img.f5ef5de6cb4d654bc3cb.png" 
-                  alt="Beatriz Durango"
-                  className="w-full h-full object-cover"
-                />
-              </div>
             </div>
           </div>
         </div>
       </div>
 
       {/* Main Content Area with padding for fixed header */}
-      <div className="flex-1 flex flex-col items-center gap-16 pt-48 pb-32">
+      <div className="flex-1 flex flex-col items-center gap-16 pb-32" style={{ paddingTop: '320px' }}>
         {/* Form Container */}
         <div className="flex flex-col gap-24 w-full max-w-[910px]">
           {renderCurrentStep()}
