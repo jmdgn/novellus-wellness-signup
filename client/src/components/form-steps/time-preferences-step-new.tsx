@@ -75,9 +75,9 @@ export default function TimePreferencesStep({ data, onUpdate, onNext }: TimePref
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-12">
         {/* Step 1: Date & Time Selection */}
-        <div className="flex flex-col gap-12 w-full">
+        <div className="flex flex-col gap-6 w-full">
           <div className="flex flex-col gap-1">
             <h2 className="text-[20px] font-semibold leading-6 tracking-[-0.22px] text-black">
               1. Select Class Date & Time
@@ -140,7 +140,7 @@ export default function TimePreferencesStep({ data, onUpdate, onNext }: TimePref
         </div>
 
         {/* Step 2: Class Type */}
-        <div className="flex flex-col gap-12 w-full">
+        <div className="flex flex-col gap-6 w-full">
           <div className="flex flex-col gap-1">
             <h2 className="text-[20px] font-semibold leading-6 tracking-[-0.22px] text-black">
               2. What kind of classes are you interested in?
@@ -180,7 +180,7 @@ export default function TimePreferencesStep({ data, onUpdate, onNext }: TimePref
         </div>
 
         {/* Step 3: Language */}
-        <div className="flex flex-col gap-12 w-full">
+        <div className="flex flex-col gap-6 w-full">
           <div className="flex flex-col gap-1">
             <h2 className="text-[20px] font-semibold leading-6 tracking-[-0.22px] text-black">
               3. What language would you prefer?
