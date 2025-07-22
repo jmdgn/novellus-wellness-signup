@@ -133,6 +133,12 @@
       margin: 0 auto !important;
     }
   }
+  
+  /* Option button padding adjustment for class type, preference, and language */
+  .py-4 {
+    padding-top: 0.5rem !important;
+    padding-bottom: 0.5rem !important;
+  }
 
   /* Calendar available dates bold styling */
   .rdp-day_button:not([disabled]):not(.rdp-day_selected) {
