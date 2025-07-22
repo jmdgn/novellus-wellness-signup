@@ -183,18 +183,27 @@ export default function BookingForm({}: BookingFormProps) {
                 </h1>
               </div>
               <div className="flex items-center gap-[10px] w-full">
-                <p className="text-[#777] text-[14px] font-normal leading-5 tracking-[0.14px] underline">
-                  Book your 2x 1-hour introduction classes for $30 AUD. Select Fridays only.
+                <p className="text-[#777] text-[14px] font-normal leading-5 tracking-[0.14px]">
+                  Book your 2x 1-hour introduction classes at{' '}
+                  <a 
+                    href="https://maps.app.goo.gl/3Yg6bq7YMTcLztVW8" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="underline hover:no-underline"
+                  >
+                    316-320 Toorak Road, South Yarra
+                  </a>
+                  {' '}for just $30. A special rate to experience semi-private pilates in our boutique studio. One-time payment, no subscription required.
                 </p>
               </div>
             </div>
 
             {/* Profile Image - Right Side */}
-            <div className="introProfile-image bg-[#f5f5f5] rounded-lg flex items-center justify-end h-[100px] overflow-hidden flex-shrink-0 ml-8">
+            <div className="introProfile-image bg-[#f5f5f5] rounded-lg flex items-center justify-center h-[100px] w-[100px] overflow-hidden flex-shrink-0 ml-8">
               <img 
                 src="https://signup.novellus.net.au/static/media/profile-img.f5ef5de6cb4d654bc3cb.png" 
                 alt="Beatriz Durango"
-                className="w-[140px] h-[140px] object-cover"
+                className="w-[100px] h-[100px] object-cover"
               />
             </div>
           </div>
