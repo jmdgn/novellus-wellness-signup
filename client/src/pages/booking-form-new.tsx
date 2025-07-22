@@ -49,6 +49,10 @@ export default function BookingForm({}: BookingFormProps) {
       medicalConditions: "",
       hasMedicalConditions: false,
     },
+    payment: {
+      agreedToTerms: false,
+      totalAmount: 3000,
+    },
   });
 
   const updateFormData = (newData: Partial<FormData>) => {
@@ -166,7 +170,7 @@ export default function BookingForm({}: BookingFormProps) {
               {[1, 2, 3, 4].map((stepNum) => (
                 <div key={stepNum} className="flex items-center">
                   <div 
-                    className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-semibold ${
+                    className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-semibold ${
                       currentStep === stepNum 
                         ? 'bg-black text-white' 
                         : 'bg-[#5555554d] text-white'
@@ -257,7 +261,7 @@ export default function BookingForm({}: BookingFormProps) {
       </div>
 
       {/* Main Content Area with padding for fixed header */}
-      <div className="flex-1 flex flex-col items-center gap-4 pb-32" style={{ paddingTop: '220px' }}>
+      <div className="flex-1 flex flex-col items-center gap-4 pb-32" style={{ paddingTop: '320px' }}>
         {/* Form Container */}
         <div className="flex flex-col gap-4 w-full max-w-[820px] px-4 md:px-0">
           {renderCurrentStep()}

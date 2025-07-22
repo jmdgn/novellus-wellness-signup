@@ -186,8 +186,8 @@ export default function TimePreferencesStep({ data, onUpdate, onNext }: TimePref
 
             {/* Mobile Layout - Stacked */}
             <div className="md:hidden flex flex-col w-full space-y-6">
-              {/* Calendar - Top */}
-              <div className="w-full">
+              {/* Calendar - Top - Centered */}
+              <div className="w-full flex justify-center">
                 <Calendar
                   mode="single"
                   selected={selectedDate}
@@ -200,8 +200,8 @@ export default function TimePreferencesStep({ data, onUpdate, onNext }: TimePref
               {/* Divider */}
               <div className="h-px bg-[#ebebeb] w-full"></div>
 
-              {/* Time Selection - Bottom */}
-              <div className="w-full">
+              {/* Time Selection - Bottom with 1rem padding */}
+              <div className="w-full px-4">
                 <h3 className="text-[14px] font-normal text-black mb-4">Select up to 3 time preferences</h3>
                 <div className="grid grid-cols-2 gap-2.5">
                   {allTimes.map((time) => (
@@ -262,7 +262,7 @@ export default function TimePreferencesStep({ data, onUpdate, onNext }: TimePref
                 key={option.value}
                 type="button"
                 onClick={() => handleClassTypeSelect(option.value as "semi-private" | "private")}
-                className={`border p-4 pr-8 pl-4 flex items-center gap-4 transition-colors ${
+                className={`border p-4 md:pr-8 md:pl-4 flex items-center gap-4 transition-colors ${
                   selectedClassType === option.value
                     ? "border-blue-500 bg-blue-500 text-white"
                     : "bg-white border-[#ddd] text-black hover:border-gray-300"
@@ -309,7 +309,7 @@ export default function TimePreferencesStep({ data, onUpdate, onNext }: TimePref
                 key={option.value}
                 type="button"
                 onClick={() => handleClassPreferenceSelect(option.value as "mat" | "reformer" | "both")}
-                className={`border p-4 pr-8 pl-4 flex items-center gap-4 transition-colors ${
+                className={`border p-4 md:pr-8 md:pl-4 flex items-center gap-4 transition-colors ${
                   selectedClassPreference === option.value
                     ? "border-blue-500 bg-blue-500 text-white"
                     : "bg-white border-[#ddd] text-black hover:border-gray-300"
@@ -355,7 +355,7 @@ export default function TimePreferencesStep({ data, onUpdate, onNext }: TimePref
                 key={option.value}
                 type="button"
                 onClick={() => handleLanguageSelect(option.value as "english" | "spanish")}
-                className={`border p-4 pr-8 pl-4 flex items-center gap-4 transition-colors ${
+                className={`border p-4 md:pr-8 md:pl-4 flex items-center gap-4 transition-colors ${
                   selectedLanguage === option.value
                     ? "border-blue-500 bg-blue-500 text-white"
                     : "bg-white border-[#ddd] text-black hover:border-gray-300"
