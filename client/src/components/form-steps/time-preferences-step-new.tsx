@@ -124,10 +124,10 @@ export default function TimePreferencesStep({ data, onUpdate, onNext }: TimePref
         {/* Step 1: Date & Time Selection */}
         <div className="flex flex-col gap-6 w-full">
           <div className="flex flex-col gap-3">
-            <h2 className="text-[22px] font-normal leading-6 tracking-[-0.22px] text-black">
+            <h2 className="text-[20px] font-semibold leading-6 tracking-[-0.22px] text-black">
               1. Select Class Date & Time
             </h2>
-            <p className="text-[16px] font-normal leading-[22px] tracking-[0.16px] text-[#999]">
+            <p className="text-[14px] font-normal leading-[22px] tracking-[0.16px] text-[#999]">
               Select a Friday and up to 3 time preferences in order of priority.
             </p>
           </div>
@@ -156,10 +156,10 @@ export default function TimePreferencesStep({ data, onUpdate, onNext }: TimePref
         {/* Step 2: Class Type */}
         <div className="flex flex-col gap-6 w-full">
           <div className="flex flex-col gap-3">
-            <h2 className="text-[22px] font-normal leading-6 tracking-[-0.22px] text-black">
+            <h2 className="text-[20px] font-semibold leading-6 tracking-[-0.22px] text-black">
               2. What kind of classes are you interested in?
             </h2>
-            <p className="text-[16px] font-normal leading-[22px] tracking-[0.16px] text-[#999]">
+            <p className="text-[14px] font-normal leading-[22px] tracking-[0.16px] text-[#999]">
               Please select your preferred class type.
             </p>
           </div>
@@ -195,10 +195,10 @@ export default function TimePreferencesStep({ data, onUpdate, onNext }: TimePref
         {/* Step 3: Language */}
         <div className="flex flex-col gap-6 w-full">
           <div className="flex flex-col gap-3">
-            <h2 className="text-[22px] font-normal leading-6 tracking-[-0.22px] text-black">
+            <h2 className="text-[20px] font-semibold leading-6 tracking-[-0.22px] text-black">
               3. What language would you prefer?
             </h2>
-            <p className="text-[16px] font-normal leading-[22px] tracking-[0.16px] text-[#999]">
+            <p className="text-[14px] font-normal leading-[22px] tracking-[0.16px] text-[#999]">
               Choose your preferred language for the classes.
             </p>
           </div>
