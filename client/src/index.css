@@ -83,6 +83,11 @@
     .p-4 {
       padding: 1rem !important;
     }
+    
+    /* Step 2 container padding on mobile */
+    .p-6 {
+      padding: 1rem !important;
+    }
   }
 
   /* Calendar available dates bold styling */
