@@ -136,13 +136,8 @@
   
   /* Option button padding adjustment for class type, preference, and language */
   button.p-4 {
-    padding: 0.5rem !important;
-  }
-  
-  @media (min-width: 768px) {
-    button.p-4 {
-      padding: 0.5rem 2rem 0.5rem 0.5rem !important;
-    }
+    padding: 0.5rem 1.5rem 0.5rem 0.5rem !important;
+    border-radius: 8px !important;
   }
 
   /* Calendar available dates bold styling */
