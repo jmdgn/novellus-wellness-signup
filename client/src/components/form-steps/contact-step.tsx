@@ -75,6 +75,19 @@ export default function ContactStep({ data, onUpdate, onNext, onPrevious }: Cont
     }
   };
 
+  // Helper function to validate phone numbers manually
+  const isPhoneValid = (phone: string) => {
+    const cleaned = phone.replace(/\D/g, '');
+    // Must be exactly 10 digits and start with 04 for mobile or 0[2-9] for landline
+    return /^(0[2-9]\d{8}|04\d{8})$/.test(cleaned);
+  };
+
+  // Helper function to validate email manually
+  const isEmailValid = (email: string) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
   return (
     <>
       {/* Title Group */}
@@ -149,7 +162,7 @@ export default function ContactStep({ data, onUpdate, onNext, onPrevious }: Cont
                           <Input 
                             placeholder="0400 000 000" 
                             className="border-[#CCC] rounded-[8px] data-[valid=true]:border-[#0095F6]"
-                            data-valid={!!field.value && !form.formState.errors.phoneNumber}
+                            data-valid={!!field.value && !form.formState.errors.phoneNumber && isPhoneValid(field.value)}
                             {...field}
                             onChange={(e) => {
                               const formatted = handlePhoneChange(e.target.value);
@@ -173,7 +186,7 @@ export default function ContactStep({ data, onUpdate, onNext, onPrevious }: Cont
                             type="email"
                             placeholder="jane.citizen@email.com" 
                             className="border-[#CCC] rounded-[8px] data-[valid=true]:border-[#0095F6]"
-                            data-valid={!!field.value && !form.formState.errors.email}
+                            data-valid={!!field.value && !form.formState.errors.email && isEmailValid(field.value)}
                             {...field}
                           />
                         </FormControl>
@@ -216,7 +229,7 @@ export default function ContactStep({ data, onUpdate, onNext, onPrevious }: Cont
                         <Input 
                           placeholder="0400 000 000" 
                           className="border-[#CCC] rounded-[8px] data-[valid=true]:border-[#0095F6]"
-                          data-valid={!!field.value && !form.formState.errors.emergencyContactPhone}
+                          data-valid={!!field.value && !form.formState.errors.emergencyContactPhone && isPhoneValid(field.value)}
                           {...field}
                           onChange={(e) => {
                             const formatted = handlePhoneChange(e.target.value);
