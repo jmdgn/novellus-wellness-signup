@@ -13,9 +13,7 @@ interface TimePreferencesStepProps {
   onNext: () => void;
 }
 
-const morningTimes = ["7.00 am", "8.00 am", "9.00 am", "10.00 am"];
-const afternoonTimes = ["1.00 pm", "2.00 pm", "3.00 pm"];
-const eveningTimes = ["5.00 pm", "6.00 pm", "7.00 pm"];
+const allTimes = ["7.00 am", "8.00 am", "9.00 am", "10.00 am", "1.00 pm", "2.00 pm", "3.00 pm", "5.00 pm", "6.00 pm", "7.00 pm"];
 
 export default function TimePreferencesStep({ data, onUpdate, onNext }: TimePreferencesStepProps) {
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(data?.selectedDate ? new Date(data.selectedDate) : undefined);
@@ -73,50 +71,7 @@ export default function TimePreferencesStep({ data, onUpdate, onNext }: TimePref
     onNext();
   };
 
-  const renderTimeSection = (title: string, times: string[], icon: string) => (
-    <div className="bg-white border border-[#ebebeb] rounded-xl p-8 shadow-[4px_4px_24px_rgba(170,170,170,0.1)]">
-      <div className="flex justify-between items-center mb-8">
-        <div className="flex items-start gap-3">
-          <div className="bg-[#e0f2fe] rounded-lg p-2.5 h-10 w-8 flex items-center justify-center">
-            <span className="text-[20px] font-semibold leading-normal tracking-[0.4px] text-black">
-              {icon}
-            </span>
-          </div>
-          <span className="text-[16px] font-normal leading-6 text-[#777]">
-            {title}
-          </span>
-        </div>
-        <div className="flex items-center gap-4 pt-1">
-          <button className="text-[#333] hover:text-black">
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-              <path d="M10 4L6 8L10 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-          </button>
-          <button className="text-[#333] hover:text-black">
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-              <path d="M6 4L10 8L6 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-          </button>
-        </div>
-      </div>
-      <div className="grid grid-cols-2 gap-3">
-        {times.map((time) => (
-          <button
-            key={time}
-            type="button"
-            onClick={() => handleTimeSelection(time)}
-            className={`p-3 rounded-lg border text-left text-sm font-medium transition-colors ${
-              selectedTimes.includes(time)
-                ? "bg-blue-50 border-blue-200 text-blue-900"
-                : "bg-white border-gray-200 text-gray-700 hover:border-gray-300"
-            }`}
-          >
-            {time}
-          </button>
-        ))}
-      </div>
-    </div>
-  );
+
 
   return (
     <Form {...form}>
@@ -132,23 +87,51 @@ export default function TimePreferencesStep({ data, onUpdate, onNext }: TimePref
             </p>
           </div>
 
-          <div className="flex gap-6 w-full">
-            {/* Calendar */}
-            <div className="bg-white border border-[#ebebeb] rounded-xl p-12 shadow-[4px_4px_24px_rgba(170,170,170,0.1)]">
-              <Calendar
-                mode="single"
-                selected={selectedDate}
-                onSelect={handleDateSelect}
-                disabled={(date) => !isFriday(date) || date < new Date()}
-                className="w-full"
-              />
-            </div>
+          <div className="bg-white border border-[#ebebeb] rounded-xl p-8 shadow-[4px_4px_24px_rgba(170,170,170,0.1)] w-full">
+            <div className="flex gap-8 w-full">
+              {/* Calendar - Left Column */}
+              <div className="flex-1">
+                <Calendar
+                  mode="single"
+                  selected={selectedDate}
+                  onSelect={handleDateSelect}
+                  disabled={(date) => !isFriday(date) || date < new Date()}
+                  className="w-full"
+                />
+              </div>
 
-            {/* Time Selection */}
-            <div className="flex flex-col gap-6 w-[386px]">
-              {renderTimeSection("Morning", morningTimes, "🌅")}
-              {renderTimeSection("Afternoon", afternoonTimes, "☀️")}
-              {renderTimeSection("Evening", eveningTimes, "🌆")}
+              {/* Time Selection - Right Column */}
+              <div className="flex-1">
+                <h3 className="text-[16px] font-medium text-black mb-4">Select up to 3 time preferences</h3>
+                <div className="grid grid-cols-3 gap-3">
+                  {allTimes.map((time) => (
+                    <button
+                      key={time}
+                      type="button"
+                      onClick={() => handleTimeSelection(time)}
+                      className={`p-3 rounded-lg border text-center text-sm font-medium transition-colors ${
+                        selectedTimes.includes(time)
+                          ? "bg-blue-50 border-blue-200 text-blue-900"
+                          : "bg-white border-gray-200 text-gray-700 hover:border-gray-300"
+                      }`}
+                    >
+                      {time}
+                    </button>
+                  ))}
+                </div>
+                {selectedTimes.length > 0 && (
+                  <div className="mt-4">
+                    <p className="text-sm text-gray-600 mb-2">Selected times (in order of preference):</p>
+                    <div className="flex flex-wrap gap-2">
+                      {selectedTimes.map((time, index) => (
+                        <span key={time} className="bg-blue-100 text-blue-800 px-2 py-1 rounded text-sm">
+                          {index + 1}. {time}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </div>
