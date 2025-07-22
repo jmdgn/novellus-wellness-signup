@@ -119,9 +119,9 @@ export default function BookingForm({}: BookingFormProps) {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Fixed Header - Following Figma Specification */}
+      {/* Fixed Header */}
       <div className="header-outer fixed top-0 left-0 right-0 bg-white z-50" style={{ borderBottom: '2px solid #eee', height: '280px' }}>
-        <div className="header-container-inner w-full h-full flex items-start justify-start max-w-[1920px] mx-auto relative">
+        <div className="header-container-inner w-full h-full flex flex-col justify-center items-center relative">
           
           {/* Logo - Top Left Corner */}
           <div className="logoContainer absolute top-6 left-6 w-[130px] h-[44px] overflow-hidden">
@@ -131,40 +131,14 @@ export default function BookingForm({}: BookingFormProps) {
             </svg>
           </div>
 
-          {/* Main Content Layout following Figma - Profile, Text, Steps in horizontal layout */}
-          <div className="flex items-start w-full pt-16 px-8 max-w-[1920px] mx-auto">
-            
-            {/* Profile Image Frame */}
-            <div className="introProfile-image bg-[#f5f5f5] rounded-lg flex items-center justify-end h-[100px] overflow-hidden flex-shrink-0">
-              <img 
-                src="https://signup.novellus.net.au/static/media/profile-img.f5ef5de6cb4d654bc3cb.png" 
-                alt="Beatriz Durango"
-                className="w-[140px] h-[140px] object-cover"
-                style={{ background: '#d3d3d3 url() 50% / cover no-repeat' }}
-              />
-            </div>
-
-            {/* Text Group */}
-            <div className="introContent-text flex flex-col items-start gap-4 w-[755px] ml-8">
-              <div className="flex items-center gap-[10px]">
-                <h1 className="text-black text-[32px] font-normal leading-9 tracking-[-0.32px]" style={{ fontFamily: 'RM Neue' }}>
-                  Try Novellus Pilates with Beatriz Durango
-                </h1>
-              </div>
-              <div className="flex items-center gap-[10px] w-full">
-                <p className="text-[#777] text-[14px] font-normal leading-5 tracking-[0.14px] flex-1 underline" style={{ fontFamily: 'RM Neue', textDecorationLine: 'underline' }}>
-                  Book your 2x 1-hour introduction classes at 316-320 Toorak Road, South Yarra for just $30. A special rate to experience semi-private pilates in our boutique studio. One-time payment, no subscription required.
-                </p>
-              </div>
-            </div>
-
-            {/* Step Container */}
-            <div className="flex items-center gap-16 ml-auto">
+          {/* Step Progress Container - Top */}
+          <div className="step-progress-container w-full max-w-[900px] mx-auto mb-8">
+            <div className="flex items-center justify-center gap-16">
               {[
-                { number: 1, title: "Class Time & Type", active: currentStep === 1 },
-                { number: 2, title: "Your Details", active: currentStep === 2 },
-                { number: 3, title: "Medical Information", active: currentStep === 3 },
-                { number: 4, title: "Payment Details", active: currentStep === 4 }
+                { number: 1, title: "Select Date & Time", active: currentStep === 1 },
+                { number: 2, title: "Contact Details", active: currentStep === 2 },
+                { number: 3, title: "Medical Declaration", active: currentStep === 3 },
+                { number: 4, title: "Payment", active: currentStep === 4 }
               ].map((step) => (
                 <div key={step.number} className="flex items-start gap-2">
                   <div className="flex items-center gap-[10px] pt-2">
@@ -177,10 +151,9 @@ export default function BookingForm({}: BookingFormProps) {
                   <div className="flex flex-col items-start">
                     <div className="flex items-center gap-[10px]">
                       <span 
-                        className={`text-[16px] font-semibold leading-6 w-[46px] ${
+                        className={`text-[16px] font-semibold leading-6 ${
                           step.active ? 'text-black' : 'text-[#5555554d]'
                         }`}
-                        style={{ fontFamily: 'RM Neue' }}
                       >
                         Step {step.number}
                       </span>
@@ -190,7 +163,6 @@ export default function BookingForm({}: BookingFormProps) {
                         className={`text-[14px] font-normal leading-[18px] ${
                           step.active ? 'text-black' : 'text-[#5555554d]'
                         }`}
-                        style={{ fontFamily: 'RM Neue' }}
                       >
                         {step.title}
                       </span>
@@ -198,6 +170,32 @@ export default function BookingForm({}: BookingFormProps) {
                   </div>
                 </div>
               ))}
+            </div>
+          </div>
+
+          {/* Text and Image Container - Bottom */}
+          <div className="text-image-container w-full max-w-[900px] mx-auto flex items-center justify-between">
+            {/* Text Group - Left Side */}
+            <div className="introContent-text flex flex-col items-start gap-4 flex-1">
+              <div className="flex items-center gap-[10px]">
+                <h1 className="text-black text-[32px] font-normal leading-9 tracking-[-0.32px]">
+                  Try Novellus Pilates with Beatriz Durango
+                </h1>
+              </div>
+              <div className="flex items-center gap-[10px] w-full">
+                <p className="text-[#777] text-[14px] font-normal leading-5 tracking-[0.14px] underline">
+                  Book your 2x 1-hour introduction classes for $30 AUD. Select Fridays only.
+                </p>
+              </div>
+            </div>
+
+            {/* Profile Image - Right Side */}
+            <div className="introProfile-image bg-[#f5f5f5] rounded-lg flex items-center justify-end h-[100px] overflow-hidden flex-shrink-0 ml-8">
+              <img 
+                src="https://signup.novellus.net.au/static/media/profile-img.f5ef5de6cb4d654bc3cb.png" 
+                alt="Beatriz Durango"
+                className="w-[140px] h-[140px] object-cover"
+              />
             </div>
           </div>
         </div>
