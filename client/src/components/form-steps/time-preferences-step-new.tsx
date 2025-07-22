@@ -88,7 +88,7 @@ export default function TimePreferencesStep({ data, onUpdate, onNext }: TimePref
           </div>
 
           <div className="bg-white border border-[#ebebeb] rounded-xl p-8 shadow-[4px_4px_24px_rgba(170,170,170,0.1)] w-full">
-            <div className="flex gap-8 w-full">
+            <div className="flex items-start w-full">
               {/* Calendar - Left Column */}
               <div className="flex-1">
                 <Calendar
@@ -100,16 +100,19 @@ export default function TimePreferencesStep({ data, onUpdate, onNext }: TimePref
                 />
               </div>
 
+              {/* Divider */}
+              <div className="w-px bg-gray-200 mx-4"></div>
+
               {/* Time Selection - Right Column */}
               <div className="flex-1">
-                <h3 className="text-[16px] font-medium text-black mb-4">Select up to 3 time preferences</h3>
+                <h3 className="text-[14px] font-normal text-black mb-4">Select up to 3 time preferences</h3>
                 <div className="grid grid-cols-3 gap-3">
                   {allTimes.map((time) => (
                     <button
                       key={time}
                       type="button"
                       onClick={() => handleTimeSelection(time)}
-                      className={`p-3 rounded-lg border text-center text-sm font-medium transition-colors ${
+                      className={`p-3 rounded-lg border text-center text-xs font-medium transition-colors ${
                         selectedTimes.includes(time)
                           ? "bg-blue-50 border-blue-200 text-blue-900"
                           : "bg-white border-gray-200 text-gray-700 hover:border-gray-300"
