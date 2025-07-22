@@ -93,6 +93,14 @@
     .p-6 {
       padding: 1.5rem 1rem !important;
     }
+    
+    /* Step progress container mobile positioning */
+    .step-progress-container {
+      max-width: 50% !important;
+      width: 50% !important;
+      margin-right: 0 !important;
+      margin-left: auto !important;
+    }
   }
 
   /* Calendar available dates bold styling */

@@ -164,7 +164,7 @@ export default function BookingForm({}: BookingFormProps) {
           </div>
 
           {/* Step Progress Container - Mobile: Circles, Desktop: Full */}
-          <div className="step-progress-container w-full max-w-[820px] mx-auto mb-4 md:max-w-[820px] md:w-full md:mx-auto" style={{ maxWidth: '50%', width: '50%', marginRight: '0', marginLeft: 'auto' }}>
+          <div className="step-progress-container w-full max-w-[820px] mx-auto mb-4 md:max-w-[820px] md:w-full md:mx-auto">
             {/* Mobile Step Progress - Circles Only */}
             <div className="md:hidden flex items-center justify-center gap-4">
               {[1, 2, 3, 4].map((stepNum) => (
