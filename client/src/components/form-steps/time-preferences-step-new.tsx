@@ -201,7 +201,7 @@ export default function TimePreferencesStep({ data, onUpdate, onNext }: TimePref
               <div className="h-px bg-[#ebebeb] w-full"></div>
 
               {/* Time Selection - Bottom with 1rem padding */}
-              <div className="w-full px-4">
+              <div className="w-full px-4 pb-4">
                 <h3 className="text-[14px] font-normal text-black mb-4">Select up to 3 time preferences</h3>
                 <div className="grid grid-cols-2 gap-2.5">
                   {allTimes.map((time) => (

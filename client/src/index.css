@@ -71,6 +71,20 @@
 }
 
 @layer components {
+  /* Mobile calendar table width */
+  @media (max-width: 768px) {
+    .rdp-table {
+      width: auto !important;
+    }
+  }
+
+  /* Mobile button padding override */
+  @media (max-width: 768px) {
+    .p-4 {
+      padding: 1rem !important;
+    }
+  }
+
   /* Calendar available dates bold styling */
   .rdp-day_button:not([disabled]):not(.rdp-day_selected) {
     font-weight: 600 !important;
