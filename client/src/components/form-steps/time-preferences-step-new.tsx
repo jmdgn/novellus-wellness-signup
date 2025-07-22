@@ -127,8 +127,9 @@ export default function TimePreferencesStep({ data, onUpdate, onNext }: TimePref
             </p>
           </div>
 
-          <div className="bg-white border border-[#ebebeb] rounded-xl p-8 shadow-[4px_4px_24px_rgba(170,170,170,0.1)] w-full">
-            <div className="flex items-start w-full">
+          <div className="bg-white border border-[#ebebeb] rounded-xl p-4 md:p-8 shadow-[4px_4px_24px_rgba(170,170,170,0.1)] w-full">
+            {/* Desktop Layout - Side by side */}
+            <div className="hidden md:flex items-start w-full">
               {/* Calendar - Left Column */}
               <div className="flex-1">
                 <Calendar
@@ -182,6 +183,62 @@ export default function TimePreferencesStep({ data, onUpdate, onNext }: TimePref
                 )}
               </div>
             </div>
+
+            {/* Mobile Layout - Stacked */}
+            <div className="md:hidden flex flex-col w-full space-y-6">
+              {/* Calendar - Top */}
+              <div className="w-full">
+                <Calendar
+                  mode="single"
+                  selected={selectedDate}
+                  onSelect={handleDateSelect}
+                  disabled={(date) => !isFriday(date) || date < new Date()}
+                  className="w-full"
+                />
+              </div>
+
+              {/* Divider */}
+              <div className="h-px bg-[#ebebeb] w-full"></div>
+
+              {/* Time Selection - Bottom */}
+              <div className="w-full">
+                <h3 className="text-[14px] font-normal text-black mb-4">Select up to 3 time preferences</h3>
+                <div className="grid grid-cols-2 gap-2.5">
+                  {allTimes.map((time) => (
+                    <button
+                      key={time}
+                      type="button"
+                      onClick={() => handleTimeSelection(time)}
+                      className={`relative p-3 border text-center text-xs font-medium transition-colors ${
+                        selectedTimes.includes(time)
+                          ? "bg-blue-500 border-blue-500 text-white rounded-lg"
+                          : "bg-white border-gray-200 text-gray-700 hover:border-gray-300 rounded-lg"
+                      }`}
+                      style={{ borderRadius: '8px' }}
+                    >
+                      {selectedTimes.includes(time) && (
+                        <div className="absolute top-1 right-1 bg-white text-blue-500 rounded-full w-4 h-4 flex items-center justify-center text-xs font-bold">
+                          {selectedTimes.indexOf(time) + 1}
+                        </div>
+                      )}
+                      {time}
+                    </button>
+                  ))}
+                </div>
+                {selectedTimes.length > 0 && (
+                  <div className="mt-4">
+                    <p className="text-sm text-gray-600 mb-2">Selected times (in order of preference):</p>
+                    <div className="flex flex-wrap gap-2">
+                      {selectedTimes.map((time, index) => (
+                        <span key={time} className="bg-blue-100 text-blue-800 px-2 py-1 rounded text-sm">
+                          {index + 1}. {time}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
           </div>
         </div>
 
@@ -196,7 +253,7 @@ export default function TimePreferencesStep({ data, onUpdate, onNext }: TimePref
             </p>
           </div>
 
-          <div className="flex gap-4">
+          <div className="flex flex-col sm:flex-row gap-4">
             {[
               { value: "semi-private", label: "Semi-private", icon: "👥" },
               { value: "private", label: "Private", icon: "👤" },
@@ -242,7 +299,7 @@ export default function TimePreferencesStep({ data, onUpdate, onNext }: TimePref
             </p>
           </div>
 
-          <div className="flex gap-4">
+          <div className="flex flex-col sm:flex-row gap-4">
             {[
               { value: "mat", label: "Mat", icon: "🧘" },
               { value: "reformer", label: "Reformer", icon: "⚙️" },
@@ -289,7 +346,7 @@ export default function TimePreferencesStep({ data, onUpdate, onNext }: TimePref
             </p>
           </div>
 
-          <div className="flex gap-4">
+          <div className="flex flex-col sm:flex-row gap-4">
             {[
               { value: "english", label: "English", icon: "🇦🇺" },
               { value: "spanish", label: "Spanish", icon: "🇪🇸" },
