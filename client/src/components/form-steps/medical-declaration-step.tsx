@@ -194,10 +194,8 @@ export default function MedicalDeclarationStep({ data, onUpdate, onNext, onPrevi
         </div>
       </div>
 
-      {/* Form Inner Container */}
-      <div className="form-inner" style={{ width: '100%', margin: '16px 0 0 0' }}>
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} style={{ width: '100%', padding: '16px 20px' }} className="space-y-6">
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-6" style={{ margin: '16px 0 0 0' }}>
           
           {/* Question 1: Pain History */}
           <div className="bg-white border border-slate-200 rounded-lg p-4">
@@ -319,9 +317,8 @@ export default function MedicalDeclarationStep({ data, onUpdate, onNext, onPrevi
             />
           )}
 
-          </form>
-        </Form>
-      </div>
+        </form>
+      </Form>
 
       {/* Navigation Container */}
       <div className="button-containerFull" style={{ 

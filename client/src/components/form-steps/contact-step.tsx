@@ -108,7 +108,8 @@ export default function ContactStep({ data, onUpdate, onNext, onPrevious }: Cont
                         <FormControl>
                           <Input 
                             placeholder="Jane" 
-                            className="border-slate-200"
+                            className="border-[#CCC] rounded-[8px] data-[filled=true]:border-[#0095F6]"
+                            data-filled={!!field.value}
                             {...field}
                           />
                         </FormControl>
@@ -125,7 +126,8 @@ export default function ContactStep({ data, onUpdate, onNext, onPrevious }: Cont
                         <FormControl>
                           <Input 
                             placeholder="Citizen" 
-                            className="border-slate-200"
+                            className="border-[#CCC] rounded-[8px] data-[filled=true]:border-[#0095F6]"
+                            data-filled={!!field.value}
                             {...field}
                           />
                         </FormControl>
@@ -146,7 +148,8 @@ export default function ContactStep({ data, onUpdate, onNext, onPrevious }: Cont
                         <FormControl>
                           <Input 
                             placeholder="0400 000 000" 
-                            className="border-slate-200"
+                            className="border-[#CCC] rounded-[8px] data-[filled=true]:border-[#0095F6]"
+                            data-filled={!!field.value}
                             {...field}
                             onChange={(e) => {
                               const formatted = handlePhoneChange(e.target.value);
@@ -169,7 +172,8 @@ export default function ContactStep({ data, onUpdate, onNext, onPrevious }: Cont
                           <Input 
                             type="email"
                             placeholder="jane.citizen@email.com" 
-                            className="border-slate-200"
+                            className="border-[#CCC] rounded-[8px] data-[filled=true]:border-[#0095F6]"
+                            data-filled={!!field.value}
                             {...field}
                           />
                         </FormControl>
@@ -193,7 +197,8 @@ export default function ContactStep({ data, onUpdate, onNext, onPrevious }: Cont
                       <FormControl>
                         <Input 
                           placeholder="Emergency contact full name" 
-                          className="border-slate-200"
+                          className="border-[#CCC] rounded-[8px] data-[filled=true]:border-[#0095F6]"
+                          data-filled={!!field.value}
                           {...field}
                         />
                       </FormControl>
@@ -210,7 +215,8 @@ export default function ContactStep({ data, onUpdate, onNext, onPrevious }: Cont
                       <FormControl>
                         <Input 
                           placeholder="0400 000 000" 
-                          className="border-slate-200"
+                          className="border-[#CCC] rounded-[8px] data-[filled=true]:border-[#0095F6]"
+                          data-filled={!!field.value}
                           {...field}
                           onChange={(e) => {
                             const formatted = handlePhoneChange(e.target.value);
