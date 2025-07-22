@@ -148,7 +148,7 @@ export default function ContactStep({ data, onUpdate, onNext, onPrevious }: Cont
           <div className="bg-white border border-slate-200 rounded-lg p-6 mb-6 w-full">
             <div className="space-y-4">
               {/* First Name & Last Name Row */}
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <FormField
                   control={form.control}
                   name="firstName"
@@ -188,7 +188,7 @@ export default function ContactStep({ data, onUpdate, onNext, onPrevious }: Cont
               </div>
 
               {/* Phone Number & Email Address Row */}
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <FormField
                   control={form.control}
                   name="phoneNumber"
@@ -237,7 +237,7 @@ export default function ContactStep({ data, onUpdate, onNext, onPrevious }: Cont
 
           {/* Emergency Contact Section - White Panel */}
           <div className="bg-white border border-slate-200 rounded-lg p-6 mb-6 w-full">
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <FormField
                   control={form.control}
                   name="emergencyContactName"
