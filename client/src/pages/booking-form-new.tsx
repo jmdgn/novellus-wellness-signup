@@ -133,7 +133,7 @@ export default function BookingForm({}: BookingFormProps) {
 
           {/* Step Progress Container - Top */}
           <div className="step-progress-container w-full max-w-[900px] mx-auto mb-4">
-            <div className="flex items-center justify-center gap-16">
+            <div className="flex items-center justify-evenly">
               {[
                 { number: 1, title: "Select Date & Time", active: currentStep === 1 },
                 { number: 2, title: "Contact Details", active: currentStep === 2 },
