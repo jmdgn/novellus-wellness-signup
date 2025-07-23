@@ -227,41 +227,43 @@ async function sendConfirmationEmail(booking: any) {
     .join('\n');
 
   const emailContent = `
-    <h2>Booking Confirmation - 1hr Semi-Private Pilates Session</h2>
+    <p>Hi ${booking.firstName},</p>
     
-    <p>Dear ${booking.firstName} ${booking.lastName},</p>
+    <p>Thank you for booking your 2x 1‑hour Introduction Pilates Sessions at Novellus Wellness! We're thrilled to help you discover how Pilates can strengthen your body, sharpen your focus, and boost your energy.</p>
     
-    <p>Thank you for booking your Introduction Pilates Session! We're excited to welcome you to our studio.</p>
-    
-    <p>Our studio is located at <a href="https://maps.google.com/?q=316-320+Toorak+Road+South+Yarra+VIC+Australia" target="_blank" rel="noopener noreferrer" style="color: #0095F6; text-decoration: underline;">316-320 Toorak Road, South Yarra</a> with accessible street parking options and a short walk from Toorak Station.</p>
-    
-    <h3>Booking Details:</h3>
+    <p><b>Your Booking at a Glance</b></p>
     <ul>
-      <li><strong>Class:</strong> Introduction Pilates Session (1 hour)</li>
-      <li><strong>Amount Paid:</strong> $30.00 AUD</li>
-      <li><strong>Language:</strong> ${booking.language === 'english' ? 'English' : 'Español'}</li>
-      <li><strong>Contact:</strong> ${booking.email}</li>
-      <li><strong>Phone:</strong> ${booking.phoneNumber}</li>
+      <li><b>Session:</b> Introduction Pilates (1 hour)</li>
+      <li><b>Paid:</b> $30.00 AUD</li>
+      <li><b>Language:</b> ${booking.language === 'english' ? 'English' : 'Español'}</li>
+      <li><b>Studio Address:</b> 316–320 Toorak Road, South Yarra</li>
+      <li>Street parking available; just a short walk from Toorak Station</li>
+      <li><b>Contact:</b> ${booking.email} | ${booking.phoneNumber}</li>
     </ul>
     
-    <h3>Your Time Preferences (in order of priority):</h3>
-    <pre>${preferredTimes}</pre>
+    <p><b>Your Time Preferences</b></p>
+    <p>We've noted your preferred slots (in priority order):</p>
+    <ol>
+      ${(booking.timePreferences as string[]).map((time, index) => `<li>${time}</li>`).join('')}
+    </ol>
     
-    <p>You will receive an email within the next week with the confirmed details of your class time. While we'll do our best to ensure you receive your first time preference we cannot guarantee all time slots will be available due to current demand.</p>
+    <p>You'll receive a follow‑up email with your confirmed class time. We'll do our best to secure your top pick, but popular slots fill up fast, thanks for your patience!</p>
     
-    <p><strong>What to bring:</strong></p>
+    <p><b>What to Bring</b></p>
     <ul>
-      <li>Comfortable workout clothing</li>
-      <li>Water bottle</li>
-      <li>Positive attitude!</li>
+      <li>Comfortable workout clothes</li>
+      <li>A full water bottle</li>
+      <li>Your positive attitude! 😊</li>
     </ul>
     
-    <p>If you have any questions, or would like to cancel your booking please don't hesitate to <a href="mailto:contact@novellus.net.au" style="color: #0095F6; text-decoration: underline;">contact us</a>.</p>
+    <p><b>Need to Reschedule or Have Questions?</b></p>
+    <p>Simply reply to this email or call us at 0431 609 074, and we'll take care of you.</p>
     
-    <p>We look forward to seeing you at the studio!</p>
+    <p>We can't wait to meet you in the studio and guide you through your first Pilates session!</p>
     
-    <p>Best regards,<br/>
-    Beatriz Durango - Novellus Wellness</p>
+    <p>Warmly,<br/>
+    <b>Beatriz Durango</b><br/>
+    Founder & Lead Instructor, Novellus Wellness</p>
   `;
 
   try {
@@ -273,7 +275,7 @@ async function sendConfirmationEmail(booking: any) {
     const result = await sendEmail(process.env.BREVO_API_KEY!, {
       to: booking.email,
       from: 'noreply@novellus.net.au',
-      subject: 'Booking Confirmation - Your Introduction Pilates Session',
+      subject: 'Your Intro Pilates Session Is Booked — Next Steps Inside!',
       html: emailContent
     });
     
