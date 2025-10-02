@@ -284,7 +284,7 @@ export default function ContactStep({ data, onUpdate, onNext, onPrevious }: Cont
         </form>
       </Form>
 
-      {/* Navigation Container - Step 2 has both Previous and Next */}
+      {/* Navigation Container - Step 1 only has Next button */}
       <div className="button-containerFull" style={{ 
         display: 'flex', 
         alignItems: 'center', 
@@ -293,32 +293,6 @@ export default function ContactStep({ data, onUpdate, onNext, onPrevious }: Cont
         margin: '24px 0 0 0',
         position: 'relative'
       }}>
-        {/* Previous Button */}
-        <div 
-          style={{ 
-            width: '55px',
-            height: '55px',
-            border: '1px solid #CCC',
-            borderRadius: '6px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            background: '#fff',
-            cursor: 'pointer',
-            flexShrink: 0,
-            transition: 'background-color 0.2s ease'
-          }}
-          onClick={onPrevious}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.background = '#F9F9F9';
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.background = '#fff';
-          }}
-        >
-          <ChevronLeft size={16} color="#111" />
-        </div>
-
         {/* Next Button */}
         <div 
           className="next-button-container" 
@@ -364,7 +338,7 @@ export default function ContactStep({ data, onUpdate, onNext, onPrevious }: Cont
             </div>
           )}
           <div style={{ flexShrink: 0 }}>
-            <div className="step-text" style={{ color: 'inherit' }}>Step 2 of 4</div>
+            <div className="step-text" style={{ color: 'inherit' }}>Step 1 of 2</div>
           </div>
           <div style={{ flexShrink: 0 }}>
             <div className="action-text" style={{ color: 'inherit' }}>
