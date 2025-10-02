@@ -61,7 +61,7 @@ export default function BookingForm({}: BookingFormProps) {
   };
 
   const handleNext = () => {
-    if (currentStep < 4) {
+    if (currentStep < 2) {
       setCurrentStep(currentStep + 1);
       // Scroll to top of screen when moving to next step
       window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -76,10 +76,14 @@ export default function BookingForm({}: BookingFormProps) {
     }
   };
 
-  const submitBooking = async (bookingData: any) => {
+  const submitBooking = async () => {
     setIsSubmitting(true);
     try {
       console.log("📝 Creating booking...");
+      const bookingData = {
+        ...formData.contact,
+        ...formData.medical,
+      };
       console.log("Submitting booking:", bookingData);
       
       const response = await fetch("/api/booking", {
@@ -96,9 +100,12 @@ export default function BookingForm({}: BookingFormProps) {
 
       const booking = await response.json();
       console.log("✅ Booking created:", booking);
+      alert("Booking submitted successfully!");
+      window.location.href = "/";
       return booking;
     } catch (error) {
       console.error("❌ Error creating booking:", error);
+      alert("Failed to submit booking. Please try again.");
       throw error;
     } finally {
       setIsSubmitting(false);
@@ -109,14 +116,6 @@ export default function BookingForm({}: BookingFormProps) {
     switch (currentStep) {
       case 1:
         return (
-          <TimePreferencesStep
-            data={formData.timePreferences}
-            onUpdate={(data: any) => updateFormData({ timePreferences: data })}
-            onNext={handleNext}
-          />
-        );
-      case 2:
-        return (
           <ContactStep
             data={formData.contact}
             onUpdate={(data: any) => updateFormData({ contact: data })}
@@ -124,22 +123,13 @@ export default function BookingForm({}: BookingFormProps) {
             onPrevious={handlePrevious}
           />
         );
-      case 3:
+      case 2:
         return (
           <MedicalDeclarationStep
             data={formData.medical}
             onUpdate={(data: any) => updateFormData({ medical: data })}
-            onNext={handleNext}
+            onNext={submitBooking}
             onPrevious={handlePrevious}
-          />
-        );
-      case 4:
-        return (
-          <PaymentStep
-            formData={formData}
-            onPrevious={handlePrevious}
-            submitBooking={submitBooking}
-            isSubmitting={isSubmitting}
           />
         );
       default:
@@ -172,7 +162,7 @@ export default function BookingForm({}: BookingFormProps) {
           <div className="step-progress-container w-full max-w-[820px] mx-auto mb-4 md:max-w-[820px] md:w-full md:mx-auto">
             {/* Mobile Step Progress - Circles Only */}
             <div className="md:hidden flex items-center justify-center gap-4">
-              {[1, 2, 3, 4].map((stepNum) => (
+              {[1, 2].map((stepNum) => (
                 <div key={stepNum} className="flex items-center">
                   <div 
                     className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-semibold ${
@@ -190,10 +180,8 @@ export default function BookingForm({}: BookingFormProps) {
             {/* Desktop Step Progress - Full Text */}
             <div className="hidden md:flex items-center justify-between">
               {[
-                { number: 1, title: "Select Date & Time", active: currentStep === 1 },
-                { number: 2, title: "Contact Details", active: currentStep === 2 },
-                { number: 3, title: "Medical Declaration", active: currentStep === 3 },
-                { number: 4, title: "Payment", active: currentStep === 4 }
+                { number: 1, title: "Contact Details", active: currentStep === 1 },
+                { number: 2, title: "Medical Declaration", active: currentStep === 2 }
               ].map((step) => (
                 <div key={step.number} className="flex items-start gap-2">
                   <div className="flex items-center gap-[10px] pt-2">
@@ -239,16 +227,7 @@ export default function BookingForm({}: BookingFormProps) {
               </div>
               <div className="flex items-center gap-[10px] w-full">
                 <p className="text-[#777] text-[13px] md:text-[14px] font-normal leading-4 md:leading-5 tracking-[0.14px]">
-                  Book your 2x 1-hour introduction classes at{' '}
-                  <a 
-                    href="https://maps.app.goo.gl/3Yg6bq7YMTcLztVW8" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="underline hover:no-underline"
-                  >
-                    316-320 Toorak Road, South Yarra
-                  </a>
-                  {' '}for just $30. A special rate to experience semi-private pilates in our boutique studio. One-time payment, no subscription required.
+                  Clases de pilates en español  al aire libre para conectar con nuestro cuerpo y mente! Todos los sábados a las 10am en el Fitzroy Gardens durante la primavera y el verano 🩷
                 </p>
               </div>
             </div>
