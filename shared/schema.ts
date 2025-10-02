@@ -16,7 +16,7 @@ export const bookings = pgTable("bookings", {
   email: text("email").notNull(),
   emergencyContactName: text("emergency_contact_name"),
   emergencyContactPhone: text("emergency_contact_phone"),
-  timePreferences: jsonb("time_preferences").notNull(), // Array of time slots in priority order
+  timePreferences: jsonb("time_preferences"), // Array of time slots in priority order (optional now)
   language: text("language").notNull().default("english"),
   painAreas: jsonb("pain_areas"), // Array of selected pain areas
   isPregnant: boolean("is_pregnant").default(false),
@@ -31,7 +31,7 @@ export const bookings = pgTable("bookings", {
   hasMedicalConditions: boolean("has_medical_conditions").default(false),
   stripePaymentIntentId: text("stripe_payment_intent_id"),
   paymentStatus: text("payment_status").default("pending"), // pending, completed, failed
-  totalAmount: integer("total_amount").notNull().default(3000), // in cents (AUD)
+  totalAmount: integer("total_amount").default(0), // in cents (AUD) - optional now
   createdAt: timestamp("created_at").defaultNow(),
 });
 
@@ -40,6 +40,8 @@ export const insertBookingSchema = createInsertSchema(bookings).omit({
   createdAt: true,
   stripePaymentIntentId: true,
   paymentStatus: true,
+  totalAmount: true,
+  timePreferences: true,
 });
 
 export const contactInfoSchema = z.object({

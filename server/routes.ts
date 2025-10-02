@@ -72,7 +72,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       }
 
       const paymentIntent = await stripe.paymentIntents.create({
-        amount: booking.totalAmount, // $20 AUD in cents
+        amount: booking.totalAmount || 3000, // $30 AUD in cents (fallback to 3000 if null)
         currency: "aud",
         automatic_payment_methods: {
           enabled: true,

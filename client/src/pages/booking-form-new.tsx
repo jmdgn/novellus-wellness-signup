@@ -1,8 +1,6 @@
 import { useState } from "react";
-import TimePreferencesStep from "@/components/form-steps/time-preferences-step-new";
 import ContactStep from "@/components/form-steps/contact-step";
 import MedicalDeclarationStep from "@/components/form-steps/medical-declaration-step";
-import PaymentStep from "@/components/form-steps/payment-step";
 import type { ContactInfo, TimePreferences, MedicalDeclaration } from "@shared/schema";
 import bdProfilePath from "@assets/bd-profile_1753224323951.png";
 
@@ -10,9 +8,6 @@ interface FormData {
   contact: Partial<ContactInfo>;
   timePreferences: Partial<TimePreferences>;
   medical: Partial<MedicalDeclaration>;
-  payment: {
-    agreeToTerms: boolean;
-  };
 }
 
 interface BookingFormProps {}
@@ -49,10 +44,6 @@ export default function BookingForm({}: BookingFormProps) {
       otherConditions: undefined,
       medicalConditions: "",
       hasMedicalConditions: false,
-    },
-    payment: {
-      agreedToTerms: false,
-      totalAmount: 3000,
     },
   });
 
