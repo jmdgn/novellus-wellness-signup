@@ -48,7 +48,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const booking = await storage.createBooking(validatedData);
       console.log("✅ Booking created with ID:", booking.id);
       
-      // Note: Medical clearance email will be sent after payment completion
+      // Send admin notification when form is submitted
+      await sendAdminBookingNotification(booking);
       
       res.json(booking);
     } catch (error: any) {
@@ -296,16 +297,6 @@ async function sendAdminBookingNotification(booking: any) {
     return;
   }
 
-  const timeSlotNames = {
-    morning: "Morning (7:00 AM - 11:00 AM)",
-    afternoon: "Afternoon (1:00 PM - 3:00 PM)", 
-    evening: "Evening (5:00 PM - 7:00 PM)"
-  };
-
-  const preferredTimes = (booking.timePreferences as string[])
-    .map((slot, index) => `${index + 1}. ${timeSlotNames[slot as keyof typeof timeSlotNames] || slot}`)
-    .join('\n');
-
   // Format medical conditions for display
   const medicalConditions = [];
   if (booking.isPregnant) medicalConditions.push(`Pregnant (${booking.pregnancyWeeks || 'N/A'} weeks)`);
@@ -322,7 +313,7 @@ async function sendAdminBookingNotification(booking: any) {
     : 'None specified';
 
   const emailContent = `
-    <h2>New Booking Received - ID #${booking.id}</h2>
+    <h2>New Form Submission - ID #${booking.id}</h2>
     
     <h3>Client Information:</h3>
     <ul>
@@ -333,17 +324,6 @@ async function sendAdminBookingNotification(booking: any) {
       <li><strong>Emergency Phone:</strong> ${booking.emergencyContactPhone || 'Not provided'}</li>
       <li><strong>Language:</strong> ${booking.language === 'english' ? 'English' : 'Español'}</li>
     </ul>
-    
-    <h3>Class Details:</h3>
-    <ul>
-      <li><strong>Class:</strong> Introduction Pilates Session (1 hour)</li>
-      <li><strong>Amount Paid:</strong> $30.00 AUD</li>
-      <li><strong>Payment Status:</strong> ${booking.paymentStatus}</li>
-      <li><strong>Stripe Payment ID:</strong> ${booking.stripePaymentIntentId}</li>
-    </ul>
-    
-    <h3>Time Preferences (in order of priority):</h3>
-    <pre>${preferredTimes}</pre>
     
     <h3>Medical Information:</h3>
     <p><strong>Pain Areas:</strong> ${painAreas}</p>
@@ -356,9 +336,9 @@ async function sendAdminBookingNotification(booking: any) {
     
     <p><strong>Requires Medical Clearance:</strong> ${medicalConditions.length > 0 ? 'Yes' : 'No'}</p>
     
-    <h3>Booking Details:</h3>
+    <h3>Submission Details:</h3>
     <ul>
-      <li><strong>Booking Date:</strong> ${new Date(booking.createdAt).toLocaleString('en-AU', { timeZone: 'Australia/Melbourne' })}</li>
+      <li><strong>Submitted:</strong> ${new Date(booking.createdAt).toLocaleString('en-AU', { timeZone: 'Australia/Melbourne' })}</li>
       <li><strong>Database ID:</strong> ${booking.id}</li>
     </ul>
     
@@ -370,7 +350,7 @@ async function sendAdminBookingNotification(booking: any) {
     console.log(`Sending admin booking notification for booking ID: ${booking.id}`);
     
     const result = await sendEmail(process.env.BREVO_API_KEY!, {
-      to: 'contact@novellus.net.au',
+      to: 'beatrizd@novellus.net.au',
       from: 'noreply@novellus.net.au',
       subject: `New Booking Received - ${booking.firstName} ${booking.lastName} (ID #${booking.id})`,
       html: emailContent
